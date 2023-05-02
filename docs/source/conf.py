@@ -10,8 +10,12 @@ import glob
 import os
 import re
 import shutil
+import sys
 import warnings
 from pdfminer.high_level import extract_text
+
+sys.path.insert(0, os.path.abspath('.'))
+from titles_from_bibtex import get_path_to_title_from_bibtex
 
 project = 'Excalibur-Neptune Documents'
 copyright = '2023, UKAEA'
@@ -79,11 +83,14 @@ def get_raw_title_from_text(pdftxt):
      
     return title.strip()
 
+pdfpaths_to_nice_titles_dict = get_path_to_title_from_bibtex("../../tex/exc.bib")
 
 def descriptive_title_from_pdf(pdfpath, pdftxt):
     try:
-        txt = "".join(pdftxt)
-        title = get_raw_title_from_text(txt)
+        if pdfpath in pdfpaths_to_nice_titles_dict and pdfpaths_to_nice_titles_dict[pdfpath] is not None:
+            title = pdfpaths_to_nice_titles_dict[pdfpath]
+        else:
+            title = get_raw_title_from_text("".join(pdftxt))
     except Exception as e:
         warnings.warn("Could not extract report title from {}\nError:\n{}".format(pdfpath, e))
         title = ""
