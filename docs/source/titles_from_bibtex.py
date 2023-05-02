@@ -158,8 +158,3 @@ def get_path_to_title_from_bibtex(bibtex_path):
             path_to_title_dict[fx] = bibtex_entry["title"]
 
     return path_to_title_dict
-
-
-# if __name__ == "__main__":
-#
-#    path_to_title_dict = get_path_to_title_from_bibtex("../../tex/exc.bib")
