@@ -47,7 +47,6 @@ def create_fms_bibtex(bib_database):
     for item in bib_database.entries:
         # the UKAEA bibtex entries need a NUMBER field
         if "number" in item.keys():
-
             bibtex_number = item["number"]
 
             # If there is no FMS number throw away
@@ -84,13 +83,11 @@ def get_bibtex_key(report):
     basename = os.path.basename(report)
 
     if po == "ukaea_reports":
-
         no_extension = os.path.splitext(basename)[0]
         report_number = no_extension.split("-")[-1]
         bid = report_number
 
     else:
-
         bid = po + "-" + ".".join(basename.split(".")[:-1])
 
     return bid
@@ -146,7 +143,6 @@ def get_bibtex_dicts(bibtex_path):
 
 
 def get_path_to_title_from_bibtex(bibtex_path):
-
     # construct the bibtex dicts
     bib_database, bib_database_fms_keys = get_bibtex_dicts(bibtex_path)
 
@@ -156,18 +152,14 @@ def get_path_to_title_from_bibtex(bibtex_path):
     # find reports and construct map from PO to reports
     path_to_title_dict = {}
     for fx in reports:
-
         # find the bibtex entry for this file
-        bibtex_entry = find_bibtex_entry(
-             bib_database, bib_database_fms_keys, fx
-        )
+        bibtex_entry = find_bibtex_entry(bib_database, bib_database_fms_keys, fx)
         if (bibtex_entry is not None) and ("title" in bibtex_entry):
             path_to_title_dict[fx] = bibtex_entry["title"]
 
     return path_to_title_dict
 
 
-#if __name__ == "__main__":
+# if __name__ == "__main__":
 #
 #    path_to_title_dict = get_path_to_title_from_bibtex("../../tex/exc.bib")
-
