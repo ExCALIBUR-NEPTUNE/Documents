@@ -1,0 +1,21 @@
+Fluids York etal
+================
+
+.. toctree::
+    Fluids_York_etal_TN-01_Task01Environments.rst
+    Fluids_York_etal_TN-02_Task11EllipticSolverTests.rst
+    Fluids_York_etal_TN-03_Task12EllipticSolverImplementation.rst
+    Fluids_York_etal_TN-04_Task211DFluidModelTests.rst
+    Fluids_York_etal_TN-05_2BoutMultiﬂuidImplementation.rst
+    Fluids_York_etal_TN-06-1_4DEllipticSolvers.rst
+    Fluids_York_etal_TN-07-1_2BoutDFluidSolverRealistic.rst
+    Fluids_York_etal_TN-08-1_4NonIntrusiveUqBoutD.rst
+    Fluids_York_etal_TN-09-1_1TestCasesDMultispeciesPlasma.rst
+    Fluids_York_etal_TN-10-1_2.rst
+    Fluids_York_etal_TN-11-1_ConsiderationsD1V.rst
+    Fluids_York_etal_TN-12-2_EllipticSolversWithinnektar.rst
+    Fluids_York_etal_TN-13-2_DplasmaModelIncorporatingVelocitySpaceEﬀects.rst
+    Fluids_York_etal_TN-14-1_3.rst
+    Fluids_York_etal_TN-15-2_5PerformanceConsiderations.rst
+    Fluids_York_etal_TN-16-1_3CommunityEnvironment.rst
+    Fluids_York_etal_TN-17_ProgressOnimplementation6Equations.rst

@@ -1,0 +1,10 @@
+Platforms
+=========
+
+.. toctree::
+    Platforms_TN-01-04_HardwareAtExascale0.rst
+    Platforms_TN-01-5_HardwareAtExascale0.rst
+    Platforms_TN-02-04_DevelopingAnExascaleReadyFusionSimulation0.rst
+    Platforms_TN-02-5_DevelopingAnExascaleReadyFusionSimulation0.rst
+    Platforms_TN-03-3_ProgressDevelopmentAnFemPicMiniappstevenWrightEdwardHiggins.rst
+    Platforms_TN-04-2_ProposalParticleDslstevenWrightEdwardHiggins.rst

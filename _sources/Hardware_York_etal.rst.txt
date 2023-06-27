@@ -1,0 +1,8 @@
+Hardware York etal
+==================
+
+.. toctree::
+    Hardware_York_etal_TN-01_SoftwareSupportProcurementhardwareAtExascale.rst
+    Hardware_York_etal_TN-02-3_SoftwareSupportProcurementdevelopingAnExascaleReadyFusionSimulation.rst
+    Hardware_York_etal_TN-03-3_SoftwareSupportProcurementProgressTowardsDslAdoption.rst
+    Hardware_York_etal_TN-04-1_1EquationsAndBenchmarkSimulationsSetuptitle.rst

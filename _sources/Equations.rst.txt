@@ -1,0 +1,5 @@
+Equations
+=========
+
+.. toctree::
+    Equations_proxyapps_Equations_EquationsProxyapps27.rst

@@ -1,0 +1,11 @@
+Software York etal
+==================
+
+.. toctree::
+    Software_York_etal_TN-01-2_ApproachesPerformancePortableapplicationsFusion.rst
+    Software_York_etal_TN-01_ApproachesPerformancePortableApplicationsFusion.rst
+    Software_York_etal_TN-02-2_IdentiﬁcationTestbedPlatformsAndapplications.rst
+    Software_York_etal_TN-02_IdentificationTestbedPlatformsApplications.rst
+    Software_York_etal_TN-03-2_EvaluationApproachesPerformanceportability.rst
+    Software_York_etal_TN-03_EvaluationApproachesPerformancePortability.rst
+    Software_York_etal_TN-04_ApproachesScientificSoftwareDevelopmentAtExascale.rst

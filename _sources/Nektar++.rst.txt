@@ -1,0 +1,12 @@
+Nektar++
+========
+
+.. toctree::
+    Nektar++_RP-01-hom_and_implementation_HighOrderMethodsTheirImplementationNektar.rst
+    Nektar++_RP-02-recent_neptune_and_particle_ProgressDuringPotentialInteractionsParticleCodes.rst
+    Nektar++_TN-01-2_ImplementationOftensorregionsLibraryNektar.rst
+    Nektar++_TN-02-4_DgPerformanceinNektar.rst
+    Nektar++_TN-03-3_AugmentationThenekmeshGeneratorProvideQuadBasedMeshesD.rst
+    Nektar++_TN-04-1_EvaluationPreconditionersOfmatrixFreeOperationsNektarAnisotropicHeat.rst
+    Nektar++_TN-04-2_EvaluationOfpreconditionersMatrixFreeOperationsNektar.rst
+    Nektar++_TN-04-preconditioning-nektarpp_EvaluationPreconditionersOfmatrixFreeOperationsNektarAnisotropicHeat.rst
