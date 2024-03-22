@@ -1,0 +1,26 @@
+MomentKinetics Oxford
+=====================
+
+.. toctree::
+    MomentKinetics_Oxford-2_TN-01_047357TnM29UpdateStateArtEdgeModelling.rst
+    MomentKinetics_Oxford-2_TN-02_ImplementingDistributedMemoryD3VdriftKineticEdgeCode.rst
+    MomentKinetics_Oxford-2_TN-03_AReducedElectronModelTestingPlasmadynamicsClosedFieldLines.rst
+    MomentKinetics_Oxford-2_TN-04_ConvergenceSolutionsD1VIonDriftkineticEquationWallBoundaryConditions.rst
+    MomentKinetics_Oxford-2_TN-05_NumericalImplementationFluidModelForelectronsDriftKineticCode.rst
+    MomentKinetics_Oxford-2_TN-06_IonIonModelCollisionOperatorsKrookOperatorandModelFokkerPlanckOperator.rst
+    MomentKinetics_Oxford-2_TN-07_AHigherOrderFiniteElementImplementationThefullFLandauFokkerPlanckCollisionOperat.rst
+    MomentKinetics_Oxford-2_TN-08_NumericalImplementationMomentKineticelectrons.rst
+    MomentKinetics_Oxford_TN-01_1DDriftKineticPeriodicBoundaryConditions.rst
+    MomentKinetics_Oxford_TN-02_Numerical1DDriftKineticPeriodicBoundaryConditions.rst
+    MomentKinetics_Oxford_TN-03_PhysicsEdgeFusion.rst
+    MomentKinetics_Oxford_TN-04_Numerical11DMomentBasedDriftKineticPeriodicBoundaryConditions.rst
+    MomentKinetics_Oxford_TN-05_1DDriftKineticWallBoundaryConditions.rst
+    MomentKinetics_Oxford_TN-06_Numerical11DMomentBasedDriftKineticPeriodicBoundaryConditions.rst
+    MomentKinetics_Oxford_TN-07_2DDriftKineticWallBoundaryConditions.rst
+    MomentKinetics_Oxford_TN-08_Numerical11DDriftKineticModelWallBoundaryConditions.rst
+    MomentKinetics_Oxford_TN-09_2DDriftKineticPeriodicBoundaryConditions.rst
+    MomentKinetics_Oxford_TN-10_Numerical11DDriftKineticParallelDynamicsPlasmaEdge.rst
+    MomentKinetics_Oxford_TN-11_2DDriftKineticsHelicalFieldSeparatrix.rst
+    MomentKinetics_Oxford_TN-12-2_TestsDDriftKineticModelPlasmaedge.rst
+    MomentKinetics_Oxford_TN-13-2_NumericalReducedModelD2VDriftKineticIonsD3VKineticneutralsHelicalMagneticFieldWa.rst
+    MomentKinetics_Oxford_TN-14-2_047357TnM29OverviewNumericalFindings.rst
