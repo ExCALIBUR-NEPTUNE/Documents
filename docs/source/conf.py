@@ -7,11 +7,14 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 import glob
+import json
 import os
 import re
 import shutil
 import sys
 import warnings
+from collections import defaultdict
+from pathlib import Path
 from pdfminer.high_level import extract_text
 
 sys.path.insert(0, os.path.abspath("."))
@@ -98,12 +101,15 @@ def descriptive_title_from_pdf(pdfpath, pdftxt):
         ):
             title = pdfpaths_to_nice_titles_dict[pdfpath]
         else:
-            title = get_raw_title_from_text("".join(pdftxt))
+            json_path = Path(pdfpath.replace("pdfs", "summaries").replace("pdf","json"))
+            with open(json_path) as json_file:
+                json_data = json.load(json_file)
+                title = json_data['title']
     except Exception as e:
         warnings.warn(
-            "Could not extract report title from {}\nError:\n{}".format(pdfpath, e)
+            "Could not extract report title from {}\nResorting to extracting the title from the text of the pdf.\nError:\n{}".format(pdfpath, e)
         )
-        title = ""
+        title = get_raw_title_from_text("".join(pdftxt))
 
     if len(title) <= 4:
         head, pdf = os.path.split(pdfpath)
@@ -148,7 +154,6 @@ def clean_title(title):
         title = re.sub(r"\b%s\b" % i, "", title, re.I)
     title = title.title()  # make first letter of all words uppercase
     title = re.sub(r"\W+", "", title)  # strip out any non alphanumeric values
-    title = title.replace(" ", "")  #  remove all spaces
     title = title[0 : min(80, len(title))]  # limit length otherwise OS complains
     return title.strip()
 
@@ -177,8 +182,21 @@ numbered_to_descriptive_dirs["2067270"] = "Hardware_York_etal"
 list_of_directories_to_ignore = [
 #    "2057701",
 ]  # the content in these directory shouldn't be displayed
-rst_names = []
+numbered_directories_to_rsts = defaultdict(list)
+rst_to_summary = {}
 
+def summary_from_path(pdfpath):
+    summary = "<no summary found>"
+    try:
+        json_path = Path(pdfpath.replace("pdfs", "summaries").replace("pdf","json"))
+        with open(json_path) as json_file:
+            json_data = json.load(json_file)
+            summary = json_data['summary']
+    except Exception as e:
+        warnings.warn(
+            "Could not find a summary for {}\nError:\n{}".format(pdfpath, e)
+        )
+    return summary
 
 def copy_and_rename_file(pdfpath, pdftxt):
     head, pdf = os.path.split(pdfpath)
@@ -198,7 +216,7 @@ def copy_and_rename_file(pdfpath, pdftxt):
     new_file_name = None
     for key in numbered_to_descriptive_dirs:
         if key in str(dirstub):
-            new_file_name = dirstub.replace(key, numbered_to_descriptive_dirs[key])
+            new_file_name = dirstub.replace(key, "")[1:]
             break
     if new_file_name is None:
         return None
@@ -212,7 +230,11 @@ def copy_and_rename_file(pdfpath, pdftxt):
     # record that the pdf has been renamed and therfore an .rst file
     # by that same name must be created to embed the pdf in
     stub = new_file_name[:-4]
-    rst_names.append(stub + ".rst")
+    rst_name = stub + ".rst"
+    numbered_dir = pdfpath.split("/")[3]
+    numbered_directories_to_rsts[numbered_dir].append(rst_name)
+    summary = summary_from_path(pdfpath)
+    rst_to_summary[rst_name] = summary
 
     return stub
 
@@ -227,6 +249,7 @@ def comma_separated_text_from_pdf(pdftxt):
 for pdfpath in glob.glob("../../pdfs/**/*.pdf"):
     pdftxt = extract_text(pdfpath)
     stub = copy_and_rename_file(pdfpath, pdftxt)
+    summary = summary_from_path(pdfpath)
     if stub is None:
         continue
     rstpath = "./" + stub + ".rst"
@@ -249,7 +272,6 @@ for pdfpath in glob.glob("../../pdfs/**/*.pdf"):
     f.write(embed_string.format(stub + ".pdf"))
     f.close()
 
-rst_names.sort()
 
 # create the file that we want to embed the pdfs in and start a toctree
 f = open("embeddedpdfs.rst", "w")
@@ -264,17 +286,26 @@ f.close()
 
 for key in numbered_to_descriptive_dirs:
     dirname = numbered_to_descriptive_dirs[key]
-    f = open("./" + dirname + ".rst", "w")
+    top = []
+    bottom = []
     title = dirname
     title = title.replace("_", " ")
-    f.write(title + "\n")  # the title of the .rst document containing the pdf
+    top.append(title + "\n")
     title_equals = "=" * len(dirname)
-    f.write(title_equals + "\n\n")
-    f.write(".. toctree::\n")
-    for rst in rst_names:
-        if dirname != rst[0 : len(dirname)]:
-            continue
-        f.write("    {0}\n".format(rst))
+    top.append(title_equals + "\n\n")
+    bottom.append(".. toctree::\n")
+    bottom.append("    :hidden:\n")
+    bottom.append("    :caption: Contents:\n")
+    for rst in numbered_directories_to_rsts[key]:
+        top.append(".. dropdown:: :doc:`{0}`\n\n".format(rst[:-4]))
+        top.append("    {0}\n\n".format(rst_to_summary[rst]))
+        bottom.append("    {0}\n".format(rst))
+    f = open("./" + dirname + ".rst", "w")
+    for l in top:
+        f.write(l)
+    f.write("\n")
+    for l in bottom:
+        f.write(l)
     f.close()
 
 # -- General configuration ---------------------------------------------------
@@ -282,6 +313,7 @@ for key in numbered_to_descriptive_dirs:
 
 extensions = [
     "sphinxcontrib.pdfembed",
+    'sphinx_design'
 ]
 
 templates_path = ["_templates"]
@@ -297,3 +329,4 @@ html_static_path = ["_static"]
 html_theme_options = {
     "page_width": 1000,
 }
+
