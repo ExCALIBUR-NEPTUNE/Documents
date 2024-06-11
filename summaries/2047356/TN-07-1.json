@@ -1,5 +1,5 @@
 {
-    "title": "Excalibur-Neptune report: Implementation of a 1D fluid solver with realistic boundary conditions",
+    "title": "ExCALIBUR-NEPTUNE report: Implementation of a 1D fluid solver with realistic boundary conditions",
     "authors": [
         "Ben Dudson",
         "Peter Hill",
@@ -10,7 +10,7 @@
     ],
     "summary": "This report summarizes the implementation of a 1D model SD1D including fluid neutrals and realistic boundary conditions for a system (2-3). Selected test cases from task 83-2.1 are also discussed.",
     "keywords": [
-        "Excalibur-Neptune",
+        "ExCALIBUR-NEPTUNE",
         "fluid solver",
         "SD1D",
         "boundary conditions",
