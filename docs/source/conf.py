@@ -154,7 +154,6 @@ def clean_title(title):
         title = re.sub(r"\b%s\b" % i, "", title, re.I)
     title = title.title()  # make first letter of all words uppercase
     title = re.sub(r"\W+", "", title)  # strip out any non alphanumeric values
-#    title = title.replace(" ", "")  #  remove all spaces
     title = title[0 : min(80, len(title))]  # limit length otherwise OS complains
     return title.strip()
 
@@ -224,7 +223,6 @@ def copy_and_rename_file(pdfpath, pdftxt):
     # add descriptive title-like suffix
     readable_suffix = "_" + clean_title(descriptive_title_from_pdf(pdfpath, pdftxt))
     new_file_name = new_file_name[:-4] + readable_suffix + ".pdf"
-    #new_file_name = readable_suffix + ".pdf"
     # copy the file over to where sphinx expects it
     destpath = "../source/_static/" + new_file_name
     os.makedirs(os.path.dirname(destpath), exist_ok=True)
