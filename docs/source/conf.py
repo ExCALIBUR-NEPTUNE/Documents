@@ -184,7 +184,20 @@ list_of_directories_to_ignore = [
 #    "2057701",
 ]  # the content in these directory shouldn't be displayed
 numbered_directories_to_rsts = defaultdict(list)
+rst_to_summary = {}
 
+def summary_from_path(pdfpath):
+    summary = "<no summary found>"
+    try:
+        json_path = Path(pdfpath.replace("pdfs", "summaries").replace("pdf","json"))
+        with open(json_path) as json_file:
+            json_data = json.load(json_file)
+            summary = json_data['summary']
+    except Exception as e:
+        warnings.warn(
+            "Could not find a summary for {}\nError:\n{}".format(pdfpath, e)
+        )
+    return summary
 
 def copy_and_rename_file(pdfpath, pdftxt):
     head, pdf = os.path.split(pdfpath)
@@ -222,6 +235,8 @@ def copy_and_rename_file(pdfpath, pdftxt):
     rst_name = stub + ".rst"
     numbered_dir = pdfpath.split("/")[3]
     numbered_directories_to_rsts[numbered_dir].append(rst_name)
+    summary = summary_from_path(pdfpath)
+    rst_to_summary[rst_name] = summary
 
     return stub
 
@@ -236,6 +251,7 @@ def comma_separated_text_from_pdf(pdftxt):
 for pdfpath in glob.glob("../../pdfs/**/*.pdf"):
     pdftxt = extract_text(pdfpath)
     stub = copy_and_rename_file(pdfpath, pdftxt)
+    summary = summary_from_path(pdfpath)
     if stub is None:
         continue
     rstpath = "./" + stub + ".rst"
@@ -272,15 +288,26 @@ f.close()
 
 for key in numbered_to_descriptive_dirs:
     dirname = numbered_to_descriptive_dirs[key]
-    f = open("./" + dirname + ".rst", "w")
+    top = []
+    bottom = []
     title = dirname
     title = title.replace("_", " ")
-    f.write(title + "\n")  # the title of the .rst document containing the pdf
+    top.append(title + "\n")
     title_equals = "=" * len(dirname)
-    f.write(title_equals + "\n\n")
-    f.write(".. toctree::\n")
+    top.append(title_equals + "\n\n")
+    bottom.append(".. toctree::\n")
+    bottom.append("    :hidden:\n")
+    bottom.append("    :caption: Contents:\n")
     for rst in numbered_directories_to_rsts[key]:
-        f.write("    {0}\n".format(rst))
+        top.append(".. dropdown:: :doc:`{0}`\n\n".format(rst[:-4]))
+        top.append("    {0}\n\n".format(rst_to_summary[rst]))
+        bottom.append("    {0}\n".format(rst))
+    f = open("./" + dirname + ".rst", "w")
+    for l in top:
+        f.write(l)
+    f.write("\n")
+    for l in bottom:
+        f.write(l)
     f.close()
 
 # -- General configuration ---------------------------------------------------
@@ -288,6 +315,7 @@ for key in numbered_to_descriptive_dirs:
 
 extensions = [
     "sphinxcontrib.pdfembed",
+    'sphinx_design'
 ]
 
 templates_path = ["_templates"]
@@ -303,3 +331,4 @@ html_static_path = ["_static"]
 html_theme_options = {
     "page_width": 1000,
 }
+
