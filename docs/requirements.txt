@@ -31,7 +31,6 @@ langchain-community==0.2.2
 langchain-core==0.2.4
 langchain-text-splitters==0.2.1
 langsmith==0.1.71
--e git+ssh://git@github.com/samueljackson92/llm-pdf-summary.git@f6ab341b5628e57b359348765a9163857436b11a#egg=llm_docs
 MarkupSafe==2.1.2
 marshmallow==3.21.2
 matplotlib-inline==0.1.7
