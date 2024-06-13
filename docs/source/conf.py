@@ -296,6 +296,7 @@ for key in numbered_to_descriptive_dirs:
     bottom.append(".. toctree::\n")
     bottom.append("    :hidden:\n")
     bottom.append("    :caption: Contents:\n")
+    numbered_directories_to_rsts[key].sort()
     for rst in numbered_directories_to_rsts[key]:
         top.append(".. dropdown:: :doc:`{0}`\n\n".format(rst[:-4]))
         top.append("    {0}\n\n".format(rst_to_summary[rst]))
