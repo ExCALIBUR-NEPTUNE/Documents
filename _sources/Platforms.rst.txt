@@ -1,0 +1,27 @@
+Platforms
+=========
+
+.. dropdown:: :doc:`TN-01-5_HardwareAtExascaleSupportCoordination`
+
+    This document provides an overview of the current hardware roadmaps for various architectures, including Intel, AMD, NVIDIA, Arm, and other architectures. It also discusses reconfigurable architectures and compares them. The report includes sections on pre-Exascale and post-Exascale systems in the United Kingdom, Europe, United States, and worldwide.
+
+.. dropdown:: :doc:`TN-02-5_DevelopingAnExascaleReadyFusionSimulation`
+
+    This document discusses the approaches to Exascale Application Development, focusing on General Purpose Programming Languages, Parallel Programming Models, Software Libraries, C++ Template Libraries, Domain Specific Languages, and their evaluation methods.
+
+.. dropdown:: :doc:`TN-03-3_ProgressDevelopmentAnFemPicMiniapp`
+
+    The goal of the NEPTUNE project is the development of a new code for the simulation of a next generation fusion reactor. This work package focuses on establishing ‘best practices’ when engineering a simulation code combining fluid and particle-based models, with a focus on performance and portability to heterogeneous Exascale-class architectures.
+
+.. dropdown:: :doc:`TN-04-2_ProposalParticleDsl`
+
+    Project NEPTUNE is concerned with the development of a new code for the simulation of a next generation fusion reactor. This report documents our progress towards developing a DSL that can be used for Particle-in-Cell (PIC) methods, embedded within the OP2 DSL.
+
+
+.. toctree::
+    :hidden:
+    :caption: Contents:
+    TN-01-5_HardwareAtExascaleSupportCoordination.rst
+    TN-02-5_DevelopingAnExascaleReadyFusionSimulation.rst
+    TN-03-3_ProgressDevelopmentAnFemPicMiniapp.rst
+    TN-04-2_ProposalParticleDsl.rst

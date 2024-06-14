@@ -1,0 +1,12 @@
+PIC Warwick
+===========
+
+.. dropdown:: :doc:`TN-01_CoDesignPicMethodsOtherElementsNeptune`
+
+    This report discusses integrating Particle-In-Cell (PIC) methods with other components of the NEPTUNE project, highlighting interactions with the gyrokinetics work package and the spatial representation based on finite elements.
+
+
+.. toctree::
+    :hidden:
+    :caption: Contents:
+    TN-01_CoDesignPicMethodsOtherElementsNeptune.rst

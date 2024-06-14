@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<meta content="technical note " name="description" />
+<meta content="Report,2070839-TN-03,A,reduced,electron,model,for,testing,plasma,dynamics,for,closed,field,lines,M.,Barnes1,,M.,R.,Hardman2,,S.,Newton3,,J.,Omotani3,and,F.,I.,Parra4,1,Rudolf,Peierls,Centre,for,Theoretical,Physics,,University,of,Oxford,,Clarendon,Laboratory,,Parks,Road,,Oxford,OX1,3PU,,United,Kingdom,2,Tokamak,Energy,Ltd,,173,Brook,Drive,,Milton,Park,,Abingdon,OX14,4SD,,United,Kingdom,3,Culham,Centre,for,Fusion,Energy,,Culham,Science,Centre,,Abingdon,,Oxon,,OX14,3DB,,United,Kingdom,4,Princeton,Plasma,Physics,Laboratory,,P.O.,Box,451,,Princeton,,New,Jersey,08540,,United,States,E-mail:,michael.barnes&#64;physics.ox.ac.uk,1.,Introduction,Calculation,of,the,electrostatic,potential,is,a,challenge,within,the,drift,kinetic,approximation.,This,is,because,,without,further,manipulation,of,the,drift,kinetic,system,of,equations,,there,is,no,explicit,equation,to,be,solved,for,the,potential:,Instead,,it,appears,as,a,parameter,in,the,drift,kinetic,equations,for,both,electrons,and,ions,,which,In,report,2047357-TN-09-01,[1],,are,then,related,to,one,another,via,quasineutrality.,we,showed,how,the,electrostatic,potential,could,be,calculated,for,a,2D,drift,kinetic,model,with,a,helical,magnetic,field,and,with,periodic,boundary,conditions,appropriate,for,closed,field,lines.,Considerable,care,had,to,be,taken,to,obtain,an,expression,for,the,electrostatic,potential.,In,particular,,we,showed,that,one,has,to,retain,higher,order,terms,in,the,drift,kinetic,expansion,parameter,and,thus,solve,a,mixed,,integral,and,partial,differential,equation,for,the,potential,at,the,domain’s,parallel,boundary.,Thus,far,we,have,side-stepped,the,issue,of,calculating,the,potential,in,our,ProxyApps,by,using,a,Boltzmann,response,for,the,electron,dynamics,so,that,no,electron,equations,need,to,be,solved,at,all.,In,this,report,,we,outline,a,collisional,model,for,electron,dynamics.,The,purpose,of,this,model,is,not,to,be,physically,accurate,,but,to,bridge,the,complexity,between,the,fully,kinetic,treatment,and,the,relatively,crude,electron,model,employed,thus,far.,Importantly,,the,collisional,model,for,electrons,will,require,the,calculation,of,the,potential,as,laid,out,in,the,aforementioned,report,,but,will,do,so,within,a,fluid,framework,that,should,be,easier,to,test,numerically.,To,begin,we,will,provide,a,brief,overview,of,the,physical,system,we,aim,to,model,,before,presenting,an,overview,of,the,recipe,for,obtaining,the,potential,derived,in,earlier,reports.,We,will,then,go,on,to,provide,a,collisional,model,for,electron,dynamics,,which,1,3,DRIFT,KINETIC,SYSTEM,OF,EQUATIONS,2,follows,from,the,original,derivation,of,Braginskii,[2].,2.,Magnetic,geometry,and,orderings,We,consider,a,plasma,consisting,of,a,single,ion,species,of,charge,e,and,mass,mi,and,electrons,with,charge,−e,and,mass,me.,Because,we,are,focusing,on,the,closed-field-line,region,of,the,plasma,where,the,neutral,density,is,low,,we,neglect,neutrals,here.,The,plasma,is,immersed,in,a,helical,magnetic,field,of,the,form,B(r,,ζ),=,Bz(r)ˆz,+,Bζ(r)ˆζ(ζ),,where,{r,,z,,ζ},are,cylindrical,coordinates,,and,ˆz,and,ˆζ,are,unit,vectors,in,the,direction,of,∇z,and,∇ζ,,respectively.,We,assume,that,the,plasma,is,electrostatic,and,does,not,vary,in,the,symmetry,direction,ˆζ.,Note,that,ζ,is,meant,to,be,the,analogue,of,the,toroidal,direction,in,a,tokamak.,(1),The,spatial,domain,we,consider,is,r,∈,[r0,,r0,+,Lr],and,z,∈,[0,,Lz],,with,a,periodic,boundary,condition,in,z.,The,characteristic,length,along,a,field,line,between,two,walls,is,B,Bz,The,characteristic,time,it,takes,for,ions,to,stream,along,the,field,line,from,one,end,of,.,=,(cid:112)2Ti/mi,is,the,ion,thermal,z,to,the,other,is,L∥/vth,i,∼,(B/Bz)(Lz/vth,i),,where,vth,i,speed,and,Ti,is,the,ion,temperature.,The,radial,E,×,B,drift,speed,is,L∥,∼,Lz.,(2),ρi,Lz,.,=,vth,i/Ωi,is,the,thermal,ion,gyroradius,,Ωi,.,=,−,∂ϕ,∂z,Bζ,B2,vEr,∼,vth,i,,.,=,eB/mi,is,the,ion,gyrofrequency,,where,ρi,and,we,have,ordered,the,electrostatic,potential,energy,comparable,to,the,thermal,energy:,eϕ,∼,Ti.,We,order,the,times,for,ions,to,cross,the,domain,in,the,radial,and,vertical,directions,to,be,comparable,,giving,(3),Taking,the,drift,kinetic,limit,,we,then,have,Lr,∼,B,Bz,ρi.,ρi,Lr,∼,Bz,B,∼,Bz,Bζ,≪,1.,3.,Drift,kinetic,system,of,equations,(4),(5),The,drift,kinetic,equations,describing,the,evolution,of,the,particle,distribution,fs,for,the,ions,and,electrons,are,1,B,(cid:19),∂fi,∂z,∂fi,∂t,∂fi,∂r,∂ϕ,∂z,∂ϕ,∂r,∂ϕ,∂z,Bz,B,1,B,eBz,miB,∂fi,∂v∥,v∥,−,−,+,+,(cid:18),(6),=,Cii[fi],+,Cie[fi,,fe],+,Si,,4,EXTENDED,BOLTZMANN,RESPONSE,MODEL,and,∂fe,∂t,−,1,B,∂ϕ,∂z,∂fe,∂r,(cid:18),+,v∥,Bz,B,+,1,B,∂ϕ,∂r,(cid:19),∂fe,∂z,+,eBz,meB,∂ϕ,∂z,∂fe,∂v∥,=,Cee[fe],+,Cei[fe,,fi],+,Se,,3,(7),where,v∥,is,the,parallel,component,of,the,particle,velocity,v,,Css′,accounts,for,the,effect,on,species,s,of,collisions,with,species,s′,,Ss,is,a,source,accounting,for,,e.g.,,heating,and,fueling,,and,angle,brackets,denote,an,average,over,particle,gyroangle.,The,distribution,functions,fi,and,fe,are,related,via,quasineutrality,,(cid:88),s,Zsens,=,(cid:90),(cid:88),Zse,s,d3vfs,=,0,,(8),where,Zi,=,1,=,−Ze.,One,of,the,main,challenges,in,solving,this,system,of,equations,is,that,there,is,no,explicit,equation,for,the,electrostatic,potential.,If,one,were,to,try,,e.g.,,to,solve,Eqs.,(6),and,(7),using,an,explicit,time,advance,algorithm,with,ϕ,at,the,previous,time,level,as,an,input,,then,in,general,the,solutions,for,fi,and,fe,so,obtained,would,not,satisfy,Eq.,(8).,This,procedure,could,be,iterated,,with,ϕ,varied,until,quasineutrality,were,satisfied,,or,one,could,develop,an,approach,that,guarantees,satisfaction,of,quasineutrality,from,the,outset.,We,have,presented,two,such,approaches,in,previous,reports:,The,first,assumes,a,Boltzmann,electron,response,and,thus,avoids,entirely,the,need,to,solve,the,electron,dynamics,,while,the,second,requires,the,inclusion,of,higher,order,corrections,in,the,drift,kinetic,expansion,parameter.,The,former,may,not,be,sufficiently,accurate,,while,the,latter,introduces,significant,complication,in,numerical,solution.,In,the,following,sections,we,provide,a,means,by,which,the,accuracy,of,the,Boltzmann,response,approximation,can,be,estimated,(and,somewhat,improved),and,a,fluid,model,that,should,make,implementation,and,testing,of,the,higher-order,approach,easier.,We,will,assume,in,this,report,that,fi,can,be,obtained,once,ϕ,is,known,,either,via,direct,solution,of,the,above,drift,kinetic,equation,or,via,the,moment-kinetic,approach,derived,in,report,2047357-TN-09-01,[1].,Our,focus,here,will,be,on,obtaining,simplified,models,for,electron,dynamics.,4.,Extended,Boltzmann,response,model,Thus,far,we,have,modelled,the,electrons,as,having,a,Boltzmann,response,in,the,closed-,field-line,region,of,the,plasma.,This,means,their,density,is,given,by,ne,=,N0,exp,(cid:19),(cid:18),eϕ,Te,=,ni,,(9),where,the,latter,equality,is,a,consequence,of,quasineutrality.,If,a,solution,of,this,form,is,expected,,one,could,expand,the,electron,distribution,function,about,it,and,solve,for,the,difference:,fe,=,fM,B,+,δfe,,(10),4,EXTENDED,BOLTZMANN,RESPONSE,MODEL,with,fM,B,.,=,N0,(cid:18),me,2πTe,(cid:19)3/2,(cid:18),exp,−,(cid:19),mev2,2Te,exp,(cid:19),.,(cid:18),eϕ,Te,Taking,the,density,moment,of,Eq,(10),then,gives,with,ne,=,N0,exp,(cid:19),(cid:18),eϕ,Te,+,δne,,(cid:90),.,=,δne,d3vδfe.,We,can,rearrange,Eq.,(12),to,solve,for,the,electrostatic,potential:,with,and,ϕ,=,ϕ0,+,ϕ1,,eϕ0,Te,.,=,ln,ni,N0,eϕ1,Te,.,=,ln,(cid:18),1,−,(cid:19),,,δne,ni,4,(11),(12),(13),(14),(15),(16),where,we,have,used,quasineutrality,to,replace,ne,with,ni.,Substituting,the,assumed,form,of,fe,from,Eq.,(10),into,the,electron,drift,kinetic,equation,(7),gives,∂δfe,∂t,−,1,B,∂ϕ,∂z,∂δfe,∂r,(cid:18),+,v∥,Bz,B,+,1,B,∂ϕ,∂r,(cid:19),∂δfe,∂z,+,eBz,meB,=,(Cee[fe],−,Cee[fM,B]),+,Cei[δfe,,fi],+,Se[fe],−,∂δfe,∂ϕ,∂z,∂v∥,∂fM,B,∂t,,,where,∂fM,B,∂t,=,fM,B,(cid:18),∂,ln,Te,∂t,(cid:18),mv2,2Te,−,(cid:19),3,2,+,∂,∂t,ln,ni,N0,+,∂,∂t,(cid:18),ln,1,−,(cid:19)(cid:19),.,δne,ni,(17),(18),The,time,derivatives,of,Te,and,ni,above,can,be,eliminated,by,using,the,ion,and,electron,continuity,equations,,but,there,is,no,equivalent,,closed-form,equation,for,δne.,This,makes,it,difficult,to,use,an,explicit,time,advance,scheme,to,evolve,δfe.,To,overcome,this,,we,can,assume,that,δne,≪,ne;,i.e.,,we,assume,that,the,electron,response,is,close,to,Boltzmann.,With,this,assumption,,we,have,eϕ1,Te,≈,−,δne,ni,≪,eϕ0,Te,,,and,v∥,Bz,B,∂δfe,∂z,+,eBz,meB,∂ϕ0,∂z,∂δfe,∂v∥,=,C,(ℓ),−,fM,B,ee,[δfe],+,Cei[δfe,,fi],+,Se[fM,B],(cid:18)mv2,2Te,(cid:18),∂,ln,Te,∂t,∂,∂t,3,2,−,+,(cid:19),ln,(19),(20),(cid:19),,,ni,N0,5,ELECTRON,FLUID,EQUATIONS,5,where,C,(ℓ),is,the,linearized,electron-electron,collision,operator,,we,have,used,the,ee,maximal,ordering,for,collisions,(νee,∼,vth,e/L∥),,and,we,have,kept,only,the,lowest,order,terms,in,(cid:112)me/mi.,Upon,solving,this,equation,for,δfe,,the,corresponding,density,δne,could,be,compared,to,ni,to,check,if,the,Boltzmann,approximation,is,valid.,If,not,,one,could,use,the,alternative,approach,for,computing,ϕ,that,was,proposed,in,report,2047357-TN-09-01,[1].,We,outline,this,approach,below,and,suggest,a,simple,fluid,model,(first,derived,by,Braginskii,[2]),that,could,be,used,to,test,it.,5.,Electron,fluid,equations,Electron,fluid,equations,are,obtained,by,taking,the,appropriate,velocity,moments,of,Eq.,(7).,The,current,conservation,equation,,obtained,by,combining,the,electron,and,ion,continuity,equations,and,enforcing,quasineutrality,,is,Bz,B,∂,∂z,(ne,(ui,−,ue)),=,0,,(21),where,us,is,the,parallel,flow,of,species,s.,We,have,assumed,(cid:82),d3v,(Si,−,Se),is,small,to,obtain,the,above,result.,The,electron,parallel,momentum,equation,is,−,Bz,B,∂p∥,e,∂z,+,ene,Bz,B,∂ϕ,∂z,+,F∥[fe,,fi],=,0,,where,p∥,e,is,the,electron,parallel,pressure,,and,F∥[fe,,fi](z,,t),(cid:90),.,=,d3v,mev∥Cei[fe,,fi],(22),(23),is,the,parallel,friction,force,between,electrons,and,ions.,The,term,proportional,to,Se,has,been,neglected,in,(22),as,small,in,me/mi,because,we,order,Se,∼,fevth,i/L∥.,Finally,,the,electron,energy,equation,is,3,2,ne,−,(cid:18),∂Te,1,∂t,B,3nemeνei,mi,+,∂ϕ,∂z,∂Te,∂r,(cid:18),+,ue,Bz,B,+,(cid:19),1,B,∂ϕ,∂r,(cid:19),∂Te,∂z,=,−,(Ti,−,Te),+,F∥[fe,,fi],(ui,−,ue),+,(cid:90),d3v,Bz,B,(cid:18),me,2,(cid:18),∂q∥,e,∂z,+,p∥,e,(cid:19),∂ue,∂z,where,q∥,e,is,the,electron,parallel,heat,flux,,(cid:90),.,=,q∥,e,d3wmsw3,∥fe.,Eqs.,(21),and,(22),can,be,solved,for,ue(r,,z,,t),and,ϕ(r,,z,,t),,respectively,,provided,the,boundary,values,ue(r,,0,,t),and,ϕ(r,,0,,t),are,given.,The,boundary,value,for,the,parallel,flow,is,obtained,by,dividing,Eq.,(22),by,ne,and,integrating,in,z:,(cid:90),Lz,(cid:18),dz,−,0,1,ne,Bz,B,∂p∥,e,∂z,+,F∥[fe,,fi],ne,(cid:19),=,0,,(26),|v,−,ueˆz|2,−,(cid:19),Te,Se,,3,2,(24),(25),6,DRIFT-REDUCED,BRAGINSKII,EQUATIONS,6,where,it,should,be,noted,that,F∥[fe,,fi],will,depend,on,ue.,An,equation,for,ϕ(r,,0,,t),is,obtained,by,going,to,higher,order,in,the,current,conservation,equation,(for,details,,see,[1]:,(cid:32),∂,∂r,−,∂,∂t,(cid:90),Lz,0,dz,Fr,+,1,B,∂,∂r,(cid:90),Lz,0,dz,∂ϕ,∂z,Fr,+,1,B,(cid:90),Lz,0,(cid:33),dz,Fext,·,ˆz,=,0,,(27),where,Fext,is,the,external,force,applied,to,the,plasma,and,(cid:19),.,=,Fr,mini,B2,(cid:18),∂ϕ,∂r,+,1,eni,∂p⊥,i,∂r,.,(28),Once,the,distribution,fi,is,provided,,we,can,close,this,set,of,equations,if,q∥,e,can,be,expressed,in,terms,of,the,other,low-order,fluid,moments,of,fe.,This,is,made,possible,when,the,plasma,is,sufficiently,collisional,by,performing,a,Chapman-Enskog,expansion,in,short,collisional,mean-free-path.,The,resulting,set,of,fluid,equations,are,the,drift-,reduced,Braginskii,equations,[2]:,We,provide,a,brief,outline,of,their,derivation,next.,6.,Drift-reduced,Braginskii,equations,Our,starting,point,is,the,electron,drift,kinetic,equation,(7).,We,first,change,variables,ˆb,,with,ˆb,the,unit,vector,in,the,from,particle,velocity,to,peculiar,velocity,w,direction,of,B:,.,=,v,−,ue,∂fe,∂t,−,−,1,∂ϕ,B,∂z,(cid:18),∂ue,∂t,(cid:18),∂fe,∂r,+,−,1,B,∂ϕ,∂r,+,1,(cid:1),Bz,∂ϕ,(cid:0)w∥,+,ue,B,B,∂r,(cid:18),(cid:1),Bz,(cid:0)w∥,+,ue,B,∂ue,∂r,+,(cid:19),∂fe,∂z,1,B,+,eBz,meB,(cid:19),∂ue,∂z,∂fe,∂ϕ,∂z,∂w∥,(cid:19),∂fe,∂w∥,+,∂ϕ,∂r,(29),=,Cee[fe],+,Cei[fe,,fi],+,Se,,We,make,the,subsidiary,expansion,λee/L∥,∼,λei/L∥,∼,(cid:112)me/mi,so,that,collisions,between,electrons,are,faster,than,any,other,process,in,Eq.,(7).,Defining,ϵ,=,(cid:112)me/mi,and,expanding,fe,=,fe0+fe1+...,,with,fe1/fe0,∼,ϵ,,the,lowest,order,drift,kinetic,equation,for,electrons,is,Cee[fe0],+,Cei[fe0,,fi],=,0.,(30),Multiplying,Eq.,(30),by,ln,fe0,and,integrating,over,velocity,space,,Boltzmann’s,H-,Theorem,indicates,that,fe0,is,an,isotropic,Maxwellian;,i.e.,,fe0,=,ne,π3/2v3,th,e,(cid:32),exp,−,(cid:33),.,w2,v2,th,e,(31),It,is,worth,noting,a,couple,of,things,about,this,solution.,First,,the,density,,temperature,and,parallel,flow,appearing,inside,it,are,defined,to,be,the,exact,values.,This,means,that,the,corresponding,moments,of,fe1,must,vanish.,Second,,the,isotropy,of,fe0,constrains,p∥,e,=,pe.,6,DRIFT-REDUCED,BRAGINSKII,EQUATIONS,At,next,order,,the,electron,drift,kinetic,equation,becomes,C,(ℓ),ee,[fe1],+,L[fe1,−,mew∥,(ui,−,ue),Te,eBz,meB,∂ϕ,∂z,+,∂fe0,∂z,fe0],∂fe0,∂w∥,,,=,w∥,Bz,B,7,(32),ee,the,linearized,electron-electron,collision,operator,and,Lei,the,Lorentz,operator.,with,C,(ℓ),We,use,the,electron,momentum,equation,(22),to,eliminate,ϕ,and,substitute,∂fe0,∂z,=,(cid:18),∂,ln,pe,∂z,+,(cid:18),mew2,2Te,−,(cid:19),(cid:19),∂,ln,Te,∂z,5,2,fe0,,∂fe0,∂w∥,=,−,2w∥,v2,th,e,fe0,,(33),(34),and,(cid:20),mew∥,(ui,−,ue),Te,into,Eq.,(32),to,obtain,L,(cid:21),fe0,=,−,√,3,π,4,(cid:18),2Te,mew2,(cid:19)3/2,meνei,(ui,−,ue),w∥,Te,fe0,(35),C,(ℓ),ee,[fe1],+,Lei[fe1],√,3,(cid:32),=,−,π,(cid:18),2Te,mew2,4,(cid:19)3/2,meνei,(ui,−,ue),w∥,Te,(cid:19),−,F∥[fe0,,fi],(36),∂p∥,e,∂z,−,2w∥,v2,th,e,+,w∥,(cid:18),Bz,1,mene,B,(cid:18),∂,ln,ne,∂z,Bz,B,+,∂,ln,Te,∂z,(cid:18),mew2,2Te,−,3,2,(cid:19)(cid:19),(cid:33),fe0,,with,the,parallel,friction,force,F∥[fe0,,fi],=,−neνei,(ue,−,ui),.,(37),Substituting,Eq.,(37),into,Eq.,(36):,C,(ℓ),ee,[fe1],+,Lei[fe1],+,√,3,w∥,π,2γeinif0e,mepe,(cid:18),2Te,mew2,(cid:18),mew2,2Te,−,(cid:32),(cid:32),=,+,Bz,B,1,−,4,(cid:18),∂,ln,Te,∂z,(cid:90),d3w,(cid:19)3/2(cid:33),w∥,(w′)3,fe1,meνei,(ui,−,ue),Te,(cid:19)(cid:19),(cid:33),5,2,w∥fe0,(38),This,form,of,the,drift,kinetic,equation,can,be,solved,by,expanding,fe1,in,terms,of,generalized,Laguerre,polynomials:,fe1,=,∞,(cid:88),k=1,ˆfkL(3/2),k,(cid:32),(cid:33),.,w2,v2,th,e,(39),7,DISCUSSION,8,The,sum,starts,at,k,=,1,because,there,is,no,flow,contained,in,fe1,by,construction.,In,practice,we,keep,only,the,first,two,terms,in,the,above,expansion.,Using,the,above,expansion,and,taking,the,generalized,Laguerre,transform,of,the,lefthand,side,of,Eq.,(38),gives,LHS,=,−neνee,(cid:32),√,2,+,13,4,√,2,4,+,69,16,3,√,3,2,√,4,+,69,16,+,433,64,16,2,45,(cid:33),(cid:32),ˆf1,ˆf2,(cid:33),.,(40),Transforming,the,righthand,side,yields,(cid:90),d3w,w2,∥fe0L(3/2),k,(cid:32),(cid:32),(x),Bz,B,(cid:33),5,2,∂,ln,Te,∂z,(cid:18),+,1,−,√,3,π,4,(cid:16)vth,e,w,(cid:17)3(cid:19),meνei,(ui,−,ue),(cid:33),Te,=,−,5,2,∂Te,∂z,δk1,−,neνei,(ui,−,ue),(cid:18),3,2,δk1,+,(cid:19),δk2,.,15,8,−,w2,v2,th,e,Bz,B,pe,me,Equating,the,two,sides,of,the,equation,,we,can,solve,for,ˆf1,and,ˆf2.,The,result,is,fe1,=,w∥fe0,(cid:18),1,νei,Bz,B,∂,ln,Te,∂z,(cid:16),c1L(3/2),1,+,c2L(3/2),2,(cid:17),+,me,(ui,−,ue),Te,(cid:16),c3L(3/2),1,+,c4L(3/2),2,(41),(cid:17)(cid:19),(42),with,c1,=,1.265,,c2,=,−0.6325,,c3,=,0.284,and,c4,=,0.032.,Using,the,solution,for,fe1,in,Eq.,(25),gives,the,classic,Braginskii,result,for,the,parallel,electron,heat,flux,,q∥,e,=,−3.16,pe,meνei,Bz,B,∂Te,∂z,−,0.71pe,(ui,−,ue),.,(43),7.,Discussion,We,have,proposed,two,models,for,electron,dynamics,to,enable,the,calculation,of,the,electrostatic,potential.,The,first,model,assumes,the,electron,response,is,almost,Boltzmann,and,calculates,the,correction,as,a,means,of,testing,the,assumption.,If,the,obtained,correction,is,large,enough,to,invalidate,the,Boltzmann,assumption,,there,are,(at,least),two,options,left:,use,an,iterative,method,to,find,self-consistent,solutions,for,fi,,fe,and,ϕ,(either,by,varying,ϕ,in,the,original,drift,kinetic,equations,or,by,varying,,e.g.,,∂δne/∂t,in,Eq.,(17);,or,use,current,conservation,at,higher,order,via,Eq.,(27),to,obtain,ϕ.,For,the,latter,approach,,it,will,be,useful,to,use,a,simple,fluid,model,for,electron,dynamics,to,facilitate,implementation,and,testing.,We,proposed,here,the,Braginskii,fluid,model,composed,of,Eqs.,(21),,(22),,(24),,(26),,(27),,(37),and,(43).,7,DISCUSSION,9,[1],F.,I.,Parra,,M.,Barnes,,and,M.,R.,Hardman.,2d,drift,kinetic,model,with,periodic,boundary,conditions.,Excalibur/Neptune,Report,,9:2047357–TN–09–01,M1.6,,2021.,[2],S.,I.,Braginskii.,Transport,phenomena,in,a,completely,ionized,two-temperature,plasma.,Sov.,Phys.,JETP,,6:358,,1958." name="keywords" />
+
+    <title>TN-03_AReducedElectronModelTestingPlasmaDynamicsClosedFieldLines &#8212; Excalibur-Neptune Documents 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/design-tabs.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="tn-03-areducedelectronmodeltestingplasmadynamicsclosedfieldlines">
+<h1>TN-03_AReducedElectronModelTestingPlasmaDynamicsClosedFieldLines<a class="headerlink" href="#tn-03-areducedelectronmodeltestingplasmadynamicsclosedfieldlines" title="Permalink to this heading">¶</a></h1>
+<p>
+                        <iframe
+                                id="ID"
+                                style="border:1px solid #666CCC"
+                                title="PDF"
+                                src="_static/TN-03_AReducedElectronModelTestingPlasmaDynamicsClosedFieldLines.pdf"
+                                frameborder="1"
+                                scrolling="auto"
+                                height="1600"
+                                width="1100"
+                                align="middle">
+                        </iframe>
+                     </p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Excalibur-Neptune Documents</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="embeddedpdfs.html">Technical Reports</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, UKAEA.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.1.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/TN-03_AReducedElectronModelTestingPlasmaDynamicsClosedFieldLines.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

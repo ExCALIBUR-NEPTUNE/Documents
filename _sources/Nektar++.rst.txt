@@ -1,0 +1,17 @@
+Nektar++
+========
+
+.. dropdown:: :doc:`TN-01-2_ImplementationTensorregionsLibraryNektar`
+
+    This report outlines the initial stages of development of the TensorRegions library, extending Nektar++ to support higher-dimensional finite element spaces for solving PDEs.
+
+.. dropdown:: :doc:`TN-02-4_ReportDgPerformanceNektar`
+
+    This report outlines the current single-node performance of discontinuous Galerkin (DG) operators within Nektar++ on x86-64 CPU hardware platforms, with the aim of identifying present bottlenecks in the development of higher-dimensional DG kernels.
+
+
+.. toctree::
+    :hidden:
+    :caption: Contents:
+    TN-01-2_ImplementationTensorregionsLibraryNektar.rst
+    TN-02-4_ReportDgPerformanceNektar.rst

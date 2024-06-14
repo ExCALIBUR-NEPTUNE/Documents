@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<meta content="technical note " name="description" />
+<meta content="Excalibur-Neptune,report,2047356-TN-10-1,Task,0.2,Development,of,a,performance,testing,and,aggregation,tool,for,NEPTUNE,proxy-apps,Edward,Higgins,and,David,Dickinson,University,of,York,April,1,,2022,Contents,1,Executive,Summary,2,Motivation,&amp;,Requirements,2.1,Motivation,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,2.2,Requirements,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,3,Existing,technology,3.1,Automation,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,3.1.1,GitHub,Actions,and,self-hosted,runners,.,.,.,.,.,.,.,.,.,.,3.1.2,ReFrame,HPC,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,3.2,Performance,analysis,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,3.3,Data,aggregation,and,visualisation,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,4,Design,&amp;,Implementation,4.1,Overview,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,4.2,RoundTable,backend,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,4.2.1,Proxy,app,configuration,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,4.2.2,Benchmark,scripts,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,4.2.3,Database,upload,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,4.3,Database,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,4.4,RoundTable,dashboard,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,4.5,Availability,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,5,References,1,Executive,Summary,1,2,2,2,3,3,3,3,4,4,4,4,5,5,6,7,7,7,8,8,This,report,outlines,the,requirements,and,design,of,a,software,framework,for,the,automated,performance,testing,and,performance,regression,analysis,of,git-,managed,software,,for,example,the,proxy,apps,developed,as,part,of,the,ExCAL-,IBUR,NEPTUNE,project.,The,framework,allows,acceptance,tests,and,performance,benchmarks,to,be,run,automatically,using,GitHub,Actions,on,self-hosted,runners,at,a,range,of,local,and,HPC,facilities,such,as,Bede,or,Archer2.,The,results,from,these,runs,are,then,collated,and,displayed,in,a,web,dashboard,along,with,results,from,other,applications,,sites,and,code,versions.,The,motivation,of,the,project,is,both,to,allow,easy,tracking,of,performance,improvements,during,the,development,of,the,proxy,apps,,as,well,as,to,iden-,tify,if,and,when,any,code,changes,negatively,affect,the,performance,of,such,applications,across,a,range,of,hardware,and,compiler,combinations.,1,2,Motivation,&amp;,Requirements,2.1,Motivation,The,aim,of,the,ExCALIBUR,NEPTUNE,project,is,to,develop,software,and,infrastructure,for,simulating,the,behaviour,of,tokamak,plasma,edges,,one,of,the,grand,challenges[1].,In,order,to,do,this,,software,solutions,will,need,to,be,developed,using,a,range,of,algorithms,across,a,number,of,different,software,and,hardware,configurations,,and,the,real-time,performance,and,scaling,of,these,solutions,monitored.,It,is,often,said,that,no,significant,software,application,is,perfectly,bug-,free,,and,the,same,is,true,in,terms,of,optimal,performance.,Often,,changes,in,one,part,of,the,code,can,negatively,affect,application,performance,elsewhere,in,unexpected,ways.,Being,able,to,spot,this,performance,decrease,quickly,,as,well,as,identifying,which,particular,code,change,caused,the,decrease,is,incredibly,useful,for,rapid,development,of,highly,performant,software.,Similarly,,code,that,performs,well,on,one,system,may,not,necessarily,perform,well,on,others.,This,can,be,due,to,differing,compiler/library,availability,,or,dif-,ferences,in,the,underlying,hardware,performing,the,calculations.,For,example,,algorithms,that,work,well,on,GPUs,are,often,different,to,those,that,work,well,on,CPUs,,due,to,their,focus,on,massive,parallelisation,rather,than,single-threaded,performance.,Being,able,to,compare,the,performance,of,software,across,a,range,of,hardware,allows,these,differences,to,be,understood.,2.2,Requirements,Due,to,these,considerations,,a,framework,for,automated,performance,testing,and,analysis,of,the,NEPTUNE,proxy,apps,was,designed.,The,requirements,for,the,framework,were:,1.,Automated,deployment:,The,framework,needs,to,be,able,to,build,,run,and,analyse,the,performance,of,proxy,apps,automatically,when,triggered;,2.,Flexibility:,The,framework,needs,to,be,able,to:,(a),Compile,and,run,the,range,of,software,seen,in,the,proxy,apps,(e.g.,Fortran/C,,MPI,,CUDA,etc.),(b),Run,on,the,range,of,hardware,systems,&amp;,software,environments,of,interest,(e.g.,x86/ARM,CPUs,,GPUs,etc.),2,(c),Obtain,a,range,of,performance,metrics.,(e.g.,run,time,,parallel,efficiency,,memory,usage,etc.),3.,Interpretability:,The,framework,needs,to,be,able,to,display,the,results,from,these,runs,in,such,a,way,that,performance,can,be,compared,across,code,versions,as,well,as,different,hardware/software,configurations.,3,Existing,technology,A,number,of,tools,already,exist,that,can,do,part,of,what,is,needed,for,this,frame-,work.,These,fall,under,4,main,categories:,automation,,performance,analysis,,data,aggregation,and,visualisation.,3.1,Automation,3.1.1,GitHub,Actions,and,self-hosted,runners,For,codes,hosted,on,GitHub,,a,service,called,GitHub,Actions[2],allows,scripts,to,be,run,automatically,when,triggered,by,predefined,events,,for,example,when,a,new,commit,is,pushed,to,a,particular,branch,of,a,repository.,By,default,these,run,within,containers,on,GitHub-provided,cloud,infrastructure,,but,they,can,also,be,configured,to,run,on,external,machines,,known,as,self-hosted,runners[3],,provided,the,user,has,sufficient,access,to,that,machine.,This,allows,users,to,have,these,Actions,run,on,,for,example,,personal,workstations,or,HPC,facilities.,3.1.2,ReFrame,HPC,In,order,to,build,and,run,the,proxy,apps,on,a,particular,system,,the,runner,must,have,knowledge,of,how,the,system,is,configured.,For,example,,which,particular,versions,of,compilers,and,libraries,are,available,and,where,they,are,stored.,While,for,single,user,machines,these,often,live,in,default,locations,,more,complex,systems,such,as,most,HPC,facilities,will,use,system,such,as,Environ-,ment,Modules[4],or,LMod[5],to,manage,multiple,software,environments.,As,well,as,this,,such,HPC,facilities,often,provide,access,to,computational,resources,via,a,queuing,system,,such,as,Slurm[6].,As,these,configurations,are,usually,site-specific,,any,automated,runner,must,be,made,aware,of,how,to,compile,and,run,applications,on,a,per-site,basis.,ReFrame[7],is,a,regression,testing,and,benchmarking,framework,which,al-,lows,site,configuration,and,application,run-time,configurations,to,be,defined,3,independently,of,each,other,,while,also,including,integration,of,many,common,tools,for,managing,software,environments,,build,systems,and,queuing,systems.,3.2,Performance,analysis,There,are,many,different,types,of,performance,measures,that,can,relevant,when,developing,software,,for,example,application,run-time,,memory,usage,,parallel,efficiency,and,more.,As,such,,a,wide,range,of,utilities,are,available,to,analyse,programs,to,quantify,these.,These,range,from,simple,system,tools,such,as,the,Unix,”time”,utility,that,simply,measures,the,amount,of,time,a,program,takes,to,run,,up,to,tools,such,as,Intel,VTune[8],that,can,perform,much,deeper,analysis,of,a,program’s,run-time,performance.,Often,,utilities,like,this,are,available,on,HPC,facilities.,3.3,Data,aggregation,and,visualisation,In,order,to,compare,performance,metrics,from,multiple,applications,across,mul-,tiple,sites,,the,data,needs,to,be,gathered,and,displayed,in,a,web,dashboard.,In,order,to,gather,the,data,,it,needs,to,be,writable,and,accessible,to,the,dashboard,for,visualisation.,This,can,be,done,simply,by,hosting,a,static,structured,data,file,,for,example,on,GitHub,,or,using,more,advanced,databases,such,as,MySQL,or,PostGRESQL,services.,Displaying,the,data,in,an,easy-to-understand,way,can,be,done,in,a,number,of,ways,as,well.,These,range,from,a,simple,static,web,page,using,JavaScript,graphing,and,visualisation,packages,such,as,Chart.js[9],or,D3.js[10],,up,to,full,dashboard,solutions,such,as,Grafana[11],,which,will,need,more,advanced,hosting,solutions.,4,Design,&amp;,Implementation,4.1,Overview,In,order,to,make,use,of,existing,technologies,and,make,it,as,easy,as,possible,for,application,developers,to,use,these,tools,,a,framework,called,RoundTable,was,designed,to,allow,existing,tools,to,be,used,together,,with,simple,per-application,configuration,files,describing,the,details,of,each,application.,The,RoundTable,framework,makes,use,of,self-hosted,GitHub,runners,on,HPC,facilities,to,run,a,range,of,benchmarks,on,applications,,setting,up,Re-,4,Frame,benchmarks,for,a,range,of,performance,analyses,,parsing,the,results,and,gathering,them,to,be,displayed,in,a,web,dashboard.,Figure,1:,Diagram,showing,how,all,the,components,of,RoundTable,work,to-,gether,,and,the,data,that,is,passed,between,them,4.2,RoundTable,backend,The,RoundTable,backend,performs,3,main,roles:,•,Generating,the,ReFrame,scripts,based,off,each,proxy,app’s,configuration,,•,Providing,benchmark,scripts,to,run,various,forms,of,analysis,and,parse,the,results,,•,Upload,the,results,to,the,RoundTable,database.,4.2.1,Proxy,app,configuration,Proxy,apps,are,configured,using,TOML,configuration,files,,describing,how,to,build,and,run,the,application,,as,well,as,the,environments,and,benchmarks,to,run.,An,example,is,listed,below:,1,#,roundtable,.,conf,2,app,=,&quot;,simple_md,&quot;,3,build,=,&quot;,make,&quot;,4,environments,=,[&quot;,gnu,&quot;,,,&quot;,intel,&quot;],5,execution,=,&quot;,simple_md,-i,&lt;,INPUT,&gt;&quot;,6,[,benchmarks,],7,8,9,[,benchmarks,.,small,],INPUT,=,&quot;,examples,/,small,.,in,&quot;,analysis,=,[&quot;,vtune,&quot;],5,Self-hosted,runnersProxy,appsReFrameCompute,resourcesRT,Backend,-,conﬁg,parser,-,benchmark,scripts,-,database,uploadconﬁgurationreframe,conﬁg,benchmark,scriptsbenchmark,resultsSourceRT,Databaseraw,benchmark,resultsﬁltered,benchmark,resultsRT,Frontend,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,resuorces,=,[,num_procs,=,1,,,time,=,&quot;0:1:0&quot;,],[,benchmarks,.,large,],INPUT,=,&quot;,examples,/,large,.,in,&quot;,analysis,=,[,&quot;,runtime,&quot;,,,&quot;,memory,&quot;,,,&quot;&quot;,],resuorces,=,[,num_procs,=,10,time,=,&quot;0:8:0&quot;,],This,defines,an,app,called,”simple,md”,which,can,be,compiled,with,Make.,It,has,two,associated,benchmarks:,•,A,small,serial,benchmark,which,is,run,through,VTune,,and,•,A,larger,parallel,benchmark,that,only,measures,the,runtime,and,memory,usage,4.2.2,Benchmark,scripts,In,order,to,simplify,the,configuration,of,the,applications,,benchmarks,are,wrapped,up,into,generic,scripts,that,can,be,run,with,any,application,on,any,supported,system,,returning,the,results,in,a,common,JSON,format.,For,example,,a,simple,benchmark,to,display,the,program,runtime,is,listed,below:,1,#,!/,usr,/,bin,/,bash,2,#,Returns,the,application,runtime,in,seconds,3,time,=,$,(,4,/,usr,/,bin,/,time,-p,&quot;,$&#64;,&quot;,2,&gt;&amp;1,,|,awk,’/,real,/{,print,$2,},’,,5,6,),7,8,echo,{,&quot;,runtime,:,&quot;,$time,},Defining,benchmarks,in,separate,scripts,like,this,allows,new,benchmarks,to,be,added,centrally,and,immediately,used,for,a,number,of,different,applications.,It,also,allows,more,complex,analysis,to,be,performed,,such,as,parallel,scaling,runs,,averaging,over,multiple,runs,etc.,6,4.2.3,Database,upload,Once,all,the,benchmarks,have,been,run,,the,RoundTable,backend,will,push,the,results,,along,with,metadata,about,when,and,where,the,runs,took,place,,to,a,centralised,database.,4.3,Database,The,results,from,all,application,runs,across,all,sites,are,stored,in,a,centralised,database,that,the,dashboard,can,get,data,from.,This,is,currently,just,a,flat,JSON,file,in,a,GitHub,repository,,but,can,easily,be,extended,to,use,more,ad-,vanced,databases,such,as,MySQL,or,PostgreSQL.,4.4,RoundTable,dashboard,The,dashboard,is,a,static,web,application,written,in,React.js,which,gets,data,from,the,database,and,renders,it,as,a,series,of,graphs,drawn,using,the,Chart.js,package.,Since,it,is,a,static,web,app,,it,can,easily,be,hosted,on,GitHub,Pages.,Below,is,a,screenshot,of,the,database,,showing,some,dummy,data.,Figure,2:,A,prototype,RoundTable,dashboard,showing,dummy,data,for,two,applications,run,across,two,sites,(hecate,and,porus).,7,4.5,Availability,The,RoundTable,framework,will,be,available,on,GitHub,soon,,within,the,ExCALIBUR-,NEPTUNE,organisation.,5,References,1.,Excalibur,Neptune,website,https://excalibur.ac.uk/projects/excalibur-fusion-,use-case-project-neptune-neutrals-plasma-turbulence-numerics-for-the-exascale/,2.,GitHub,Actions,https://docs.github.com/en/actions,3.,GitHub,Actions,self-hosted,runners,https://docs.github.com/en/actions/hosting-,your-own-runners/about-self-hosted-runners,4.,Environment,modules,https://modules.readthedocs.io,5.,LMod,https://lmod.readthedocs.io,6.,The,SLURM,scheduler,https://slurm.schedmd.com/documentation.html,7.,ReFrame,HPC,https://reframe-hpc.readthedocs.io,8.,Intel,VTune,https://www.intel.com/content/www/us/en/developer/tools/oneapi/vtune-,profiler.html,9.,Chart.js,graphing,library,https://www.chartjs.org/,10.,D3.js,visualisation,library,https://D3.js,11.,Grafana,dashboards,https://grafana.com/,8" name="keywords" />
+
+    <title>TN-10-1_DevelopmentPerformanceTestingAggregationToolNeptuneProxyApps &#8212; Excalibur-Neptune Documents 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/design-tabs.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="tn-10-1-developmentperformancetestingaggregationtoolneptuneproxyapps">
+<h1>TN-10-1_DevelopmentPerformanceTestingAggregationToolNeptuneProxyApps<a class="headerlink" href="#tn-10-1-developmentperformancetestingaggregationtoolneptuneproxyapps" title="Permalink to this heading">¶</a></h1>
+<p>
+                        <iframe
+                                id="ID"
+                                style="border:1px solid #666CCC"
+                                title="PDF"
+                                src="_static/TN-10-1_DevelopmentPerformanceTestingAggregationToolNeptuneProxyApps.pdf"
+                                frameborder="1"
+                                scrolling="auto"
+                                height="1600"
+                                width="1100"
+                                align="middle">
+                        </iframe>
+                     </p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Excalibur-Neptune Documents</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="embeddedpdfs.html">Technical Reports</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, UKAEA.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.1.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/TN-10-1_DevelopmentPerformanceTestingAggregationToolNeptuneProxyApps.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<meta content="technical note " name="description" />
+<meta content="NEPTUNE:,2047353-TN-01,Priority,Equations,and,Test,Cases:,Preconditioning,Milestones,M1.1,and,M2.1,Sue,Thorne,Version,1:,January,2021;,Version,2:,22,February,2021,1,Introduction,Within,the,NEPTUNE,Programme,,there,are,a,wide,variety,of,interesting,prob-,lems,[1],but,,due,to,the,length,of,the,Preconditioning,project,,it,is,important,that,we,prioritise,a,small,number,of,equations,and,test,cases.,2,Elliptic,Problems,For,elliptic,problems,,System,2-2,from,[1],is,our,priority,,which,consists,of,a,2-D,elliptic,solver,in,complex,geometry.,BOUT++,[2],already,has,some,test,cases,and,Nektar++,[4],also,has,some,suitable,cases.,BOUT++,has,ﬁnite,diﬀerence,examples,whilst,Nektar++,uses,ﬁnite,and,spectral/hp,elements,for,its,discretizations.,There,is,a,solver,in,BOUT++,that,sets,up,a,matrix,problem,and,calls,PETSc,[5],,and,another,implementation,of,the,same,problem,which,calls,HYPRE,[6].,Since,BOUT++,uses,ﬁnite,diﬀerences,and,not,ﬁnite,or,spectral,elements,,there,are,plans,within,the,NEPTUNE,Programme,to,implement,the,Nektar++,version,over,the,next,6,months,or,so.,3,Hyperbolic,Problems,For,hyperbolic,problems,,System,2-3,from,[1],is,our,priority,case.,There,is,already,a,BOUT++,test,case,called,SD1D,[3],that,models,the,dynamics,along,the,magnetic,ﬁeld,,uses,ﬁnite,diﬀerences,and,is,a,matrix-free,implementation,that,uses,SUNDIALS,[7].,A,version,of,this,test,problem,is,going,to,be,formed,using,Nektar++,during,the,next,few,months.,For,the,dynamics,across,the,magnetic,ﬁeld,,there,are,2D,problems,like,Hasegawa-Wakatani,,which,are,a,similar,to,incompressible,ﬂuid,dynamics,(and,are,a,simpliﬁed,version,of,the,equations,shown,in,Ben,Dudson’s,talk,at,the,1,NEPTUNE,Kick-Oﬀ,Meeting):,∂n,∂t,∂ω,∂t,=,−,[φ,,n],+,α,(φ,−,n),−,κ,∂φ,∂z,+,Dn∇2,⊥n,,=,−,[ω,,n],+,α,(ω,−,n),+,Dω∇2,⊥ω,,∇2φ,=,ω,(1),(2),(3),where,the,equations,are,solved,for,the,plasma,density,n,and,vorticity,ω,=,b0,·,∇,×,v,,where,v,is,the,E,×,B,drift,velocity,velocity,in,a,constant,magnetic,ﬁeld,and,b0,is,the,unit,vector,in,the,direction,of,the,equilibrium,magnetic,ﬁeld.,The,Poison,bracket,is,represented,by,[·,,·].,For,simplicity,,if,the,backward,Euler,method,is,used,to,discretise,the,time,derivative,and,we,assume,that,n,,ω,and,φ,are,discretized,using,the,same,dis-,cretization,basis,,then,we,obtain,the,following,discretized,,non-linear,equations:,0,=,M,(cid:0)ni,−,ni−1(cid:1),+,∆t,(cid:0)diag(Lxφi)Lzni,−,diag(Lzφi)Lxni,(4),−αM,(cid:0)φi,−,ni(cid:1),−,κLzφ,−,DnKni(cid:1),,,0,=,M,(cid:0)ωi,−,ωi−1(cid:1),+,∆t,(cid:0)diag(Lxφi)Lzωi,−,diag(Lzφi)Lxωi,−αM,(cid:0)φi,−,ni(cid:1),−,DωKωi(cid:1),,,0,=,Kφi,−,M,ω,,(5),(6),where,M,is,the,mass,matrix,associated,with,the,discretization,basis,,Lx,and,Lz,are,matrices,that,contain,the,discretized,forms,of,∂,∂z,,,respectively,,K,is,the,discretized,Laplacian,matrix,and,diag(x),denotes,a,diagonal,matrix,with,the,(p,,p),entry,equal,to,x(p).,∂x,and,∂,The,Jacobian,of,equations,(4)-(6),with,respect,to,the,unknowns,n,,ω,and,φ,can,be,expressed,in,the,following,block,matrix,format:,,,A,0,E,G,C,B,0,−M,K,,,,,where,A,=,M,+,∆t,(cid:0)diag(Lxφi)Lz,−,diag(Lzφi)Lx,+,αM,−,DnK(cid:1),,,B,=,α∆tM,,C,=,M,+,∆t,(cid:0)diag(Lxφi)Lz,−,diag(Lzφi)Lx,−,DωK(cid:1),,,(cid:1),,,E,=,∆t,(cid:0)diag(Lzni)Lx,−,diag(Lxni)Lz,−,αM,−,κLz,G,=,∆t,(cid:0)diag(Lzωi)Lx,−,diag(Lxωi)Lz,(cid:1),.,(7),(8),(9),(10),(11),(12),If,K,,Lx,,Lz,and,M,are,all,sparse,,then,the,Jacobian,will,be,sparse.,Alternatively,,we,can,remove,φi,from,(4),and,(5),by,substituting,in,φi,=,K,−1ωi,from,(6).,The,Jacobian,for,the,reduced,equations,is,(cid:20),P,R,Q,S,(cid:21),,,2,(13),where,P,=,M,+,∆,(cid:0)diag(LxK,−1M,ωi)Lz,−,diag(LzK,−1M,ωi)Lx,+,αM,−,DnK(cid:1),,,Q,=,α∆tM,,R,=,∆t,(cid:0)diag(Lzni)LxK,−1M,−,diag(Lxni)LzK,−1M,−,αM,K,−1M,−κLzK,−1M,(cid:1),,,S,=,M,+,∆t,(cid:0)diag(LxK,−1M,ωi)Lz,+,diag(Lzωi)LxK,−1M,−,αM,K,−1M,−DωK),.,Note,that,the,inverse,of,the,elliptic,matrix,K,is,normally,a,dense,matrix,,par-,ticularly,for,the,ﬁnite,and,spectral,element,discretizations,of,interest,to,this,project.,Hence,,for,the,discretizations,of,interest,,the,Jacobian,of,the,reduced,system,is,not,sparse.,Therefore,,one,of,the,questions,is,whether,to,(a),use,the,reduced,system,but,have,a,dense,Jacobian,,or,(b),treat,the,elliptic,problem,as,a,constraint,but,have,a,sparse,,larger,and,more,ill-conditioned,Jacobian.,Option,(a),is,normally,done,but,experiments,have,also,been,done,in,BOUT++,(b),in,order,to,use,PETSc’s,matrix,coloring,to,extract,an,approximate,matrix,for,pre-,conditioning,from,our,matrix-free,code.,Nektar++,also,has,an,implementation,of,the,Hasegawa-Wakatani,problem.,4,General,Comments,When,possible,,Nektar++,examples,should,have,higher,priority,than,BOUT++,due,to,the,expectation,that,ﬁnite,element,and,spectral,discretizations,will,be,the,method,of,choice,for,future,simulations.,In,addition,,we,should,expect,adaptive,hp-reﬁnement,to,be,used.,Nektar++,is,moving,towards,matrix-free,implementations.,For,Nektar++,,we,need,to,keep,in,contact,with,David,Moxey.,5,Acknowledgements,I,would,like,to,thank,Ben,Dudson,for,his,help,in,prioritising,the,equations,and,test,cases.,References,[1],W.,Arter.,Equations,for,NEPTUNE,Proxyapps,,2020.,[2],B.,Dudson,et,al.,BOUT++,v4.3.2,,March,2020.,[3],B.,Dudson,et,al.,Sd1d:,One-dimensional,plasma-neutral,simulation,for,sol,and,divertor,studies.,https://github.com/boutproject/SD1D,,2020.,[4],D.,Moxey,et,al.,Nektar++,website.,https://www.nektar.info,,2020.,3,[5],Satish,Balay,et,al.,PETSc,Web,page.,https://www.mcs.anl.gov/petsc,,2019.,[6],Lawrence,Livermore,National,Laboratory.,HYPRE:,Scalable,Linear,Solvers,and,Multigrid,Methods.,https://computing.llnl.gov/projects/,hypre-scalable-linear-solvers-multigrid-methods/software.,[7],Lawrence,Livermore,National,Laboratory.,SUNDIALS:,SUite,of,Nonlinear,and,DIﬀerential/ALgebraic,Equation,Solvers.,https://computing.llnl.,gov/projects/sundials.,4" name="keywords" />
+
+    <title>TN-01_PriorityEquationsTestCases &#8212; Excalibur-Neptune Documents 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/design-tabs.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="tn-01-priorityequationstestcases">
+<h1>TN-01_PriorityEquationsTestCases<a class="headerlink" href="#tn-01-priorityequationstestcases" title="Permalink to this heading">¶</a></h1>
+<p>
+                        <iframe
+                                id="ID"
+                                style="border:1px solid #666CCC"
+                                title="PDF"
+                                src="_static/TN-01_PriorityEquationsTestCases.pdf"
+                                frameborder="1"
+                                scrolling="auto"
+                                height="1600"
+                                width="1100"
+                                align="middle">
+                        </iframe>
+                     </p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Excalibur-Neptune Documents</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="embeddedpdfs.html">Technical Reports</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, UKAEA.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.1.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/TN-01_PriorityEquationsTestCases.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

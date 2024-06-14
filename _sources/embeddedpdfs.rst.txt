@@ -1,0 +1,21 @@
+Technical Reports
+=================
+
+.. toctree::
+    Coupling_STFC
+    Equations
+    Fluids_York_etal
+    Hardware_York_etal
+    Meshing_Exeter
+    MomentKinetics_Oxford
+    MomentKinetics_Oxford-2
+    Nektar++
+    PIC_Warwick
+    Platforms
+    Precondition_STFC
+    Precondition_STFC-2
+    Software_York_etal
+    Surrogates_UCL
+    UKAEA
+    UQ_UCL
+    UQ_UCL-2

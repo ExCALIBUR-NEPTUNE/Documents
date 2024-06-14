@@ -1,0 +1,342 @@
+UKAEA
+=====
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0001-1.10-Fusion_Modelling_System_Science_Plan_ExcaliburFusionModellingSystemSciencePlan`
+
+    This document outlines the Science Plan for research to be commissioned by the Met Office for the ‘Fusion Modelling System’ use case of the SPF ‘Exascale Computing Algorithms and Infrastructures Benefiting UK Research’ programme (ExCALIBUR).
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0007-Bham-workshop-summary_SummaryDiscussionSessionsAtExcaliburNeptuneWorkshop05022020`
+
+    This document contains a short summary of the discussion sessions of the 05-02-2020 ExCALIBUR NEPTUNE workshop. The discussions focused on selecting a referent model for numerical implementation, exploring suitable numerical methods to handle low plasma density and a large number of species, and more.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0011-1.00-M1.2.1_YearOneSummaryReport`
+
+    This report describes work for the ExCALIBUR project NEPTUNE at Milestone 1.2.1. This End of Year One (Y1) summary report outlines the reasoning behind the Y2 plan, listing questions to be addressed, the proxyapps that will be developed, and how they will be connected to each other and exploited to steer thinking around the development of a next generation edge boundary code.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0012-1.00-M2.1.1_OptionsGeometryRepresentation`
+
+    This report describes work for the ExCALIBUR project NEPTUNE at Milestone 2.1.1. The investigation focuses on high order mesh generation as an optimal strategy for representing fusion device geometry in the presence of strong anisotropy induced by the magnetic field.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0013-1.00-M2.3.1_OptionsParticleAlgorithms`
+
+    This report describes work for ExCALIBUR project NEPTUNE at Milestone 2.3.1, investigating algorithms to optimize usage of particle-based information at ExaScale, focusing on reducing noise levels in the neutral-plasma fluid interaction and studying particle-mesh interaction effects with elements of different orders.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0021-1.01-M1.2.1_YearOneSummaryReport`
+
+    This document describes equations for the ExCALIBUR project's NEPTUNE Proxyapps. The report is a living document and additional equation systems will be added throughout the course of the project.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0021-1.20-M1.2.1_YearOneSummaryReport`
+
+    This document describes equations for the ExCALIBUR project's NEPTUNE Proxyapps, including Braginskii’s transport coefficients and sources of atomic and molecular radiation. The report is a living document that will be updated throughout the project.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0021-1.23-M1.2.1_YearOneSummaryReport`
+
+    This document describes equations for ExCALIBUR project NEPTUNE Proxyapps, including Braginskii’s transport coefficients and sources of atomic and molecular radiation. It is a living document to which further equation systems will be added throughout the course of the project.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0021-1.24-M1.2.1_YearOneSummaryReport`
+
+    This document describes equations for the ExCALIBUR project's NEPTUNE Proxyapps, including Braginskii’s transport coefficients and sources of atomic and molecular radiation. It is a living document that will be updated throughout the project.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0021-1.26-M1.2.1_YearOneSummaryReport`
+
+    This report describes equations for ExCALIBUR project NEPTUNE Proxyapps, including Braginskii’s transport coefficients and sources of atomic and molecular radiation. The document is a living one, with further equation systems to be added throughout the project.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0021-1.30-M1.2.1_YearOneSummaryReport`
+
+    This document describes equations for ExCALIBUR project NEPTUNE Proxyapps, including details on Braginskii’s transport coefficients and sources of atomic and molecular radiation. It is a living document that will be updated throughout the project.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0021-1.31-M1.2.1_YearOneSummaryReport`
+
+    This document describes equations for the ExCALIBUR project's NEPTUNE Proxyapps, focusing on Braginskii’s transport coefficients and sources of atomic and molecular radiation. It is a living document that will be updated throughout the course of the project.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0022-M3.1.2_ReportUserFrameworksTokamakMultiphysics`
+
+    This report investigates the state-of-art in software design for multiphysics applications potentially relevant to the ExCALIBUR project NEPTUNE, focusing on 'software frameworks'. The resulting code is intended to build a wider user and developer community.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0023-M3.3.2_ReportDesignPatternsSpecificationsPrototypes`
+
+    This report describes work for the ExCALIBUR project NEPTUNE at Milestone 3.3.2, focusing on design patterns and prototypes specifications for tokamak edge simulation.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0024-1.00-M3.1.3_ReportUserLayerDesignUncertaintyQuantification`
+
+    The report describes work for the ExCALIBUR project around techniques for Uncertainty Quantification (UQ) that are expected to prove important for the project. The focus is on optimizing plant design, identifying major sources of uncertainty, producing surrogates, and predicting distributions of expected outcomes.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0026-1.00-M3.3.3_DesignPatternsEvaluation`
+
+    This report describes work for ExCALIBUR project NEPTUNE at Milestone 3.3.3. It identifies software design patterns for use by specific NEPTUNE proxyapps, with reference to existing C++ and Fortran simulation codes.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0031-M2.5.1_SelectMorModelOrderReduction`
+
+    The report describes work for ExCALIBUR project NEPTUNE at Milestone 2.5.1. It includes an overview of three important classes of Model Order Reduction (MOR) approach, and a discussion of techniques for data assimilation in the context of numerical weather prediction.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0032-D3.3_ModuleGuide`
+
+    This report provides a discussion for the NEPTUNE project of both very high-level and very low-level options for the basic module structure, together with input/output and fine-scale data structures.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0033-1.10-D3.4_DevelopmentPlan`
+
+    This report surveys the textbook and standards literature regarding documents that should be produced as part of a major software development. The focus is on documents that should be produced before development starts, and on living documents that may require amendment as the development proceeds.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0034-M2.2.1_PerformanceSpectralHpElementMethodsReferentPlasma`
+
+    This report details the progress made in the ExCALIBUR project NEPTUNE at Milestone 2.2.1, focusing on mesh generation, solvers, and training work. The report also discusses the technical challenges and potential solutions in surface mesh generation.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0035-M2.4.1_AssessmentUqMethodsAreRequiredMakeNepActionable`
+
+    This report describes work for the ExCALIBUR project NEPTUNE at Milestone 2.4.1. It outlines a discussion on technical progress, including the recent report by MV and the pros and cons of various UQ methods for NEP-TUNE.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0036-M2.7.1_IdentificationSuitablePreconditioner`
+
+    This report describes work for the ExCALIBUR project NEPTUNE at Milestone 2.7.1. It discusses a meeting to form a report on technical progress, and focuses on preconditioner techniques.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0037-M2.8.1_SelectionPhysics`
+
+    The report describes work for ExCALIBUR project NEPTUNE at Milestone 2.8.1. Minutes of meeting to form a report on technical progress regarding the selection of physics models.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0038-M2.6.1_IdentificationPreferredOverallNumericalScheme`
+
+    This report describes the progress of the ExCALIBUR Fusion Modelling System's NEPTUNE project, as discussed in a meeting on June 17, 2021. The report focuses on updates regarding project member roles and commitments, particularly Ben Dudson's relocation and its impact on the project schedule.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0039-M3.2.1_SurveyCodeGeneratorsTheirSuitabilityNep`
+
+    The report describes work for the ExCALIBUR project NEPTUNE at Milestone 3.2.1. It discusses the status of programming models and code generators for various node architectures, focusing on performance, usability, maintainability, and availability.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0040-M5.1_ManagementExternalResearchSupportsUqProcurement`
+
+    This report collates technical material used to inform the preparation of the call for procurement of support for Uncertainty Quantiﬁcation (UQ). The work performed primarily consisted of collating material produced internally and by external grantees, plus hands-on exploration of sampling techniques, construction of surrogates and study of dimensionally reduced models.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0041-M3.2.2_SurveyDomainSpecificLanguages`
+
+    This report summarizes the outcome of two workshops on Domain-Specific Languages (DSLs) organized by UKAEA. The aim was to improve understanding and identify the best way DSL(s) could be employed by NEPTUNE, focusing on promoting growth of a community around the software.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0042-M3.1.4_SpecificationIntegrationScientificSoftware`
+
+    This report describes work for the ExCALIBUR project NEPTUNE at Milestone M3.1.4. It outlines guidelines for a generic open-source development of scientific modeling software by a community, focusing on practical points and important issues that need early agreement.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0043-M2.4.2_SelectionUncertaintyQuantification`
+
+    This report describes work for ExCALIBUR project NEPTUNE at Milestone 2.4.2. It focuses on the uncertainty sources in major scientific codes and introduces Forward Uncertainty Quantification (UQ) as a solution to capture epistemic and aleatoric uncertainties. The report provides recommendations for UQ methodologies, particularly non-intrusive and semi-intrusive methods for NEPTUNE.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0044-M2.5.2_SelectionModelOrderReduction`
+
+    This report provides a preliminary description of potential reduction of inputs, design size, and outputs for fusion codes. It focuses on the anisotropic heat transport proxyapp using reduced order models (ROMs) and Gaussian process surrogates (GP-ROM).
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0045-M2.7.2_IdentificationSuitablePreconditioner`
+
+    This report discusses the importance of preconditioning in solving systems of Partial Differential Equations (PDEs) and provides an overview of different classes of preconditioners.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0046-M2.1.2_SurfaceMeshGeneration`
+
+    This document discusses work for the ExCALIBUR project NEPTUNE at Milestone 2.1.2. It outlines relevant capabilities within the mesh generation software NekMesh, as well as initial tests to assess performance.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0047-M2.2.2_FiniteElementModelsPerformance`
+
+    This report describes preliminary evaluations of the Nektar++-based NEPTUNE proxyapps (Nektar-Diffusion and Nektar-Driftwave) for simulating diffusion problems and Hasegawa-Wakatani equations, respectively. It also includes a discussion of Soldrake, a one-dimensional continuum model of the scrape-off layer implemented in Firedrake software.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0048-M2.3.2_OptionsParticleAlgorithms`
+
+    This report describes a Particle In Cell (PIC) method for the continuity equation of a single species distribution function f. The focus is on methods to represent and evolve g using particle based properties.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0049-D3.2_DomainSpecificLanguageDslPerformancePortabilityAssessment`
+
+    This document describes work for the ExCALIBUR project NEPTUNE at the point of Deliverable 3.2. It binds technical reports related to performance portability, specifically 'Identiﬁcation of Testbed Platforms and Applications' and 'Evaluation of Approaches to Performance Portability'.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0050-D3.5_VerificationBenchmarksMethodology`
+
+    This document describes the work done on the verification and benchmarking of proxyapps within the ExCALIBUR project NEPTUNE. The focus is on checking software meets its internal design specifications and understanding hardware behavior.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0051-M6.1_FiniteElementModelsComplementaryActivitiesI`
+
+    This report describes work for ExCALIBUR project NEPTUNE at Milestone 6.1, including the application of Nektar++ finite-element software to natural convection problems and an outline of the complementary experimental programme Smallab.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0052-M7.1_LiteratureCallTAw08621MathematicalSupportSoftwareImplementation`
+
+    This report describes work for the ExCALIBUR project NEPTUNE at Milestone 7.1. It is a literature review performed to support Call T/AW086/21, focusing on suitable numerical algorithms for future Exascale edge plasma codes.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0053-M7.2_CodeCouplingBenchmarking`
+
+    This report discusses work performed under the Code Structure and Coordination work package of the ExCALIBUR project, focusing on code coupling and benchmarking. The report also highlights the current trends in HPC systems, including increased on-node parallelism, adoption of accelerators, innovations in memory technologies, and the impact of these trends on performance.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0054-D3.1_SoftwareSpecificationWebSite`
+
+    This report describes the development of a specification website for the ExCALIBUR project NEPTUNE at Milestone 3.1. The site serves as a living document, requiring further amendments as details are agreed and features become more refined.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0054-RB-1_ExcaliburFusionModellingSystemD31SoftwareRequirementsSpecification`
+
+    This document provides a description of tokamak science physicists’ requirements for the new UKAEA exhaust code, focusing on its ability to capture parallel and perpendicular transport of charged and neutral particles in 3D, self-consistent turbulence modelling, energy transfer physics, and more.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0054-RB-2_ExcaliburFusionModellingSystemSoftwareRequirementsSpecification`
+
+    This document provides a description of reactor design engineers’ requirements for the ExCALIBUR Fusion Modelling System. It forms part of the requirements baseline (RB).
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0054-TS-1_ExcaliburD31SoftwareRequirementsSpecification`
+
+    This document provides a response to Tokamak Science’s exhaust code specification document. It forms part of the technical specification (TS).
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0055-M1.8.1_ReportNeptuneWorkshop7October2021`
+
+    The report describes work for ExCALIBUR project NEPTUNE at Mile-stone M1.8.1. It comprises the minutes of the NEPTUNE workshop held on 7 October 2021.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0057-M2.6.2_FluidReferentModels`
+
+    This report describes work on the ExCALIBUR project NEPTUNE at Milestone 2.6.2, including documents related to infrastructure establishment, elliptic solvers, and fluid models within the BOUT++ software framework. The reports are living documents available from the NEPTUNE github repository.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0058-M2.8.2_TechnicalPhysicsModelSelection`
+
+    This report summarizes five reports on theory development regarding the creation of a drift kinetic model for plasma in the tokamak edge. It discusses the state of the field, the development of the model, and future work.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0061-M4.2_2DModelNeutralGasImpurities`
+
+    This report describes work for the ExCALIBUR project NEPTUNE at Milestone M4.2. It discusses a Domain Specific Language (DSL) and implementation for describing particle-based algorithms that is performance portable.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0062-M4.3_HighDimensionalModelsComplementaryActions2`
+
+    This report describes work for ExCALIBUR project NEPTUNE at Milestone M4.3, focusing on a 2-D model of neutral gas and impurities. It discusses inter-species interactions in the SOL, an extension to a particle implementation for global communication, and results from 2-D experiments with Particle-in-Cell algorithms.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0063-M5.2_SelectionUncertaintyQuantification`
+
+    This report discusses work for the ExCALIBUR project NEPTUNE, focusing on alternative approaches to the production of surrogates, comparing adaptive spline fitting and Gaussian processes.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0064-M6.2_FiniteElementModelsComplementaryActions2`
+
+    The report describes work for ExCALIBUR project NEPTUNE at Mile-stone M6.2, including an application of the Nektar++ finite-element software to the classic problem of vertical natural convection.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0065-M7.3_SoftwareSupportComplementaryActions2`
+
+    This report describes work for ExCALIBUR project NEPTUNE at Mile-stone M7.3. It focuses on the development of a GitHub repository, project website, and collaborations arising from NEPTUNE-related interactions.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0066-M4.1_SupportHighDimensionalProcurement`
+
+    This report describes work done for the ExCALIBUR project NEPTUNE at Milestone M4.1. It collates technical material to prepare a call for high-dimensional procurement, including a description of a simple 1d1vkinetic solver implemented within the Nektar++ spectral / hpelement framework and its application to the textbook problem of the two-stream instability.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0067-M6c.1_ExcaliburFusionModellingSystem`
+
+    This report provides a literature review designed to inform the production of Calls T/AW085/22 ‘Spectral element procurement’ and T/AW086/22 ‘Advanced referent model procurement’. It discusses challenges for computational physics, neutral species from the kinetic standpoint, and tokamak plasma. Various variational approaches to fluid dynamics are described, as well as spectral finite elements and a modal discontinuous Galerkin approach to electromagnetics.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0068-M7c.1_ManagementExternalResearchExcaliburFusionModellingSystem`
+
+    This report provides a literature review designed to inform the production of Calls Contract T/AW087/22 and Contract T/AW088/22. It contains two main sections concerning relevant material corresponding to each call respectively.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0069-M6c.2_ExcaliburFusionModellingSystem`
+
+    The report describes work for ExCALIBUR project NEPTUNE at Milestone 6c.2. It provides material on finite element exterior calculus and recent developments within the Nektar++ solver framework.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0070-1.00-M4c.1_ExcaliburFusionModellingSystem`
+
+    This report describes the development of a SYCL-based particle framework, NESO-Particles , for the ExCALIBUR project NEPTUNE. It details 1-D and 2-D particle models, the Particle-In-Cell (PIC) algorithm, and reproduction of known physical results.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0071-M1.12_ExcaliburFusionModellingSystemY4WorkshopReport`
+
+    Report detailing the ExCALIBUR project NEPTUNE at Mile-stone M1.12, focusing on a workshop to discuss progress and engage with external stakeholders. The report includes the workshop timetable and notes uploaded separately.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0072-M4c.2_ExcaliburFusionModellingSystem`
+
+    The report describes work for ExCALIBUR project NEPTUNE at Milestone M4c.2. An integrated 2D particle and continuum model has been developed, using SYCL to pave the way to Exascale in a performance-portable manner.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0073-M5c.1_ExcaliburFusionModellingSystemAtMilestoneM5C1`
+
+    This report outlines work on uncertainty quantification (UQ) and reduced-order modelling for the ExCALIBUR project NEPTUNE. The report includes a simple reduced-order model describing convective heat transfer coupled to diffusion, with a focus on one-way and two-way coupling, two-dimensional heat transfer, and the calculation of a stability boundary between steady and time-dependent solutions.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0074-M6c.3_ExcaliburFusionModellingSystemComplementaryActionsCodeIntegrationAcceptanceOpera`
+
+    This report describes work for the ExCALIBUR project NEPTUNE at Milestone M6c.3. It focuses on the implementation of HERMES -3 equations in N EKTAR ++, improvements to the solver efficiency, and attempts to verify its outputs. The report also outlines further developments and verifies them against recent literature results.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0075-M7c.2_and_M8c.1_ExcaliburFusionModellingSystem`
+
+    The report describes work for ExCALIBUR project NEPTUNE at Milestone M7c.2. Complementary actions are described which assist code-coupling and the use of benchmarking techniques and physics databases.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0078-M6c.4_ExcaliburFusionModellingSystemComplementaryActionsCodeIntegrationAcceptanceOpera`
+
+    This report describes work for ExCALIBUR project NEPTUNE at Mile-stone M6c.4. It provides material concerning the implementation of plasma fluid solvers in N EKTAR ++.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0079-M4c.3_ExcaliburFusionModellingSystemDevelopment3DIntegratedParticleContinuumModel`
+
+    This report describes the development of an integrated particle and continuum model in 3d3v for the ExCALIBUR project NEPTUNE. The model represents plasma as a fluid using Nektar++ and populates the 3-D 3-V phase space with neutral particles via the SYCL-enabled NESO-Particles library.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0082-M4c.4_ExcaliburFusionModellingSystemProgressTowardsImplementation3DTurbulenceCodeTight`
+
+    This report describes progress made towards the implementation of a 3-D turbulence code tightly coupled to kinetic neutrals. The work includes the ParticleLoop implementation in NESO-Particles, the parallel dynamics of the Hasegawa-Wakatani model, and the recombination reaction kernel for neutral particles.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0083-M5c.2_ExcaliburFusionModellingSystemUncertaintyQuantificationComplementaryActions`
+
+    This report describes work for the ExCALIBUR project NEPTUNE at Milestone M5c.2. It outlines work towards uncertainty quantification, reduced-order modelling, and data assimilation for NEPTUNE. An analysis of the accuracy of numerical simulations of advection-diffusion problems is presented.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0084-M6c.5_ExcaliburComplementaryActionsCodeIntegrationAcceptanceOperation`
+
+    This report describes work for ExCALIBUR project NEPTUNE at Mile-stone M6c.5. It provides material related to the implementation of 3-D plasma turbulence equations using finite element modelling (FEM) techniques.
+
+.. dropdown:: :doc:`CD-EXCALIBUR-FMS0085-M7c.3_and_M8c.2_ExcaliburFusionModellingSystemComplementaryActionsInternalWork`
+
+    This report describes work for ExCALIBUR project NEPTUNE at Milestone M7c.3. It outlines complementary actions to assist code-coupling, benchmarking techniques and physics databases. The work includes the development of educational material, technical material, text processing tools, improvements to the developers’ website, and benchmarking aimed at helping optimize NESO execution.
+
+
+.. toctree::
+    :hidden:
+    :caption: Contents:
+    CD-EXCALIBUR-FMS0001-1.10-Fusion_Modelling_System_Science_Plan_ExcaliburFusionModellingSystemSciencePlan.rst
+    CD-EXCALIBUR-FMS0007-Bham-workshop-summary_SummaryDiscussionSessionsAtExcaliburNeptuneWorkshop05022020.rst
+    CD-EXCALIBUR-FMS0011-1.00-M1.2.1_YearOneSummaryReport.rst
+    CD-EXCALIBUR-FMS0012-1.00-M2.1.1_OptionsGeometryRepresentation.rst
+    CD-EXCALIBUR-FMS0013-1.00-M2.3.1_OptionsParticleAlgorithms.rst
+    CD-EXCALIBUR-FMS0021-1.01-M1.2.1_YearOneSummaryReport.rst
+    CD-EXCALIBUR-FMS0021-1.20-M1.2.1_YearOneSummaryReport.rst
+    CD-EXCALIBUR-FMS0021-1.23-M1.2.1_YearOneSummaryReport.rst
+    CD-EXCALIBUR-FMS0021-1.24-M1.2.1_YearOneSummaryReport.rst
+    CD-EXCALIBUR-FMS0021-1.26-M1.2.1_YearOneSummaryReport.rst
+    CD-EXCALIBUR-FMS0021-1.30-M1.2.1_YearOneSummaryReport.rst
+    CD-EXCALIBUR-FMS0021-1.31-M1.2.1_YearOneSummaryReport.rst
+    CD-EXCALIBUR-FMS0022-M3.1.2_ReportUserFrameworksTokamakMultiphysics.rst
+    CD-EXCALIBUR-FMS0023-M3.3.2_ReportDesignPatternsSpecificationsPrototypes.rst
+    CD-EXCALIBUR-FMS0024-1.00-M3.1.3_ReportUserLayerDesignUncertaintyQuantification.rst
+    CD-EXCALIBUR-FMS0026-1.00-M3.3.3_DesignPatternsEvaluation.rst
+    CD-EXCALIBUR-FMS0031-M2.5.1_SelectMorModelOrderReduction.rst
+    CD-EXCALIBUR-FMS0032-D3.3_ModuleGuide.rst
+    CD-EXCALIBUR-FMS0033-1.10-D3.4_DevelopmentPlan.rst
+    CD-EXCALIBUR-FMS0034-M2.2.1_PerformanceSpectralHpElementMethodsReferentPlasma.rst
+    CD-EXCALIBUR-FMS0035-M2.4.1_AssessmentUqMethodsAreRequiredMakeNepActionable.rst
+    CD-EXCALIBUR-FMS0036-M2.7.1_IdentificationSuitablePreconditioner.rst
+    CD-EXCALIBUR-FMS0037-M2.8.1_SelectionPhysics.rst
+    CD-EXCALIBUR-FMS0038-M2.6.1_IdentificationPreferredOverallNumericalScheme.rst
+    CD-EXCALIBUR-FMS0039-M3.2.1_SurveyCodeGeneratorsTheirSuitabilityNep.rst
+    CD-EXCALIBUR-FMS0040-M5.1_ManagementExternalResearchSupportsUqProcurement.rst
+    CD-EXCALIBUR-FMS0041-M3.2.2_SurveyDomainSpecificLanguages.rst
+    CD-EXCALIBUR-FMS0042-M3.1.4_SpecificationIntegrationScientificSoftware.rst
+    CD-EXCALIBUR-FMS0043-M2.4.2_SelectionUncertaintyQuantification.rst
+    CD-EXCALIBUR-FMS0044-M2.5.2_SelectionModelOrderReduction.rst
+    CD-EXCALIBUR-FMS0045-M2.7.2_IdentificationSuitablePreconditioner.rst
+    CD-EXCALIBUR-FMS0046-M2.1.2_SurfaceMeshGeneration.rst
+    CD-EXCALIBUR-FMS0047-M2.2.2_FiniteElementModelsPerformance.rst
+    CD-EXCALIBUR-FMS0048-M2.3.2_OptionsParticleAlgorithms.rst
+    CD-EXCALIBUR-FMS0049-D3.2_DomainSpecificLanguageDslPerformancePortabilityAssessment.rst
+    CD-EXCALIBUR-FMS0050-D3.5_VerificationBenchmarksMethodology.rst
+    CD-EXCALIBUR-FMS0051-M6.1_FiniteElementModelsComplementaryActivitiesI.rst
+    CD-EXCALIBUR-FMS0052-M7.1_LiteratureCallTAw08621MathematicalSupportSoftwareImplementation.rst
+    CD-EXCALIBUR-FMS0053-M7.2_CodeCouplingBenchmarking.rst
+    CD-EXCALIBUR-FMS0054-D3.1_SoftwareSpecificationWebSite.rst
+    CD-EXCALIBUR-FMS0054-RB-1_ExcaliburFusionModellingSystemD31SoftwareRequirementsSpecification.rst
+    CD-EXCALIBUR-FMS0054-RB-2_ExcaliburFusionModellingSystemSoftwareRequirementsSpecification.rst
+    CD-EXCALIBUR-FMS0054-TS-1_ExcaliburD31SoftwareRequirementsSpecification.rst
+    CD-EXCALIBUR-FMS0055-M1.8.1_ReportNeptuneWorkshop7October2021.rst
+    CD-EXCALIBUR-FMS0057-M2.6.2_FluidReferentModels.rst
+    CD-EXCALIBUR-FMS0058-M2.8.2_TechnicalPhysicsModelSelection.rst
+    CD-EXCALIBUR-FMS0061-M4.2_2DModelNeutralGasImpurities.rst
+    CD-EXCALIBUR-FMS0062-M4.3_HighDimensionalModelsComplementaryActions2.rst
+    CD-EXCALIBUR-FMS0063-M5.2_SelectionUncertaintyQuantification.rst
+    CD-EXCALIBUR-FMS0064-M6.2_FiniteElementModelsComplementaryActions2.rst
+    CD-EXCALIBUR-FMS0065-M7.3_SoftwareSupportComplementaryActions2.rst
+    CD-EXCALIBUR-FMS0066-M4.1_SupportHighDimensionalProcurement.rst
+    CD-EXCALIBUR-FMS0067-M6c.1_ExcaliburFusionModellingSystem.rst
+    CD-EXCALIBUR-FMS0068-M7c.1_ManagementExternalResearchExcaliburFusionModellingSystem.rst
+    CD-EXCALIBUR-FMS0069-M6c.2_ExcaliburFusionModellingSystem.rst
+    CD-EXCALIBUR-FMS0070-1.00-M4c.1_ExcaliburFusionModellingSystem.rst
+    CD-EXCALIBUR-FMS0071-M1.12_ExcaliburFusionModellingSystemY4WorkshopReport.rst
+    CD-EXCALIBUR-FMS0072-M4c.2_ExcaliburFusionModellingSystem.rst
+    CD-EXCALIBUR-FMS0073-M5c.1_ExcaliburFusionModellingSystemAtMilestoneM5C1.rst
+    CD-EXCALIBUR-FMS0074-M6c.3_ExcaliburFusionModellingSystemComplementaryActionsCodeIntegrationAcceptanceOpera.rst
+    CD-EXCALIBUR-FMS0075-M7c.2_and_M8c.1_ExcaliburFusionModellingSystem.rst
+    CD-EXCALIBUR-FMS0078-M6c.4_ExcaliburFusionModellingSystemComplementaryActionsCodeIntegrationAcceptanceOpera.rst
+    CD-EXCALIBUR-FMS0079-M4c.3_ExcaliburFusionModellingSystemDevelopment3DIntegratedParticleContinuumModel.rst
+    CD-EXCALIBUR-FMS0082-M4c.4_ExcaliburFusionModellingSystemProgressTowardsImplementation3DTurbulenceCodeTight.rst
+    CD-EXCALIBUR-FMS0083-M5c.2_ExcaliburFusionModellingSystemUncertaintyQuantificationComplementaryActions.rst
+    CD-EXCALIBUR-FMS0084-M6c.5_ExcaliburComplementaryActionsCodeIntegrationAcceptanceOperation.rst
+    CD-EXCALIBUR-FMS0085-M7c.3_and_M8c.2_ExcaliburFusionModellingSystemComplementaryActionsInternalWork.rst

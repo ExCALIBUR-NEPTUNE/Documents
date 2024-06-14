@@ -1,0 +1,27 @@
+Coupling STFC
+=============
+
+.. dropdown:: :doc:`TN-01_AReviewTimeSteppingTechniquesPreconditioningHyperbolicAnisotropicEllipticProblem`
+
+    <no summary found>
+
+.. dropdown:: :doc:`TN-02-5_CouplingContinuumFluidParticlePlasmaNeptune`
+
+    The aim of this report is to explore techniques and software relevant to the coupling of continuum (fluid) and particle models of plasma for NEPTUNE, focusing on improving the scalability and accuracy of simulations for ITER and related fusion technology.
+
+.. dropdown:: :doc:`TN-02_TechniquesCouplingContinuumFluidParticlePlasmaNeptune`
+
+    This technical report discusses the development of new algorithms, software, and related infrastructure for the efficient use of supercomputing hardware in fusion modelling. It emphasizes the need to couple different simulation approaches for various regions of the plasma, and reviews available literature and code coupling libraries for this purpose.
+
+.. dropdown:: :doc:`TN-03_TimeSteppingTechniquesPreconditioningHyperbolicAnisotropicEllipticProblems`
+
+    Explores efficient and accurate solution methods for hyperbolic and anisotropic elliptic problems using high order finite elements/spectral element codes, focusing on matrix-free linear systems. The report includes a literature and software review, comparisons of preconditioning strategies, stationary and time-dependent hyperbolic problem investigations, and conclusions.
+
+
+.. toctree::
+    :hidden:
+    :caption: Contents:
+    TN-01_AReviewTimeSteppingTechniquesPreconditioningHyperbolicAnisotropicEllipticProblem.rst
+    TN-02-5_CouplingContinuumFluidParticlePlasmaNeptune.rst
+    TN-02_TechniquesCouplingContinuumFluidParticlePlasmaNeptune.rst
+    TN-03_TimeSteppingTechniquesPreconditioningHyperbolicAnisotropicEllipticProblems.rst

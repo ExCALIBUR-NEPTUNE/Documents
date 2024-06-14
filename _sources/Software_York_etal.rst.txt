@@ -1,0 +1,42 @@
+Software York etal
+==================
+
+.. dropdown:: :doc:`TN-01-2_CodeStructureCoordination`
+
+    This report discusses approaches to performance portable applications for fusion, focusing on pre- and post-Exascale hardware, software approaches, data structures, I/O and parallel file systems, risks, and recommendations.
+
+.. dropdown:: :doc:`TN-01_ApproachesPerformancePortableApplicationsFusion`
+
+    This report discusses the challenges and solutions in developing portable performance applications for fusion, focusing on pre- and post-Exascale hardware, software approaches, data structures, I/O, parallel file systems, and risks and recommendations.
+
+.. dropdown:: :doc:`TN-02-2_IdentiﬁcationTestbedPlatformsApplications`
+
+    This report outlines the focus, methodology, and objectives of a project aimed at evaluating hardware platforms and software development methodologies for the development of a plasma-fusion application.
+
+.. dropdown:: :doc:`TN-02_IdentificationTestbedPlatformsApplications`
+
+    This report outlines a project to evaluate various hardware platforms and associated software development methodologies for developing a plasma-fusion application, focusing on performance portability.
+
+.. dropdown:: :doc:`TN-03-2_CodeStructureCoordination`
+
+    This report evaluates several approaches to performance portability of simulation applications for Exascale systems, including TeaLeaf, miniFE, Laghos, CabanaPIC, VPIC, and EMPIRE-PIC.
+
+.. dropdown:: :doc:`TN-03_EvaluationApproachesPerformancePortability`
+
+    The focus of the code structure and coordination work package is to establish a series of ‘best practices’ on how to develop simulation applications for Exascale systems that are able to obtain high performance on each architecture (i.e. are performance portable) without significant manual porting efforts.
+
+.. dropdown:: :doc:`TN-04_ApproachesScientificSoftwareDevelopmentAtExascale`
+
+    Investigates the development of performance portable software for Exascale systems, discusses various approaches including OpenMP, Kokkos and RAJA, SYCL and DPC++, and offers key findings and recommendations.
+
+
+.. toctree::
+    :hidden:
+    :caption: Contents:
+    TN-01-2_CodeStructureCoordination.rst
+    TN-01_ApproachesPerformancePortableApplicationsFusion.rst
+    TN-02-2_IdentiﬁcationTestbedPlatformsApplications.rst
+    TN-02_IdentificationTestbedPlatformsApplications.rst
+    TN-03-2_CodeStructureCoordination.rst
+    TN-03_EvaluationApproachesPerformancePortability.rst
+    TN-04_ApproachesScientificSoftwareDevelopmentAtExascale.rst

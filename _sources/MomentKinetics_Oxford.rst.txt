@@ -1,0 +1,77 @@
+MomentKinetics Oxford
+=====================
+
+.. dropdown:: :doc:`TN-01_1DDriftKineticPeriodicBoundaryConditions`
+
+    This report proposes 1D drift kinetic equations to test the possibility of extracting low order moments from the distribution functions for implicit methods. The model has periodic boundary conditions, suitable for the closed field line region of the edge.
+
+.. dropdown:: :doc:`TN-02_Numerical1DDriftKineticPeriodicBoundaryConditions`
+
+    This report describes a numerical study on the solution of drift kinetic equations in plasma edge, focusing on developing and testing a novel analytical model for treating electron motion along magnetic field. The authors present a simple model for parallel plasma dynamics, their corresponding code, and compare numerical results with an analytical benchmark.
+
+.. dropdown:: :doc:`TN-03_PhysicsEdgeFusion`
+
+    This report presents a brief overview of the current state of fusion device edge modeling, focusing on the known problems of fluid models without much emphasis on their many successes.
+
+.. dropdown:: :doc:`TN-04_Numerical11DMomentBasedDriftKineticPeriodicBoundaryConditions`
+
+    This report presents an overview of a novel moment-based approach for solving drift kinetic equations in plasma physics, with a focus on the numerical implementation and associated challenges.
+
+.. dropdown:: :doc:`TN-05_1DDriftKineticWallBoundaryConditions`
+
+    This report discusses a minimal 1D drift kinetic model with wall boundary conditions that represents open field lines. The basic drift kinetic model is presented in section 2, and the wall boundary conditions are discussed in section 3.
+
+.. dropdown:: :doc:`TN-06_Numerical11DMomentBasedDriftKineticPeriodicBoundaryConditions`
+
+    This report describes the numerical implementation and testing of a novel analytical model and associated numerical algorithm for solving drift kinetic equations with a focus on treating the motion of electrons along the magnetic field.
+
+.. dropdown:: :doc:`TN-07_2DDriftKineticWallBoundaryConditions`
+
+    This report presents a 2D drift kinetic model for a helical magnetic field, which resembles the magnetic field in the tokamak edge. The plasma is assumed to vary only in radial and z directions.
+
+.. dropdown:: :doc:`TN-08_Numerical11DDriftKineticModelWallBoundaryConditions`
+
+    This document outlines the numerical algorithm employed to solve parallel-to-the-field dynamics for a drift kinetic model with wall boundary conditions.
+
+.. dropdown:: :doc:`TN-09_2DDriftKineticPeriodicBoundaryConditions`
+
+    This report presents a modified 2D drift kinetic model for a helical magnetic field with periodic boundary conditions, as opposed to the wall boundary conditions in a previous report.
+
+.. dropdown:: :doc:`TN-10_Numerical11DDriftKineticParallelDynamicsPlasmaEdge`
+
+    This report presents a set of drift kinetic models as candidate models for describing plasma dynamics parallel to the field in both open-field-line and closed-field-line regions of the edge, in the presence of neutrals. The aim is to test the relative eﬃcacy of these models for numerical simulation.
+
+.. dropdown:: :doc:`TN-11_2DDriftKineticsHelicalFieldSeparatrix`
+
+    This report discusses how to connect 2D drift kinetic models with wall boundary conditions and periodic boundary conditions when considering a situation where the boundary conditions switch from being periodic to being wall boundary conditions at some radial position r=rs, which is an effective 'separatrix'.
+
+.. dropdown:: :doc:`TN-12-2_Tests2DDriftKineticModelPlasmaEdge`
+
+    This report discusses a strategy for testing a 2D drift kinetic model, using the method of manufactured solutions. The proposed method is illustrated with the drift kinetic system in the collisionless limit and with an assumed Boltzmann response for electrons.
+
+.. dropdown:: :doc:`TN-13-2_NumericalReducedModelCoupling2D2VDriftKineticIons2D3VKineticNeutralsHelicalMagne`
+
+    This report describes an initial investigation into the challenges associated with developing 2D edge plasma models with kinetic ion and neutral species, focusing on the implementation of model ion-neutral collision operators and simple wall boundary conditions.
+
+.. dropdown:: :doc:`TN-14-2_OverviewNumerical1D2DDriftKinetic`
+
+    An accurate model of plasma dynamics in the edge of tokamaks must include a treatment of both open and closed field lines, motion both along and across the (predominantly toroidal) equilibrium magnetic field, and interaction between charged and neutral particles. The results of our numerical studies of these models is contained in a series of reports, with key findings discussed.
+
+
+.. toctree::
+    :hidden:
+    :caption: Contents:
+    TN-01_1DDriftKineticPeriodicBoundaryConditions.rst
+    TN-02_Numerical1DDriftKineticPeriodicBoundaryConditions.rst
+    TN-03_PhysicsEdgeFusion.rst
+    TN-04_Numerical11DMomentBasedDriftKineticPeriodicBoundaryConditions.rst
+    TN-05_1DDriftKineticWallBoundaryConditions.rst
+    TN-06_Numerical11DMomentBasedDriftKineticPeriodicBoundaryConditions.rst
+    TN-07_2DDriftKineticWallBoundaryConditions.rst
+    TN-08_Numerical11DDriftKineticModelWallBoundaryConditions.rst
+    TN-09_2DDriftKineticPeriodicBoundaryConditions.rst
+    TN-10_Numerical11DDriftKineticParallelDynamicsPlasmaEdge.rst
+    TN-11_2DDriftKineticsHelicalFieldSeparatrix.rst
+    TN-12-2_Tests2DDriftKineticModelPlasmaEdge.rst
+    TN-13-2_NumericalReducedModelCoupling2D2VDriftKineticIons2D3VKineticNeutralsHelicalMagne.rst
+    TN-14-2_OverviewNumerical1D2DDriftKinetic.rst

@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<meta content="technical note " name="description" />
+<meta content="ExCALIBUR,Performance,of,spectral-hp,element,methods,for,the,referent,plasma,models,M2.2.1,Abstract,The,report,describes,work,for,ExCALIBUR,project,NEPTUNE,at,Milestone,2.2.1.,Minutes,of,meeting,to,form,report,on,technical,progress.,UKAEA,REFERENCE,AND,APPROVAL,SHEET,Client,Reference:,UKAEA,Reference:,CD/EXCALIBUR-FMS/0034,Issue:,Date:,1.00,April,27,,2021,Project,Name:,ExCALIBUR,Fusion,Modelling,System,Prepared,By:,Name,and,Department,Ed,Threlfall,Wayne,Arter,Signature,N/A,N/A,Date,April,27,,2021,April,27,,2021,BD,Reviewed,By:,Rob,Akers,April,27,,2021,Advanced,Dept.,Manager,Computing,Approved,By:,Rob,Akers,April,27,,2021,Advanced,Dept.,Manager,Computing,2,NEPTUNE,Meeting:,23,April,2021,10.00-11.00am,BST,Present,•,Chair:,Wayne,Arter,,UKAEA,•,Ed,Threlfall,,UKAEA,•,David,Moxey,,Exeter,•,Chris,Cantwell,,Imperial,College,London,1,Minutes,WA,explained,that,the,purpose,of,this,meeting,is,for,the,grantees,to,report,on,progress,to-date,and,outline,plans,for,the,next,few,months’,work.,DM,had,prepared,slides,outlining,mesh,generation,,solvers,and,training,work.,D1.3,-,report,on,surface,mesh,generation,is,currently,outstanding,due,to,DM’s,personal,circumstances.,WA,asked,for,an,estimated,ETA,for,the,report;,DM,responded,that,he,would,probably,be,able,to,submit,a,draft,by,the,end,of,the,current,month,,adding,that,he,has,undertaken,signiﬁcant,technical,work,for,the,report,during,the,last,few,weeks.,WA,advised,that,reports,by,the,other,grantees,were,available,for,viewing,on,the,NEPTUNE,documents,repository,,to,which,all,grantees,should,have,read,access.,DM,had,looked,and,noticed,STFC’s,reports,there.,DM,reported,on,the,mesh,generation,work,,which,he,is,leading.,Re.,the,surface,meshing,work,he,has,taken,the,approach,of,simplifying,the,problem,to,a,spherical,geometry,(unique,radius,of,curvature),and,assessing,the,surface,normal,accuracy,(ie.,deviation,from,CAD,normals),for,various,levels,of,mesh,reﬁnement.,Overall,results,for,his,higher-order,mesh,appear,promising,,with,normals,accurate,to,better,than,0.1,degree,in,a,L2-norm,assessment;,however,,some,individual,normals,showed,deviations,of,2,degrees,from,analytic.,WA,asked,if,DM,was,using,CADFIX,,to,which,DM,answered,that,he,was,using,OPEN,CASCADE,with,a,B-spline,sphere,(not,a,NURBS,one,-,which,would,have,rendered,the,normal,test,trivial,as,NURBS,can,exactly,represent,a,spherical,surface).,DM,said,the,CAD,engine,handles,the,representation,of,the,unstructured,sphere,,and,that,he,has,been,working,with,Joachim,Peiro,at,Imperial,on,a,functional,to,optimize,the,surface,mesh,quality,(currently,using,a,‘spring’-type,metric,,though,there,are,other,ways,eg.,the,deviation,of,the,normals,could,be,used,as,a,basis,for,optimization).,DM,said,the,surface,distance,quality,was,accurate,within,10−5,−,10−6,for,a,sphere,of,radius,0.5.,WA,asked,whether,the,deviations,came,from,the,CAD,package,itself,and,DM,agreed,this,was,a,valid,question;,he,proposed,doing,the,analysis,for,a,‘perfect’,sphere.,Other,possible,improvements,are,to,use,higher-order,curvature,approximations,(currently,linear,,try,quadratic,or,cubic).,(One,point,that,comes,to,mind,here,is,that,it,may,be,better,to,interpolate,the,normal,vector,over,a,surface,face,,rather,than,interpolate,a,scalar,quantity,derived,from,the,normal,-,cf.,Phong,vs.,Gouraud,shading,,though,this,was,not,mentioned,during,the,meeting.),DM,says,this,meshing,challenge,represents,an,interesting,,solvable,problem;,his,report,will,outline,metrics,and,meshes.,He,will,also,assess,GMSH,and,POINTWISE,in,terms,of,the,performance,of,their,normal,representations.,WA,added,that,the,main,3,thing,was,to,keep,variations,smooth,-,that,there,can,be,deviations,but,they,must,vary,gradually.,DM,said,one,question,was,whether,the,surface,meshing,was,localizing,the,error,,eg.,NekMesh,cannot,currently,do,a,periodic,surface,mesh,so,there,might,be,error,concentrated,at,the,‘join’,in,the,sphere,surface.,DM,reiterated,that,his,draft,report,should,be,ready,by,the,end,of,next,week.,DM,moved,on,to,discuss,D,1.1,-,mesh,generation,for,2-D,cross-sections,,in,which,a,key,issue,is,r-adaptivity,of,meshes,at,the,magnetic,ﬁeld,X-point.,DM,has,a,code,that,uses,variational,optimiza-,tion,(from,work,on,ExCALIBUR,project,ELEMENT,with,a,PhD,student),-,currently,DM,working,on,tidying,this,up,and,improving,performance,/,memory,use.,WA,asked,whether,this,work,might,beneﬁt,from,additional,expertise,in,code,optimization;,DM,acknowledged,that,this,might,be,the,case,as,there,are,a,couple,of,versions,of,this,code,(including,CPU,and,GPU,versions),and,that,expertise,in,optimization,,benchmarking,,and,proﬁling,might,be,useful.,WA,noted,that,we,have,future,calls,to,issue,that,could,be,used,to,provide,help,in,this,area,(eg.,Sue,Thorne,at,Rutherford).,DM,said,that,one,current,problem,with,the,2-D,meshing,(and,also,with,D1.2,-,quadrilateral,mesh-,ing),was,that,NekMesh,ignores,curves,within,the,computational,domain,so,cannot,currently,mesh,the,X-point,geometry,(coincidentally,,the,quad,meshing,uses,something,called,‘cross-points’),and,that,this,deﬁciency,needed,to,be,rectiﬁed.,He,also,stressed,the,importance,of,keeping,his,own,work,aligned,with,UKAEA,requirements,(eg.,ﬁeld-aligned,meshes,in,3-D,,not,yet,attempted).,WA,added,that,Ben,Dudson,was,best-placed,to,provide,this,alignment.,DM,was,trying,to,understand,the,nature,of,the,3-D,meshing,challenge;,ﬁeld,lines,that,do,not,close.,WA,mentioned,that,many,people,use,a,local,approximation,to,ﬁeldline,alignment,when,computing,parallel,derivatives,,how-,ever,as,far,as,he,knew,,all,employed,a,relatively,low,order,ﬁnite,difference,approx.,,except,near,the,X-point,,and,that,different,meshing,was,sometimes,used,in,the,region,of,that,point.,He,stated,the,problem,was,the,obvious,discontinuity,in,the,toroidal,angle,where,element,edges,(or,faces),will,fail,to,be,congruent;,a,ﬁeld-aligned,global,coordinate,system,is,impossible,(Ben,McMillan,ap-,parently,has,some,ideas,to,treat,this).,With,full,FEM,,local,coordinates,would,be,avoided,at,the,expense,of,moving,all,the,problems,to,one,plane,-,where,they,could,be,handled,by,allowing,hang-,ing,nodes.,An,alternative,is,to,open,a,say,a,15o,toroidal,gap,and,mesh,using,another,method,say,with,triangular,prisms,and,some,relaxation,of,ﬁeld-following,(possibly,propagated,through,360o).,DM,said,NEKTAR++,can,handle,hanging,nodes,in,discontinuous,Galerkin,(same,problem,as,a,periodic,boundary).,However,,the,question,of,numerical,performance,with,either,hanging,nodes,or,a,meshed,15,degree,gap,is,open.,DM,stated,that,the,2-D,problem,was,tractable,within,the,avail-,able,6,month,window,but,that,this,3-D,problem,probably,was,not.,He,mentioned,that,NEKTAR++,can,do,axially-symmetric,geometries,using,inhomogeneous,methods,ie.,Fourier,decomposition,in,one,angle.,WA,clariﬁed,that,what,he,was,seeking,was,DM’s,expert,opinion,on,how,to,proceed,,but,he,acknowledged,that,it,might,not,be,possible,to,provide,such,opinion,at,this,juncture.,DM,emphasized,that,he,has,yet,to,understand,the,physics,impact,of,various,meshing,options,and,said,he,might,seek,advice,from,Spencer,Sherwin,and,also,Ben,Dudson.,WA,made,the,point,that,BOUT++,generally,does,2-D,cross,section,plus,axisymmetric,extrusion,runs,but,that,this,would,not,work,for,real,device,geometries,including,details,such,as,tiles,,ports,and,antennas.,DM,replied,that,he,might,understand,more,once,task,2,was,complete;,this,task,is,CC’s,work,trying,to,quantify,the,effect,of,the,mesh,on,the,solution,quality,,in,which,task,WA,commented,that,the,problems,of,ﬁeld-alignment,and,surface,alignment,are,combined.,Moving,on,to,D2.1,-,Baseline,solver,for,anisotropic,transport,,DM,said,that,work,at,Imperial,was,leveraging,an,undergraduate,project,but,Imperial,was,recruiting,a,PDRA,also,for,the,task;,CC,cautioned,that,their,candidate,requires,a,work,visa,,but,should,be,in,place,by,July,(the,alternate,4,choice,had,declined,the,job,due,to,family,relocation,difﬁculties).,WA,asked,as,to,the,status,of,DM’s,interviewing,and,DM,replied,that,they,had,assembled,funding,for,an,18-month,PDRA,contract,(6,months,funded,via,UKAEA,,but,might,be,able,to,spend,more,than,6,months,on,NEPTUNE,due,to,a,certain,ﬂexibility,in,the,remainder,of,the,funding).,WA,added,that,future,NEPTUNE,grants,might,help,,but,that,they,are,probably,a,year,away.,CC,discussed,work,so,far,-,now,that,the,undergraduate,is,familiar,with,the,code,,good,progress,is,being,made.,There,was,a,brief,mention,of,code,issues,to,date,including,a,non-physical,value,for,the,diffusion,constant,,but,at,least,work,had,begun,-,other,problems,might,be,too,hard,for,an,undergraduate,project,and,CC,or,Spencer,Sherwin,might,step,in,,before,July.,WA,advised,that,there,is,an,updated,,clearer,version,of,the,equations,document,[1].,CC,opined,that,it,would,be,useful,to,communicate,with,someone,who,knows,the,expected,value,of,the,diffusion,coefﬁcient,to,provide,sanity,checks;,WA,advised,that,there,exists,downloadable,software,(Fortran),that,can,produce,derived,values,of,the,diffusion,coefﬁcient,,see,https://github.com/wayne-arter/smardda-misc.,DM,moved,onto,D2.2,-,matrix-free,kernels,,mostly,in,the,hands,of,Spencer,Sherwin,and,a,for-,mer,postdoc,of,his.,DM,has,also,merged,old,benchmarks,of,his,into,NEKTAR++,including,AVX2,/,AVX512,for,all,element,types,(eg.,tetrahedra,,pyramids).,DM,mentioned,also,the,LIKWID,en-,vironment,which,is,capable,of,doing,FLOP,counts,,estimates,of,arithmetic,intensity,and,rooﬂine,analysis.,His,aim,is,for,a,performant,,matrix-free,proxyapp,-,development,to,commence,in,Au-,gust.,He,noted,that,the,spatially-varying,anisotropy,of,the,Laplacian,will,affect,performance,as,operator,data,needs,to,be,loaded,from,memory.,CC,added,that,he,and,Spencer,Sherwin,have,another,student,working,on,variable,coefﬁcient,Laplacian,for,hexahedra,/,quadrilateral,meshes,(done,,triangles,and,tetrahedra,in,progress).,WA,mentioned,that,Sue,Thorne,at,STFC,was,look-,ing,for,relevant,matrices,to,precondition,and,asked,if,DM,or,CC,could,provide,examples.,DM,replied,that,he,could,easily,extract,matrices,from,the,proxyapp,solver,and,noted,that,Sue,Thorne,had,emailed,him,during,his,recent,leave,period;,he,said,he,would,respond,to,this,,acknowledging,that,one,of,the,challenges,of,the,matrix-free,implementation,was,the,preconditioning.,WA,said,that,Sue,Thorne,has,matrix,free,methods,eg.,Monte-Carlo.,DM,added,that,he,has,code,for,a,p-multigrid,preconditioner,that,works,well,for,purely,elliptic,problems,,but,is,not,so,effective,for,hyperbolic,problems,or,eg.,the,Euler,equations,where,preconditioning,the,elliptic,part,does,not,sufﬁce.,DM,mentioned,a,talk,he,had,heard,comparing,p-multigrid,and,LU,-,but,no,ﬁrm,conclusion.,He,also,considers,algebraic,multigrid,and,geometric,multigrid,and,is,interested,to,talk,with,Sue,Thorne,as,he,has,no,experience,with,Monte,Carlo,preconditioning.,WA,noted,that,Sue,Thorne’s,reports,are,available,on,the,document,repository,,possibly,on,a,yet,as,unmerged,branch,,see,github.com:ExCALIBUR-NEPTUNE/Documents.git.,DM,discussed,then,D3.2,-,training.,He,has,had,5,or,6,responses,to,questionnaire,re.,areas,of,NEKTAR++,that,NEPTUNE,partners,want,to,know,more,about;,there,was,no,particular,training,direction,indicated,in,the,responses.,He,proposed,a,demonstration,of,coding,eg.,the,Hasegawa-,Wakatani,equations,in,NEKTAR++,,a,lecture,on,higher-order,methods,,and,an,interactive,session,on,how,to,write,a,solver,in,the,framework.,DM,cited,EPSRC,calls,as,the,reason,why,the,training,schedule,had,not,advanced,further;,WA,reassured,him,that,the,training,was,not,proposed,to,start,until,August.,DM,is,keen,to,know,problems,people,have,when,using,and,extending,NEKTAR++.,WA,mentioned,that,Vassil,Alexandrov,had,requested,a,copy,of,Zhdanov’s,derivation,of,the,13-,moment,transport,equations,[2],but,had,appeared,not,to,get,much,out,of,it,thus,far.,WA,asked,if,there,was,anything,CC,wanted,to,add,but,CC,replied,that,DM,had,covered,everything.,5,WA,mentioned,Ben,Dudson’s,proposal,planned,to,run,work,on,every,set,of,proxyapp,equations,taken,from,ref,[1],in,parallel,from,1,April,and,pointed,out,that,DM,was,listed,against,these,tasks.,DM,said,his,work,plan,was,that,Task,1,started,in,June,on,the,NEKTAR++,side,,and,that,he,planned,to,recruit,a,PDRA,to,start,in,July,and,needed,to,advertise,for,this;,6,months,PRISM,funding,for,a,12-month,PDRA,contract,and,he,needs,to,talk,to,Rob,Akers.,WA,said,a,discussion,of,repercussions,of,Ben,Dudson,leaving,the,project,would,be,needed,at,some,point;,Rob,Akers,is,negotiating,with,York,(WA,not,privy,to,details).,WA,said,a,meeting,with,CADFIX,developers,would,be,a,good,idea,,mentioning,that,UKAEA,has,two,full,commercial,licences,for,the,software.,It,turned,out,that,DM,has,monthly,meetings,with,them,already,and,has,done,so,for,a,few,years.,CADFIX,has,a,quad-based,adaptive,meshing,that,could,be,useful,for,comparison,purposes,-,DM,has,student,involved,with,this.,DM,stated,that,the,meshing,part,of,CADFIX,was,not,great.,WA,added,that,the,CADFIX,interface,is,also,poor;,DM,concurred,,adding,that,it,recalls,something,from,the,1990s.,However,,he,said,that,the,API,was,better,than,that,of,OPEN,CASCADE,,which,is,very,poor,(eg.,c.40,000,classes,and,much,repeated,functionality).,WA,said,that,CADFIX,is,otherwise,a,good,tool,,and,that,most,nuclear,fusion,CAD,is,done,via,CATIAT,M,.,DM,said,CADFIX,is,good,for,cleaning,up,geometries,,eg.,STEP,ﬁles.,WA,commented,that,most,of,this,CAD,/,meshing,‘needs,a,human,in,the,loop’.,He,recommended,reconvening,for,an,additional,meeting,,of,having,UKAEA,attend,DM’s,next,meeting,with,the,CADFIX,developers;,DM,will,check,the,date,of,the,next,of,these,meetings.,WA,commented,that,those,developers,might,be,eligible,for,a,future,NEPTUNE,grant,if,the,company,have,sufﬁcient,U.K.,research,personnel,to,qualify,,then,WA,closed,the,meeting.,6,Acknowledgement,The,support,of,the,UK,Meteorological,Ofﬁce,and,Strategic,Priorities,Fund,is,acknowledged.,References,[1],W.,Arter.,Equations,for,EXCALIBUR/NEPTUNE,Proxyapps.,Technical,Report,CD/EXCALIBUR-FMS/0021-1.00-M1.2.1,,UKAEA,,2020.,10/3/20.,[2],V.M.,Zhdanov.,Transport,processes,in,multicomponent,plasma.,CRC,Press,,2002.,7" name="keywords" />
+
+    <title>CD-EXCALIBUR-FMS0034-M2.2.1_PerformanceSpectralHpElementMethodsReferentPlasma &#8212; Excalibur-Neptune Documents 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/design-tabs.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cd-excalibur-fms0034-m2-2-1-performancespectralhpelementmethodsreferentplasma">
+<h1>CD-EXCALIBUR-FMS0034-M2.2.1_PerformanceSpectralHpElementMethodsReferentPlasma<a class="headerlink" href="#cd-excalibur-fms0034-m2-2-1-performancespectralhpelementmethodsreferentplasma" title="Permalink to this heading">¶</a></h1>
+<p>
+                        <iframe
+                                id="ID"
+                                style="border:1px solid #666CCC"
+                                title="PDF"
+                                src="_static/CD-EXCALIBUR-FMS0034-M2.2.1_PerformanceSpectralHpElementMethodsReferentPlasma.pdf"
+                                frameborder="1"
+                                scrolling="auto"
+                                height="1600"
+                                width="1100"
+                                align="middle">
+                        </iframe>
+                     </p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Excalibur-Neptune Documents</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="embeddedpdfs.html">Technical Reports</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, UKAEA.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.1.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/CD-EXCALIBUR-FMS0034-M2.2.1_PerformanceSpectralHpElementMethodsReferentPlasma.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

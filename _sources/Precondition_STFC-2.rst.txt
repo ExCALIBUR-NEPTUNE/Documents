@@ -1,0 +1,52 @@
+Precondition STFC-2
+===================
+
+.. dropdown:: :doc:`TN-01_PreconditionersNeptuneProgrammeNumericalResults`
+
+    This report discusses the use of preconditioners in simulations relating to plasma physics. The authors describe their use of BOUT++ and Nektar++ for the NEPTUNE Project, detailing how preconditioners are currently incorporated into these libraries.
+
+.. dropdown:: :doc:`TN-02_ImplicitFactorizationPreconditionersNonSymmetricProblems`
+
+    This report extends the class of constraint preconditioners from symmetric problems to non-symmetric problems, considering theoretical properties and demonstrating their effectiveness on a set of test problems inspired by the Hasegawa-Wakatani problem.
+
+.. dropdown:: :doc:`TN-03_AReviewTimeSteppingTechniquesPreconditioningHyperbolicAnisotropicEllipticProblem`
+
+    This report investigates the current state of the art in time advance techniques and preconditioners for hyperbolic partial differential equations (PDEs) and corresponding elliptic problems, focusing on methods amenable to high order finite elements/spectral elements.
+
+.. dropdown:: :doc:`TN-04_TimeSteppingTechniquesPreconditioningHyperbolicAnisotropicEllipticProblems`
+
+    This report explores efficient and accurate solution methods for hyperbolic and anisotropic elliptic problems, focusing on linear systems arising from high order finite element discretizations. The study uses a range of test problems designed to mimic plasma simulation within a tokamak.
+
+.. dropdown:: :doc:`TN-05_TechniquesCouplingContinuumFluidParticlePlasmaNeptune`
+
+    The aim of the ‘Fusion Modelling’ use case within ExCALIBUR is to develop new algorithms, software and related infrastructure for efficient use of current Petascale and future Exascale supercomputing hardware. The report focuses on coupling together different approaches for fluid and particle-based simulations in plasma regions.
+
+.. dropdown:: :doc:`TN-06_ImplementationScalabilityAnalysisContinuumKineticCouplingNeptune`
+
+    This report presents the implementation and scalability analysis of a continuum-kinetic simulation coupling using CWIPI for NEPTUNE. The study focuses on nuclear fusion modeling, where plasma behavior varies significantly across different regions.
+
+.. dropdown:: :doc:`TN-07_AReviewSolutionContinuationTechniques`
+
+    This report discusses the methodologies for continuation of solutions to nonlinear equations, focusing on techniques useful for modern computing. It includes primary references and relevant physical applications.
+
+.. dropdown:: :doc:`TN-08_ReviewAdjointMethodPlasmaPhysicsNeptune`
+
+    This report aims to review the adjoint method to determine how it may be used in optimising plasma flows within the NEPTUNE project.
+
+.. dropdown:: :doc:`TN-09_AdjointBasedSensitivityAnalysisDifferentiallyHeatedCavity`
+
+    This report presents an adjoint-based study on the stability of a differentially-heated cavity at Rayleigh numbers near the stability frontier. The sensitivity analysis was performed using the adjoint global mode and direct mode obtained from classic linear stability analysis.
+
+
+.. toctree::
+    :hidden:
+    :caption: Contents:
+    TN-01_PreconditionersNeptuneProgrammeNumericalResults.rst
+    TN-02_ImplicitFactorizationPreconditionersNonSymmetricProblems.rst
+    TN-03_AReviewTimeSteppingTechniquesPreconditioningHyperbolicAnisotropicEllipticProblem.rst
+    TN-04_TimeSteppingTechniquesPreconditioningHyperbolicAnisotropicEllipticProblems.rst
+    TN-05_TechniquesCouplingContinuumFluidParticlePlasmaNeptune.rst
+    TN-06_ImplementationScalabilityAnalysisContinuumKineticCouplingNeptune.rst
+    TN-07_AReviewSolutionContinuationTechniques.rst
+    TN-08_ReviewAdjointMethodPlasmaPhysicsNeptune.rst
+    TN-09_AdjointBasedSensitivityAnalysisDifferentiallyHeatedCavity.rst

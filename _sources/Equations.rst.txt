@@ -1,0 +1,12 @@
+Equations
+=========
+
+.. dropdown:: :doc:`proxyapps_equations_EquationsProxyapps27`
+
+    <no summary found>
+
+
+.. toctree::
+    :hidden:
+    :caption: Contents:
+    proxyapps_equations_EquationsProxyapps27.rst

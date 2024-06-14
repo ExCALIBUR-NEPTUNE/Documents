@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<meta content="technical note " name="description" />
+<meta content="Progress,during,NEPTUNE,&amp;,potential,interactions,with,particle,codes,David,Moxey,Department,of,Engineering,,King's,College,London,UKAEA,Nektar++,Training,Event,,1st,August,2022,Overview,•,As,part,of,NEPTUNE,,we,have,been,investigating,the,application,of,high-,order,methods,within,prototype,fusion,problems.,•,The,work,undertaken,thus,far,focuses,on,three,areas:,High-order,mesh,generation,Performance,on,modern,hardware,Community,engagement,with,NEPTUNE,•,How,do,we,generate,meshes,suitable,for,fusion,applications?,•,High-order,methods,show,great,potential,for,exascale,platforms.,•,NEPTUNE,is,composed,of,several,partners,,each,developing,proxyapps,•,Consider,surface,mesh,accuracy,,anisotropy,and,geometric,complexity.,•,Examining,how,performant,kernels,can,be,designed,for,unstructured,elements.,•,Developing,coupling,approaches,,modern,CI,and,coordination,CAD-exact,feature,representation,•,For,fusion,applications,,certain,internal,features,such,as,the,plasma,separatrix,should,be,modelled,as,accurately,as,possible.,•,Also,beneficial,to,generate,anisotropic,elements,within,these,regions,to,align,with,the,corresponding,physical,models.,•,Within,the,mesh,generation,process,,we,therefore,consider,the,use,of,internal,CAD,curves,which,allow,for,exact,representation,of,these,features.,•,Furthermore,,the,optimisation,process,can,be,made,CAD-aware,,so,that,during,optimisation,,nodes,'slide',along,CAD,curves,&amp;,surfaces.,•,Implementation,of,this,within,the,high-order,mesh,generation,software,NekMesh,,which,is,part,of,the,Nektar++,spectral/hp,element,framework.,Example:,circle,in,square,Using,the,modiﬁed,NekMesh,with,the,CAD,curve,reﬁnement,and,executing,the,same,command,as,the,previous,case,with,the,unmodiﬁed,code,,we,can,see,in,Figure,5(b),that,the,resolution,around,the,circle,drastically,increases.,Additionally,,the,octree,smoothing,is,exerting,its,in-,ﬂuence,throughout,most,of,the,domain,,which,further,increase,the,resolution,,resulting,with,a,mesh,containing,4,184,elements,and,66,022,degrees,of,freedom.,Mesh,edges,align,with,CAD,curve,regions,Figure,3:,Illustration,of,the,faces,and,edges,of,the,circle,in,square,test,case.,CAD,boundary,representation,Coarse,high-order,grid,(a),Isotropically-refined,high-order,(b),grid,Figure,5:,Mesh,of,the,circle,in,square,test,case,(a),the,unmodiﬁed,version,of,NekMesh,with,no,reﬁnement;,(b),the,modiﬁed,version,of,NekMesh,using,reﬁnement,around,the,CAD,curves,of,the,circle.,5.1.3,r-adaptation,Despite,the,increase,in,resolution,,the,mesh,produced,by,employing,reﬁnement,is,still,isotropic,and,there,is,no,clustering,within,the,reﬁned,zone,around,the,circle’s,curves.,To,achieve,that,,we,employed,the,r-adaptation,method,,which,shall,be,explored,next.,Keeping,in,mind,Section,4.3,,the,pipeline,process,where,multiple,executions,of,the,variational,optimisation,module,using,di↵erent,parameters,will,be,demonstrated,with,the,steps,discussed,hereafter.,(a),First,,we,attempt,to,generate,a,mesh,using,r-adaptation,only,on,elements,adjacent,to,the,(b),circle’s,curve,,i.e.,without,specifying,a,radius.,This,is,done,with,following,command:,Figure,4:,Illustration,of,the,separate,faces,and,associated,edges,of,the,circle,in,square,test,case,showing,(a),the,square,region,without,the,embedded,circle;,(b),the,circle,region,without,the,surrounding,square.,NekMesh,-v,NekMesh,-v,-m,varopti:hyperelastic:nq=5,2d_circle_square.mcf,!,2d_circle_square.xml,,,!,,,stol=1e-5:nq=2:numthreads=10,-m,varopti:hyperelastic:nq=5:numthreads=10,2d_circle_square.mcf,2d_circle_square.xml,-m,varopti:linearelastic:radaptcurves=1-4:radaptscale=0.275:subiter=5:re,c,&lt;NEKTAR&gt;,&lt;MESHING&gt;,We,note,the,use,of,additional,options,,namely,restol,and,numthreads,which,were,not,pre-,viously,explained.,The,former,is,the,minimum,residual,required,to,halt,the,iterations,in,the,variational,optimisation,process,,and,the,latter,is,number,of,execution,threads,on,a,muti-,12,threaded,CPU.,As,explained,in,Section,3.2,,the,r-adaptation,is,executed,on,a,linear,mesh,by,using,nq=2,,followed,by,a,second,pass,of,the,variational,optimisation,module,without,r-,adaptation,and,using,nq=5,to,promote,the,mesh,to,4th,order,whilst,ensuring,the,process,of,increasing,the,polynomial,order,doesn’t,degrade,the,mesh,quality.,14,Example:,circle,in,square,Applying,anisotropic,refinement,Close-up,view,of,boundary,of,circle,Interior,layer,refinements,•,Have,also,begin,process,of,generating,refinement,in,a,more,structured,manner.,•,This,uses,boundary,layer,refinement,strategies,we,typically,adopt,for,external,flows,but,on,the,internal,CAD,curve.,•,Isoparametric,approach,allows,arbitrary,refinement,as,desired.,Example:,sample,plasma,core,separatrix,•,Same,process,applied,to,a,schematic,tokamak,cross-section.,•,Fully,valid,mesh,(no,inverted,elements),at,order,P,=,5,.,•,Potential,future,directions:,‣,extension,to,3D;,‣,improving,performance,via,different,optimisation,strategies;,‣,distributed-type,parallelism,,GPU,offloading.,Performance,&amp;,matrix-free,operator,evaluation,•,A,key,ability,of,high-order,methods,is,their,arithmetic,intensity:,the,ratio,of,floating-point,operations,(FLOPS),per,byte,of,data,transferred,over,memory.,•,As,P,increases,,so,too,does,the,amount,of,FLOPS,needed,for,evaluation.,‣,This,sounds,bad,,but,we,get,a,corresponding,increase,in,accuracy!,•,Significantly,reduce,the,impact,of,memory,bandwidth,limits,found,on,modern,hardware,architectures,&amp;,exascale,platforms.,•,Solution,of,the,anisotropic,heat,transport,involves,evaluation,of,operators,ℒ(u),=,∇[D,⋅,∇u],,,where,D,is,a,spatially-constant,d,×,d,tensor.,•,Second,track,of,work,focuses,on,performant-kernels,for,this,operator,,particularly,focused,on,unstructured,elements,due,to,complexity,of,geometry,found,in,realistic,problems.,4.3.2,3-D,elements,Pyramidal,A,similar,approach,to,the,2-D,elements,test,cases,was,taken,in,terms,of,generating,the,mesh,The,hardware,that,was,used,to,run,both,conﬁg-,geometry,for,the,3-D,element,test,cases.,How-,urations,was,a,compute,node,with,24,hardware,ever,,the,3-D,meshes,had,signiﬁcantly,less,el-,cores,,192GB,RAM,and,two,Intel,Xeon,Phi,7120,For,the,pyramidal,mesh,,there,were,6,elements,arranged,in,a,cuboid,volume.,The,mesh,can,be,seen,in,Figures,4.20,and,4.21.,The,solution,superimposed,onto,this,grid,can,be,seen,in,Fig-,ements,,as,the,focus,was,to,run,quick,tests,in,ure,4.22.,processors.,Tetrahedral,For,the,tetrahedral,mesh,,there,were,6,elements,arranged,in,a,cuboid,volume.,The,mesh,can,be,seen,in,Figure,4.23.,The,solution,superimposed,onto,this,grid,can,be,seen,in,Figure,4.24.,Timings,were,then,taken,for,the,four,test,cases,,with,polynomial,order,set,to,3,P,Æ,Æ,7.,The,timings,taken,for,the,quadrilateral,,prismatic,,pyramidal,and,tetrahedral,test,cases,can,be,seen,in,Figures,4.12,,4.13,,4.14,and,4.15,respec-,(4.4),order,to,aid,code,iteration,during,the,design,process.,Also,,each,test,case,was,only,run,25,4.3.1,2-D,elements,times,before,the,mean,was,taken.,For,testing,2-D,elements,,quadrilateral,and,tri-,angle,mesh,geometries,were,generated,in,Gmsh.,A,high,number,of,elements,in,each,mesh,was,de-,Hexahedral,sired,in,these,test,cases,,in,order,to,prevent,any,For,the,hexahedral,mesh,,there,were,6,elements,cases,of,data,being,stored,during,execution,,in-,arranged,in,a,cuboid,volume.,The,mesh,can,be,stead,of,computation,over,every,element.,Each,seen,in,Figure,4.16.,The,solution,superimposed,test,case,was,run,1000,times,,and,the,mean,was,onto,this,grid,can,be,seen,in,Figure,4.17.,taken.,Prismatic,c,4,Quadrilateral,3,3,3,c,4,For,the,prismatic,mesh,,there,were,54,elements,For,the,quadrilateral,mesh,,there,were,1972,ele-,ﬁz,arranged,in,a,cuboid,volume.,The,mesh,can,be,ments,arranged,in,a,hexagonal,shape.,The,mesh,seen,in,Figure,4.18.,The,solution,superimposed,can,be,seen,in,Figures,4.5,,4.6,and,4.7.,The,so-,onto,this,grid,can,be,seen,in,Figure,4.19.,lution,superimposed,onto,this,grid,can,be,seen,c,4,(4.5),tively.,in,Figure,4.8.,Triangular,For,the,triangular,mesh,,there,were,4096,ele-,ments,arranged,in,a,hexagonal,shape.,The,mesh,can,be,seen,in,Figures,4.9,and,4.10.,The,solu-,tion,superimposed,onto,this,grid,can,be,seen,in,Figure,4.11.,Timings,were,then,taken,for,both,of,these,test,For,the,3-D,cases,,the,forcing,function,and,boundary,conditions,used,were,similar:,uboundary,=,sin,ﬁx,ﬁy,sin,sin,a,4,3,b,4,3,c,4,3,ﬁz,where,a,,b,,c,were,set,to,arbitrary,constants,,and,f,=,⁄,+,ﬁ2,≠,5,‡00,a2,+,‡11,b2,+,‡22,c2,3,ﬁx,sin,3,‡01,3,3,ab,4,‡02,ac,4,‡12,bc,4,3,a,4,cos,cos,sin,sin,3,ﬁx,3,a,4,ﬁx,3,a,4,ﬁx,a,4,3,ﬁy,46,ﬁz,sin,b,4,cos,3,ﬁy,c,4,sin,3,b,4,ﬁy,3,b,4,ﬁy,b,4,3,cos,cos,sin,cos,+,2ﬁ2,+,2ﬁ2,+,2ﬁ2,ﬁz,ﬁz,The,exact,analytical,solution,,to,be,used,to,compare,to,the,numerical,solution,found,,was:,u,=,sin,ﬁx,ﬁy,sin,sin,a,4,3,b,4,3,c,4,3,ﬁz,(4.6),The,test,ﬁles,were,run,in,two,conﬁgurations,,with,and,without,the,ﬂags,for,SIMD,vectori-,sation,on,during,compilation,in,cmake.,These,ﬂags,were:,•,NEKTAR,ENABLE,SIMD,AVX2,set,to,ON.,•,CMAKE,CXX,FLAGS,set,to,-mavx2,-mfma.,Software,implementation,cases,,with,polynomial,order,set,to,3,Æ,7.,The,timings,taken,for,the,quadrilateral,test,case,can,be,seen,in,Figure,4.3,,and,the,timings,taken,for,the,triangular,test,case,can,be,seen,in,Figure,4.4.,Æ,P,Figure,4.12:,Timings,for,hexahedral,mesh.,Figure,4.13:,Timings,for,prismatic,mesh.,ℒ(u),=,∇[D,⋅,∇u],d,x,d,spatially-constant,diffusion,tensor,Figure,4.3:,Timings,for,quadrilateral,mesh.,Figure,4.4:,Timings,for,triangular,mesh.,Figure,4.14:,Timings,for,pyramidal,mesh.,Figure,4.15:,Timings,for,tetrahedral,mesh.,22,Good,speedups,observed,over,non-vectorised,versions,of,26,this,operator,for,both,2D,&amp;,3D,elements,Test,cases,within,NEPTUNE,•,Focuses,around,setup,of,a,solver,for,a,highly,anisotropic,heat,transport,case,based,on,high-order,elements.,3,2,N,∂T,∂t,=,∇,⋅,(κ∥b[b,⋅,∇T],+,κ⊥(,∇T,−,[b,⋅,∇T])),•,Two,aspects,being,considered:,•,Physics:,for,this,model,problem,,how,do,high-,order,elements,perform,for,high,levels,of,anisotropy?,•,Software:,how,do,we,implement,efficient,realisations,suitable,for,exascale,platforms?,Figure,1:,Sketch,of,the,test,conﬁguration,,showing,ﬁeldlines,in,direction,b,and,the,boundary,between,anisotropic,conductor,and,perfect,insulator.,black,line,which,denotes,the,boundary,between,anisotropic,conductor,and,perfect,insulator.,The,exact,steady-state,solution,has,T,=,constant,along,ﬁeldlines,,but,numerical,diffusion,will,result,in,non-zero,T,in,the,region,of,blue,ﬁeldlines.,The,relative,size,of,this,numerical,diffusion,must,be,estimated,as,a,function,of,incidence,angle,✓,,where,interest,attaches,to,small,✓,2o.,,To,test,curvature,effects,the,whole,2-D,domain,of,Figure,1,could,be,distorted,by,conformal,map-,ping,(which,preserves,angles).,3.1.2,Intermediate,Case,3.1.3,Realistic,Case,This,needs,to,be,3-D,and,involve,JET,divertor,tile,descriptions,derived,from,the,output,of,the,CAD,design,tool,,together,with,information,describing,the,magnetic,ﬁeld,as,a,function,of,position,,which,will,be,supplied.,The,magnetic,equilibrium,may,be,supplied,analytically,after,Solovev,,but,the,usual,input,is,as,an,.eqdsk,ﬁle.,The,EQDSK,G,format,is,a,“non-standard”,standard,for,solutions,(R,,Z),,p(,),,F,(,),of,the,Grad-Shafranov,equation,,where,is,the,magnetic,ﬂux,and,(R,,Z),are,cylindrical,coordinates,in,planes,normal,to,the,toroidal,direction.,The,functions,p,and,F,give,the,variation,of,the,pressure,and,toroidal,ﬁeld,respectively.,The,basic,standard,for,EQDSK,G,may,be,found,at:,https://fusion.gat.com/theory/Efitgeqdsk,(which,may,be,password-protected),or,else,at,https://w3.pppl.gov/ntcc/TORAY/G_EQDSK.pdf,The,ﬂux,(R,,Z),is,sampled,at,uni-,formly,spaced,points,on,a,direct,product,grid,,for,which,the,.eqdsk,header,deﬁnes,the,mesh-size,,as,well,as,other,useful,information,,such,as,the,ﬂux,on,axis,and,at,boundary.,Unfortunately,the,strict,EQDSK,G,standard,uses,a,Fortran,format,that,does,not,require,spaces,between,samples,,9,Development,of,proxyapps,Steady,State,Case,Anisotropic,heat,transport,P=8,https://github.com/ExCALIBUR-NEPTUNE/nektar-diffusion,SOL-solver,(single,species,1D,solver),3,https://github.com/ExCALIBUR-NEPTUNE/nektar-sol-1d,Hasegawa-Wakatani,drift-wave,system,https://github.com/ExCALIBUR-,NEPTUNE/nektar-driftwave,Particle,interactions,System,2-6,progress,•,(From,my,perspective!),a,somewhat,scary,set,of,equations,for,a,2D,fluid,model.,•,Thanks,to,Ed/James,for,a,fully,laid,out,version,of,this!,•,To,date,progress,mostly,around,scoping:,what,do,we,have,,and,what,do,we,not,have.,•,One,thing,that,will,need,to,be,addressed,is,interaction,with,particle,codes.,•,Will,briefly,outline,how,this,could,work,with,Nektar++.,Particles,in,Nektar++,to,date,•,Some,attempts,have,been,made,in,the,past,to,introduce,simple,to,moderately,complex,Lagrangian,particle,tracing,within,Nektar++.,•,These,were,particularly,motivated,by,physical,fluid,dynamics,applications,(e.g.,erosive,wear.),•,There,are,essentially,three,interactions,required:,‣,for,a,given,particle,location,in,world-space,,which,element,does,this,correspond,to,in,the,grid,(and,in,parallel,execution),,and,what,are,the,reference,coordinates,within,that,element;,‣,given,that,location,,evaluate,the,solution,field(s),there,to,e.g.,extract,velocity;,‣,given,results,of,the,particle,code,,project,e.g.,density,into,the,finite,element,space.,Finding,positions,•,This,can,be,done,at,two,levels,within,the,library,hierarchy:,‣,Within,SpatialDomains,,each,Geometry,object,has,a,ContainsPoint,method,,which,accepts,as,parameter,a,position,in,world-space.,(x,,y,,z),‣,Within,MultiRegions,,an,ExpList,object,has,a,GetExpIndex,method,which,performs,essentially,the,same,action,,but,has,a,couple,of,additional,speed-ups,and,is,also,designed,to,handle,e.g.,manifolds.,•,Finding,positions,•,In,particular,we,use,the,following,process,to,speed,up,location,searches,within,the,mesh:,‣,At,mesh,construction,time,,for,each,element,of,the,mesh,,construct,the,element's,bounding,box.,‣,We,then,use,the,bounding,boxes,to,construct,an,r-tree.,‣,When,we,look,up,a,point,,we,first,use,the,r-tree,to,locate,the,subset,of,elements,that,might,contain,this,point.,‣,Then,,we,loop,over,those,subset,and,call,the,ContainsPoint,method.,•,However,the,last,point,can,still,be,expensive,if,we,are,querying,curvilinear,elements.,Finding,reference,locations,•,Since,we,ultimately,want,to,evaluate,at,points,within,the,element,,we,need,to,know,the,location,within,the,reference,element.,•,To,do,this,requires,inverting,the,mapping,χ,that,is,used,to,define,the,element.,•,For,straight,sided,elements,,is,affine,and,χ,this,is,straightforward;,however,for,curvilinear,elements,(or,non-parallelepiped,quads/hexes),this,is,non-linear.,•,We,solve,via,a,Newton-Raphson,search.,Finding,minimum,distance,between,a,point,and,an,element's,edge,Bounding,boxes,for,curvilinear,elements,•,Additional,headache,is,bounding,boxes,are,also,difficult/expensive,to,compute.,•,Cheap,guess,is,to,use,quadrature,points,and,add,a,small,margin,(e.g.,10%).,Experimental,branch,where,we,compute,exact,boxes,at,additional,costs.,Barycentric,formulation,for,Lagrangian,interpolation,•,Given,an,element,,a,location,within,the,reference,element,,and,a,field,represented,at,the,quadrature,points,,we,can,evaluate,the,field,at,that,point.,•,This,is,a,straightforward,polynomial,interpolation,,which,can,be,performed,by,calling,the,StdRegions,function,PhysEvaluate,call.,•,Until,relatively,recently,,this,was,quite,expensive,at,for,a,1D,segment.,However,we,can,leverage,𝒪(P2),tricks,from,spectral,methods,to,reduce,this,via,barycentric,interpolation.,•,Storing,weights,allows,us,to,perform,polynomial,wj,interpolation,at,any,location,in,derivatives).,𝒪(P),time,(and,Results,-,optimisation,profiling,•,Example,in,the,FindDistance,function,shown,before,for,138,points,along,a,curved,interface.,•,Benchmarking,existing,Lagragian,interpolation,method,with,old/new,bounding,boxes,vs.,new,barycentric,formulation.,•,Significant,speedup,for,this,problem,(nonconformal,DG,grid).,FindDistance,[%CPU],Total,computation,time,[s],L2,Error,91.12%,43.2631s,4.73493E-10,85.15%,30.7281s,4.73493E-10,24.47%,4.86649s,4.73493E-10,Lagrangian,(old,bbox),Lagrangian,(new,bbox),Barycentric,(new,bbox),Other,considerations,•,At,present,,these,routines,are,not,parallel,aware,so,all,local,domains,on,each,rank,handle,things,independently.,•,Need,to,investigate,mesh,halos,(from,Will's,code),and,use,of,appropriate,logic,to,handle,fringe,cases,(e.g.,landing,exactly,on,vertex,of,element,shared,across,parallel,partitions).,•,Interactions,with,boundaries,can,also,be,difficult,to,handle,where,the,boundary,is,curved:,similar,issues,with,solving,nonlinear,problems,and,can,be,easy,to,miscompute,e.g.,deflection,angles,when,looking,at,particle-boundary,collisions." name="keywords" />
+
+    <title>RP-02-recent_neptune_and_particle_InvestigationHighOrderMethodsWithinPrototypeFusionProblems &#8212; Excalibur-Neptune Documents 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/design-tabs.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="rp-02-recent-neptune-and-particle-investigationhighordermethodswithinprototypefusionproblems">
+<h1>RP-02-recent_neptune_and_particle_InvestigationHighOrderMethodsWithinPrototypeFusionProblems<a class="headerlink" href="#rp-02-recent-neptune-and-particle-investigationhighordermethodswithinprototypefusionproblems" title="Permalink to this heading">¶</a></h1>
+<p>
+                        <iframe
+                                id="ID"
+                                style="border:1px solid #666CCC"
+                                title="PDF"
+                                src="_static/RP-02-recent_neptune_and_particle_InvestigationHighOrderMethodsWithinPrototypeFusionProblems.pdf"
+                                frameborder="1"
+                                scrolling="auto"
+                                height="1600"
+                                width="1100"
+                                align="middle">
+                        </iframe>
+                     </p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Excalibur-Neptune Documents</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="embeddedpdfs.html">Technical Reports</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, UKAEA.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.1.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/RP-02-recent_neptune_and_particle_InvestigationHighOrderMethodsWithinPrototypeFusionProblems.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

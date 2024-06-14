@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<meta content="technical note " name="description" />
+<meta content="Implicit-factorization,preconditioners,for,non-symmetric,problems,Technical,Report,2047353-TN-04,Maksims,Abal,enkovs*,Vassil,Alexandrov*,Anton,Lebedev*,Emre,Sahin*,Sue,Thorne**,July,2021,1,Introduction,In,this,report,,we,extend,the,class,of,constraint,preconditioners,from,symmetric,problems,to,non-symmetric,problems.,We,consider,the,theoretical,properties,and,demonstrate,their,effectiveness,on,a,set,of,test,problems,inspired,by,the,Hasegawa-Wakatani,problem.,2,Constraint-style,preconditioners,Let,us,assume,that,A,=,(cid:181),H,C,B,−D,(cid:182),,,(1),where,H,∈,(cid:82)n×n,,B,C,T,∈,(cid:82)m×n,and,D,∈,(cid:82)m×m,subject,to,m,≤,n.,We,always,assume,that,A,is,non-singular.,We,consider,the,use,of,a,preconditioner,of,the,form,P,=,(cid:181),G,C,B,−D,(cid:182),,,(2),where,G,∈,(cid:82)n×n.,2.1,Constraint-style,preconditioners:,symmetric,case,The,case,when,D,=,0,,B,=,C,T,and,H,=,H,T,was,analysed,by,Keller,,Gould,and,Wathen,[6]:,Theorem,2.1.,Let,A,∈,(cid:82)(n+m)×(n+m),be,a,symmetric,and,indeﬁnite,matrix,of,the,form,A,=,(cid:181),H,B,T,0,B,(cid:182),,,where,H,∈,(cid:82)n×n,is,symmetric,and,B,∈,(cid:82)m×n,is,of,full,rank.,Assume,Z,is,an,n,×,(n,−,m),basis,for,the,nullspace,of,B.,Preconditioning,A,by,a,matrix,of,the,form,P,=,(cid:181),G,B,T,0,B,(cid:182),,,where,G,∈,(cid:82)n×n,is,symmetric,,and,B,∈,(cid:82)m×n,is,as,above,,implies,that,the,matrix,P,−1A,has,*The,authors,are,with,the,Hartree,Centre,,STFC,Daresbury,Laboratory,,Sci-Tech,Daresbury,,Keckwick,,Daresbury,,Warrington,,WA4,4AD,,UK.,**Sue,Thorne,is,with,the,Hartree,Centre,,STFC,Rutherford,Appleton,Laboratory,,Harwell,Campus,,Didcot,,OX11,0QX,,UK.,Email,contact:,sue.thorne&#64;stfc.ac.uk,1,1.,an,eigenvalue,at,1,with,multiplicity,2m;,2.,n,−,m,eigenvalues,λ,which,are,deﬁned,by,the,generalized,eigenvalue,problem,Z,T,H,Z,xz,=,λZ,T,G,Z,xz,.,(3),This,accounts,for,all,of,the,eigenvalues.,Assume,,in,addition,,that,Z,T,G,Z,is,positive,deﬁnite.,Then,P,−1A,has,the,following,m,+,i,+,j,linearly,inde-,pendent,eigenvectors:,1.,m,eigenvectors,of,the,form,(cid:163)0T,,,y,T,(cid:164)T,corresponding,to,the,eigenvalue,1,of,P,−1A,;,2.,i,(0,≤,i,≤,n),eigenvectors,of,the,form,(cid:163)w,T,,,y,T,(cid:164)T,corresponding,to,the,eigenvalue,1,of,P,−1A,,,where,the,components,w,arise,from,the,generalized,eigenvalue,problem,H,w,=,G,w;,3.,j,(cid:161)0,≤,j,≤,n,−,m(cid:162),eigenvectors,of,the,form,(cid:163)xT,corresponding,to,the,eigenvalues,of,P,−1A,note,equal,to,1,,where,the,components,xz,arise,from,the,generalized,eigenvalue,problem,Z,T,H,Z,xz,=,λZ,T,G,Z,xz,with,λ,(cid:54)=,1.,z,,,0T,,,y,T,(cid:164)T,The,case,when,when,B,=,C,T,,,H,=,H,T,and,D,symmetric,and,positive,deﬁnite,has,been,analysed,by,a,num-,ber,of,different,authors,[2,,3,,4],and,can,be,summarised,in,the,following,theorems:,Theorem,2.2.,Let,A,∈,(cid:82)(n+m)×(n+m),be,a,symmetric,and,indeﬁnite,matrix,of,the,form,A,=,(cid:181),H,B,T,B,−D,(cid:182),,,where,H,∈,(cid:82)n×n,is,symmetric,,B,∈,(cid:82)m×n,is,of,full,rank,and,D,∈,(cid:82)m×m,is,symmetric,and,positive,deﬁnite.,Precon-,ditioning,A,by,a,matrix,of,the,form,P,=,(cid:181),G,B,T,B,−D,(cid:182),,,where,G,∈,(cid:82)n×n,is,symmetric,,and,B,∈,(cid:82)m×n,and,D,∈,(cid:82)m×m,are,as,above,,implies,that,the,matrix,P,−1A,has,1.,an,eigenvalue,at,1,with,multiplicity,m;,2.,n,eigenvalues,λ,which,are,deﬁned,by,the,generalized,eigenvalue,problem,−1B,(cid:162),x.,−1B,(cid:162),x,=,λ,(cid:161)G,+,B,T,D,(cid:161)H,+,B,T,D,(4),This,accounts,for,all,of,the,eigenvalues.,Dollar,et,al.,[4],have,extended,Theorem,2.2,to,the,case,when,D,is,symmetric,and,positive,semi-deﬁnite:,Theorem,2.3.,Let,A,∈,(cid:82)(n+m)×(n+m),be,a,symmetric,and,indeﬁnite,matrix,of,the,form,A,=,(cid:181),H,B,T,B,−D,(cid:182),,,where,H,∈,(cid:82)n×n,is,symmetric,,B,∈,(cid:82)m×n,is,of,full,rank,and,D,∈,(cid:82)m×m,is,symmetric,and,positive,semi-deﬁnite,with,rank,l,,,where,0,&lt;,l,&lt;,m.,Assume,that,D,is,factored,as,D,=,E,SE,T,,,where,E,∈,(cid:82)m×l,and,S,∈,(cid:82)l,×l,is,nonsingular,,F,∈,(cid:82)m×(m−l,),is,a,vasis,for,the,nullspace,of,E,T,and,(cid:163),E,F,(cid:164),is,orthogonal.,Let,the,columns,of,N,∈,(cid:82)n×(n−m+l,),span,the,nullspace,of,F,T,B.,Preconditioning,A,by,a,matrix,of,the,form,P,=,(cid:181),G,B,T,B,−D,(cid:182),,,where,G,∈,(cid:82)n×n,is,symmetric,,and,B,∈,(cid:82)m×n,and,D,∈,(cid:82)m×m,are,as,above,,implies,that,the,matrix,P,−1A,has,1.,an,eigenvalue,at,1,with,multiplicity,2m,−,l,;,2.,n,−,m,+,l,eigenvalues,λ,which,are,deﬁned,by,the,generalized,eigenvalue,problem,−1E,T,B,(cid:162),N,z.,−1E,T,B,(cid:162),N,z,=,λN,T,(cid:161)G,+,B,T,E,S,N,T,(cid:161)H,+,B,T,E,S,(5),This,accounts,for,all,of,the,eigenvalues.,2,2.2,Constraint-style,preconditioners:,nonsymmetric,case,We,will,now,extend,Theorems,2.1,and,2.2,to,the,non-symmetric,case.,2.3,D,non-singular,Theorem,2.4.,Let,A,∈,(cid:82)(n+m)×(n+m),,m,≤,n,,be,a,matrix,of,the,form,A,=,(cid:181),H,C,B,−D,(cid:182),,,where,H,∈,(cid:82)n×n,,B,∈,(cid:82)m×n,and,C,∈,(cid:82)n×m,are,of,full,rank,and,D,∈,(cid:82)m×m,is,non-singular.,Preconditioning,A,by,a,matrix,of,the,form,P,=,(cid:181),G,C,B,−D,(cid:182),,,where,G,∈,(cid:82)n×n,,and,B,∈,(cid:82)m×n,,C,∈,(cid:82)n×m,and,D,∈,(cid:82)m×m,are,as,above,,implies,that,the,matrix,P,−1A,has,1.,an,eigenvalue,at,1,with,multiplicity,m;,2.,n,eigenvalues,λ,which,are,deﬁned,by,the,generalized,eigenvalue,problem,(cid:161)H,+C,D,−1B,(cid:162),x,=,λ,(cid:161)G,+C,D,−1B,(cid:162),x.,This,accounts,for,all,of,the,eigenvalues.,Proof.,The,eigenvalues,of,P,−1A,may,be,derived,by,considering,the,generalized,eigenvalue,problem,(cid:181),H,C,B,−D,(cid:182),(cid:181),x,y,(cid:182),=,λ,(cid:181),G,C,B,−D,(cid:182),(cid:181),x,y,(cid:182),(6),(7),Premultiplying,(7),by,the,non-singular,matrix,(cid:181),I,C,D,0,−D,−1,−1,(cid:182),gives,the,equivalent,generalized,eigenvalue,problem,(cid:181),H,+C,D,−D,−1B,−1B,0,I,(cid:182),(cid:181),x,y,(cid:182),=,λ,(cid:181),G,+C,D,−D,−1B,−1B,0,I,(cid:182),(cid:182),(cid:181),x,y,Thus,,there,are,m,eigenvalues,equal,to,1,and,the,remaining,n,eigenvalues,are,deﬁned,by,the,generalized,eigen-,value,problem,(cid:161)H,+C,D,−1B,(cid:162),x,=,λ,(cid:161)G,+C,D,−1B,(cid:162),x.,(8),2.4,D,=,0,Theorem,2.5.,Let,A,∈,(cid:82)(n+m)×(n+m),,m,≤,n,,be,a,matrix,of,the,form,A,=,(cid:181),H,C,0,B,(cid:182),,,where,H,∈,(cid:82)n×n,,and,B,∈,(cid:82)m×n,and,C,∈,(cid:82)n×m,are,of,full,rank.,Let,the,columns,of,ZB,∈,(cid:82)n×(n−m),span,the,nullspace,of,B,and,the,columns,of,ZC,∈,(cid:82)n×(n−m),span,the,nullspace,of,C,T,.,Preconditioning,A,by,a,matrix,of,the,form,P,=,(cid:181),G,C,0,B,(cid:182),,,where,G,∈,(cid:82)n×n,,and,B,∈,(cid:82)m×n,,C,∈,(cid:82)n×m,are,as,above,,implies,that,the,matrix,P,−1A,has,3,1.,2m,eigenvalues,of,equal,to,1;,2.,the,remaining,n,−,m,eigenvalues,,λ,,are,deﬁned,by,the,generalized,eigenvalue,problem,C,H,ZB,xz,=,λZ,T,Z,T,C,G,ZB,xz,.,This,accounts,for,all,of,the,eigenvalues.,Proof.,The,eigenvalues,of,P,−1A,may,be,derived,by,considering,the,generalized,eigenvalue,problem,(cid:181),H,C,0,B,(cid:182),(cid:181),x,y,(cid:182),=,λ,(cid:181),G,C,0,B,(cid:182),(cid:181),x,y,(cid:182),,,(9),(10),where,λ,∈,(cid:67),,λ,∈,(cid:67)n,and,λ,∈,(cid:67)m.,Let,B,=,UB,(cid:161),ΣB,0,(cid:162),(cid:182),(cid:181),Y,T,B,Z,T,B,,,C,T,=,UC,(cid:161),ΣC,0,(cid:162),(cid:182),(cid:181),Y,T,C,Z,T,C,be,the,singular-value,decompositions,of,B,and,C,with,YB,,,YC,∈,(cid:82)n×m.,Note,that,ZB,,,ZC,∈,(cid:82)n×(n−m),span,the,nullspace,of,B,and,C,T,,,respectively.,If,we,substitute,in,x,=,YB,xY,+,ZB,xZ,into,(10),and,premultiply,the,equation,by,the,nonsingular,matrix,,,Y,T,C,Z,T,C,0,,,,,0,0,I,where,YB,and,YC,are,n,by,m,matrices,whose,columns,span,the,range,space,of,B,T,and,C,,,respectively,,then,we,obtain,,,Y,T,C,H,YB,Z,T,C,H,YB,B,YB,Y,T,C,H,ZB,Z,T,C,H,ZB,0,Y,T,C,C,0,0,,,,,xY,xZ,y,,,=,λ,Y,T,C,GYB,Z,T,C,GYB,B,YB,,,(cid:124),Y,T,C,G,ZB,Z,T,C,G,ZB,0,(cid:123)(cid:122),˜P,Y,T,C,C,0,0,,xY,xZ,y,,,,,(cid:125),,.,(11),If,we,pre-multiply,(11),by,˜P,−1,,then,we,obtain,an,equivalent,eigenvalue,problem,of,the,form,,,I,Θ1,Θ2,(Z,T,0,−1Z,T,C,G,XB,),Θ3,C,H,ZB,,,,,0,0,I,xY,xZ,y,,,=,λ,,,,,,,xY,xZ,y,(12),where,the,exact,deﬁnition,of,Θ1,,Θ2,and,Θ3,are,not,important,for,the,proof.,Hence,,P,−1A,has,2m,eigenval-,ues,equal,to,1,and,the,remaining,eigenvalues,are,deﬁned,by,the,eigenvalue,problem,generalized,eigenvalue,problem,(9).,We,note,that,when,A,and,P,are,no-longer,symmetric,,some,of,the,non-unitary,eigenvalues,may,be,com-,plex.,3,Implicit-factorization,constraint,preconditioners,In,[4],,the,authors,derive,a,number,of,factorizations,for,generating,symmetric,constraint,preconditioners.,In,the,following,,we,will,assume,that,the,rows,and,columns,of,H,have,been,ordered,in,such,a,manner,that,we,can,partition,B,∈,(cid:82)m×n,,C,∈,(cid:82)n×m,,G,∈,(cid:82)n×n,and,H,∈,(cid:82)n×n,as,(cid:162),,,B,=,(cid:161),B1,B2,(cid:181),C1,C2,C,=,(cid:182),,,G,=,H,=,(cid:181),G1,1,G1,2,G2,1,G2,2,(cid:181),G1,1,G1,2,G2,1,G2,2,(cid:182),(cid:182),,,,,4,(13),(14),(15),(16),where,B1,∈,(cid:82)m×m,and,C1,∈,(cid:82)m×m,are,non-singular,,G1,1,∈,(cid:82)m×m,and,H1,1,∈,(cid:82)m×m.,For,coupled,multi-physics,problems,,this,ordering,is,implicitly,available,through,the,nature,of,the,problems.,As,in,[4],,we,form,factors,of,the,form,L,=,N,=,R,=,,,,,,,L1,1,L2,1,L3,1,L1,2,L2,2,L3,2,,,,,L1,3,L2,3,L3,3,N1,1,N1,2,N1,3,N2,1,N2,2,N2,3,N3,1,N3,2,N3,3,R1,1,R1,2,R1,3,R2,1,R2,2,R2,3,R3,1,R3,2,R3,3,,,,,,,set,some,of,the,sub-blocks,to,zero,whilst,assuming,other,sub-blocks,are,invertible,and,relatively,easy,to,solve,with,,and,the,sub-blocks,are,such,that,the,product,LN,R,forms,a,non-symmetric,constraint,preconditioner,of,the,form,P,=,(cid:181),G,C,B,−D,(cid:182),.,Without,loss,of,generality,,we,ﬁx,L1,3,,L2,2,,L2,3,,R2,2,,R3,1,and,R3,2,to,be,non-zero,with,L2,2,and,R2,2,both,non-,singular.,We,use,a,Matlab,script,(see,Appendix,A),to,generate,all,62,possible,implicit-factorization,constraint,preconditioners.,We,note,that,if,B,=,C,T,,,R3,1,=,B1,,R3,2,=,B2,,L1,3,=,B,T,2,,,then,we,obtain,the,families,given,in,[4].,1,and,L2,3,=,B,T,Some,of,the,non-symmetric,implicit,factorizations,are,only,suitable,for,the,case,D,=,0,,for,example,,,,,,,L,=,N,=,R,=,L1,1,L2,1,L3,1,0,L2,2,0,,,,,L1,3,L2,3,0,0,0,0,N1,3,N2,2,N2,3,N3,1,N3,2,N3,3,R1,1,R1,2,R1,3,0,R2,2,0,R3,1,R3,2,0,,,,,,,subject,to,produces,B1R,L3,1N1,3R3,1,=,B1,,−1,3,1R3,2,=,B2,,L1,3N3,1R1,3,=,C1,,−1,1,3C1,=,C2,L2,3L,G1,1,=,L1,1N1,3R3,1,+,L1,3N3,3R3,1,+,L1,3N3,1R1,1,,−1,−1,1,3R1,2,+,L1,3N3,2R2,2,,3,1B2,+,L1,3N3,3R3,1B,G1,2,=,L1,1L,−1,−1,G2,1,=,L2,1L,3,1B1,+,L2,2N2,3R3,1,+C2C,1,3R1,1,,−1,−1,G2,2,=,L2,2N2,2R2,2,+C2C,1,L1,3N3,2R2,2,+,L2,1L,1,L1,3N3,3R3,1B,−1,1,B2.,−1,1,B2,+C1R,−1,1,L1,3N3,3R3,1,+C2R,−1,3,1B2,+C2C,+L2,2N2,3R3,1B,−1,1,B2,5,There,are,also,some,that,are,only,suitable,for,non-singular,D,,for,example,,,,,,,,L,=,N,=,R,=,L1,1,L2,1,L3,1,0,L2,2,0,,,,,L1,3,L2,3,0,0,0,0,N1,3,N2,2,N2,3,N3,1,N3,2,N3,3,R1,1,R1,2,0,R2,2,0,R3,1,R3,2,R3,3,0,,,,,,,L3,1N1,3R3,1,=,B1,,−1,3,1R3,2,=,B2,,B1R,L3,1N1,3R33,=,D,,−,(cid:161)L2,1N1,3,+,L2,3N3,3,+,L2,2N2,3,−,(cid:161)L1,1N1,3,+,L1,3N3,3,(cid:162),R3,1,=,C1D,(cid:162),R3,1R3,1,=,C1D,−1B1,,−1B1,subject,to,produces,G1,1,=,−C1D,G1,2,=,−C1D,G2,1,=,−C2D,G2,2,=,L2,2N2,2R2,2,+,L2,3N3,2R2,2,+C2C,−1B1,+,L1,3N3,1R1,1,,−1B2,+,(cid:161)G1,1,+C1D,−1B1,+,L2,3N3,1R1,1,,−1B1,(cid:162),R,−1,1,1R1,2,+,L1,3N3,2R2,2,,−1B2,+,L2,3N3,1R1,2.,4,Numerical,tests,We,will,consider,a,test,problem,inspired,by,the,2D,problem,known,as,the,Hasegawa-Wakatani,problem,,which,is,similar,to,incompressible,ﬂuid,dynamics:,=,−{φ,,n},+,α(φ,−,n),−,κ,∂φ,∂z,+,Dn∇2,⊥n,=,−{ω,,n},+,α(ω,−,n),+,Dω∇2,⊥ω,∂n,∂t,∂ω,∂t,∇2φ,=,ω,.,Here,n,is,the,plasma,number,density,,ω,:=,(cid:126),a,constant,magnetic,ﬁeld,and,operator,{·,,·},is,the,Poisson,bracket.,b0,·,∇,×,(cid:126)v,is,the,vorticity,with,(cid:126)v,being,the,(cid:126)E,×,(cid:126)B,drift,velocity,in,(cid:126),b0,is,the,unit,vector,in,the,direction,of,the,equilibrium,magnetic,ﬁeld.,The,The,discretized,version,of,the,problem,is,described,in,[1],but,we,will,consider,a,split,implicit-explicit,method,where,the,Jacobian,that,needs,solving,at,each,Newton,iteration,is,of,the,following,form:,,,J,=,where,the,constituent,matrices,are,the,following,A,0,0,B,C,E,0,−M,K,,,,,(17),A,=,M,+,∆t,(−DωK,),,,B,=,α∆t,M,,,C,=,∆t,(−αM,),,,E,=,M,+,∆t,(αM,−,DnK,),.,6,Here,K,and,M,are,the,stiffness,and,mass,matrices,,respectively.,Note,that,we,have,permuted,the,rows,and,columns,so,the,matrix,will,not,directly,map,to,that,given,in,[1].,We,tried,to,use,BOUT++[5],directly,to,solve,the,Hasegawa-Wakatani,problem,and,test,our,preconditioners,but,using,PETSc,with,a,constraint,and,precon-,ditioner,resulted,in,runtime,errors,,which,might,be,due,to,the,manner,that,PETSc,was,installed,on,the,Hartree,Centre’s,Scafell,Pike,cluster.,Instead,,we,took,advantage,of,the,situation,and,created,mass,and,stiffness,matri-,ces,that,use,a,ﬁnite-element,discretization,instead,of,ﬁnite,difference.,We,used,the,same,values,of,constants,as,used,within,the,BOUT++,implementation,and,set,∆t,to,be,equal,to,the,inverse,of,the,number,of,rows,in,M,.,We,will,compare,the,following,preconditioning,strategies:,•,A,block-diagonal,preconditioner,•,A,constraint,preconditioner,with,G,=,I,,,PD,=,0,A,0,0,C,0,I,0,0,,,;,,,P1,=,I,0,0,B,E,I,−M,K,0,,,;,•,A,constraint,preconditioner,with,G2,2,=,I,and,the,remainder,of,G,zero:,,,P2,=,0,0,0,B,E,I,−M,K,0,,,;,•,A,constraint,preconditioner,with,G2,2,=,C,and,the,remainder,of,G,zero:,,,P3,=,0,0,,,;,0,B,C,E,0,−M,K,•,An,implicit-factorization,constraint,preconditioner,with:,,,,,,,L,=,N,=,R,=,−,DωDn,∆t,α,−I,K,M,I,−1K,M,−1,0,I,0,1,α∆t,I,(cid:161)(1,+,αγ)M,−,γDnK,(cid:162),M,0,−1,,,,,0,0,α∆t,M,0,−,Dω,0,I,−,1,α∆t,α,M,−1K,M,I,−1K,−M,0,(cid:161)(1,+,αγ)M,−,γDnK,(cid:162),M,K,−1K,I,0,0,,.,,−1K,−M,Dω(1+α∆t,),α,−γDωK,,K,,,,Note,that,,with,the,exception,of,preconditioner,P1,,we,do,not,explicitly,form,the,preconditioner,and,we,in-,stead,apply,them,by,exploiting,the,block,structures.,In,Tables,1,and,2,,we,report,the,number,of,iterations,−6,and,the,times,for,solving,our,test,problems,using,Matlab’s,to,reduce,the,relative,residual,by,a,factor,of,10,GMRES,function,with,no,restarting.,Note,that,the,preconditioners,have,not,been,optimized,with,respect,to,time,so,these,values,are,only,indicative.,Preconditioners,P1,and,P5,produce,the,best,iteration,counts,but,we,note,that,for,larger,problems,,factoring,P1,via,a,direct,method,will,become,extremely,expensive.,Addition-,ally,,alternative,choices,for,the,blocks,in,the,implicit,factorization,preconditioner,may,increase,the,number,of,iterations,but,make,the,preconditioner,much,cheaper,to,apply.,For,example,,solves,with,the,mass,matrix,can,be,well-approximated,using,the,Chebyshev,semi-iteration,[7],and,solves,involving,the,stiffness,matrix,may,be,approximated,with,a,multigrid,method:,this,was,very,successfully,done,within,the,symmetric,constraint,preconditioner,context,for,PDE-constrained,problems,[8].,In,Tables,1,and,2,,we,report,the,number,of,iterations,to,reduce,the,relative,residual,by,a,factor,of,10,and,the,times,for,solving,our,test,problems,using,Matlab’s,GMRES,function,with,restarting,set,to,10.,Here,,preconditioner,P2,failed,to,converge,but,we,see,similar,results,to,non-restarted,GMRES,for,preconditioners,P1,and,P5.,Note,that,by,using,the,restarted,version,of,GMRES,,we,were,able,to,solve,larger,problems.,−6,7,n,450,1922,7938,m,PD,57,103,192,225,961,3969,P1,3,2,2,P2,43,86,172,P3,61,122,239,P4,2,2,2,Table,1:,Number,of,preconditioned,GMRES,iterations,to,reduce,the,relative,residual,by,a,factor,of,10,−6.,n,450,1922,7938,m,225,961,3969,PD,0.029,0.21,2.18,P1,0.020,0.077,0.37,P2,0.037,0.17,0.37,P3,0.051,0.31,3.97,P4,0.015,0.27,8.63,Table,2:,Time,(in,seconds),for,preconditioned,GMRES,to,reduce,the,relative,residual,by,a,factor,of,10,−6.,n,450,1922,7938,32258,m,225,961,3969,16129,PD,404,725,2078,4514,P1,3,2,2,2,P2,-,-,-,-,P3,15,649,2255,7875,P4,2,2,2,2,Table,3:,Number,of,preconditioned,GMRES(10),iterations,to,reduce,the,relative,residual,by,a,factor,of,10,−6.,n,450,1922,7938,32258,m,225,961,3969,16129,PD,0.17,1.19,20.3,214,P1,0.020,0.083,0.37,1.83,P2,-,-,-,-,P3,0.12,1.58,33.4,622,P4,0.015,0.27,8.70,324,Table,4:,Time,(in,seconds),for,preconditioned,GMRES(10),to,reduce,the,relative,residual,by,a,factor,of,10,−6.,5,Conclusions,We,conclude,by,observing,that,our,results,demonstrate,the,effectiveness,of,using,non-symmetric,constraint,preconditioners.,By,careful,selection,of,the,constraint,preconditioner,,we,have,shown,that,they,can,be,applied,in,an,operator-based,manner,either,by,using,very,simple,choices,of,G,or,by,using,an,implicit-factorization.,The,next,step,will,be,to,incorporate,these,preconditioners,into,BOUT++,and,Nektar++,[9],to,see,how,they,perform,within,a,non-linear,simulation.,References,[1],V.,Alexandrov,,A.,Lebedev,,E.,Sahin,,and,S.,Thorne.,Linear,systems,of,equations,and,preconditioners,relating,to,the,NEPTUNE,Programme:,a,brief,overview.,Technical,Report,2047353-TN-02,,UKAEA,,2021.,[2],O.,Axelsson,and,M.,Neytcheva.,Preconditioning,methods,for,linear,systems,arising,in,constrained,opti-,mization,problems.,Numerical,linear,algebra,with,applications,,10(1-2):3–31,,2003.,[3],L.,Bergamaschi,,J.,Gondzio,,and,G.,Zilli.,Preconditioning,indeﬁnite,systems,in,interior,point,methods,for,optimization.,Computational,Optimization,and,Applications,,28(2):149–171,,2004.,[4],H.,S.,Dollar,,N.,I.,Gould,,W.,H.,Schilders,,and,A.,J.,Wathen.,Implicit-factorization,preconditioning,and,iterative,solvers,for,regularized,saddle-point,systems.,SIAM,Journal,on,Matrix,Analysis,and,Applications,,28(1):170–189,,2006.,[5],B.,Dudson,,P.,Hill,,and,J.,Parker.,BOUT++.,online,repository,,2020.,URL,http://boutproject.github.io.,[6],C.,Keller,,N.,Gould,,and,A.,Wathen.,Constraint,preconditioning,for,indeﬁnite,linear,systems.,SIAM,J.,Matrix,Anal.,Appl.,,21:1300–1317,,2000.,8,[7],T.,Rees,and,A.,J.,Wathen.,Optimal,solvers,for,pde-constrained,optimizationchebyshev,semi-iteration,in,preconditioning,for,problems,including,the,mass,matrix.,Electronic,Transactions,on,Numerical,Analysis,,34,,2008.,[8],T.,Rees,,H.,S.,Dollar,,and,A.,J.,Wathen.,Optimal,solvers,for,pde-constrained,optimization.,SIAM,Journal,on,Scientiﬁc,Computing,,32(1):271–298,,2010.,doi:,10.1137/080727154.,URL,https://doi.org/10.1137/,080727154.,[9],S.,Sherwin,,M.,Kirby,,C.,Cantwell,,and,D.,Moxey.,Nektar++.,online,,2021.,URL,https://www.nektar.info.,9,Appendix,A:,Matlab,Script,%,Generates,non-symmetric,implicit-factorization,constraint,preconditioner,%,families,format,compact,Ll,=,[sym(’l11’),sym(’l12’),,sym(’l13’),sym(’l21’),sym(’l22’),...,sym(’l23’),sym(’l31’),sym(’l32’),sym(’l33’),];,Rr,=,[sym(’r11’),sym(’r12’),,sym(’r13’),sym(’r21’),sym(’r22’),...,sym(’r23’),sym(’r31’),sym(’r32’),sym(’r33’),],Mm,=,[sym(’m11’),sym(’m12’),,sym(’m13’),sym(’m21’),sym(’m22’),...,sym(’m23’),sym(’m31’),sym(’m32’),sym(’m33’),],total,=,0;,for,i=1:5,for,j=1:3,for,k=1:5,L,=,[Ll(1:3);Ll(4:6);Ll(7:9)];,R,=,[Rr(1:3);Rr(4:6);Rr(7:9)];,M,=,[Mm(1:3);Mm(4:6);Mm(7:9)];,switch,i,case,1,L(1,1:2)=0;,L(2,1)=0;,case,2,L(1,1:2)=0;,L(3,2)=0;,case,3,L(1,2)=0;,L(3,1:2)=0;,case,4,L(2,1)=0;,L(3,1:2)=0;,case,5,L(1,2)=0;,L(3,2:3)=0;,end,switch,j,case,1,M(3,2:3)=0;,M(2,3)=0;,case,2,M(1,1:2)=0;,M(2,1)=0;,case,3,M(1,2)=0;,M(2,1)=0;,M(2,3)=0;,M(3,2)=0;,end,switch,k,case,1,R(1:2,1)=0;,R(1,2)=0;,case,2,R(1:2,1)=0;,R(2,3)=0;,case,3,R(2,1)=0;,R(2:3,3)=0;,case,4,R(2,1)=0;,R(1:2,3)=0;,case,5,R(1,2)=0;,R(1:2,3)=0;,end,p,=,1;,F,=,L*M*R;,if,((F(1,3)==0),|,(F(2,3)==0),|,(F(3,1)==0),|,(F(3,2)==0)),10,p=0;,end,if,(p==1),total,=,total+1;,%,[i,j,k],factor,=,total,struct=[L,M,R],F,end,end,end,end,total,11" name="keywords" />
+
+    <title>TN-04_ImplicitFactorizationPreconditionersNonSymmetricProblems &#8212; Excalibur-Neptune Documents 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/design-tabs.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="tn-04-implicitfactorizationpreconditionersnonsymmetricproblems">
+<h1>TN-04_ImplicitFactorizationPreconditionersNonSymmetricProblems<a class="headerlink" href="#tn-04-implicitfactorizationpreconditionersnonsymmetricproblems" title="Permalink to this heading">¶</a></h1>
+<p>
+                        <iframe
+                                id="ID"
+                                style="border:1px solid #666CCC"
+                                title="PDF"
+                                src="_static/TN-04_ImplicitFactorizationPreconditionersNonSymmetricProblems.pdf"
+                                frameborder="1"
+                                scrolling="auto"
+                                height="1600"
+                                width="1100"
+                                align="middle">
+                        </iframe>
+                     </p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Excalibur-Neptune Documents</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="embeddedpdfs.html">Technical Reports</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, UKAEA.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.1.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/TN-04_ImplicitFactorizationPreconditionersNonSymmetricProblems.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

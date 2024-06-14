@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<meta content="technical note " name="description" />
+<meta content="REPORT,2047357-TN-11-01,M1.7,1,2D,drift,kinetics,in,a,helical,ﬁeld,with,a,‘separatrix’,Felix,I.,Parra,,Michael,Barnes,and,Michael,Hardman,Rudolf,Peierls,Centre,for,Theoretical,Physics,,University,of,Oxford,,Oxford,OX1,3PU,,UK,(This,version,is,of,28,November,2021),1.,Introduction,In,reports,2047357-TN-07-02,and,2047357-TN-09-01,,we,presented,2D,drift,kinetic,models,with,wall,boundary,conditions,and,periodic,boundary,conditions,,respectively.,The,diﬀerence,between,the,two,models,is,signiﬁcant:,with,periodic,boundary,conditions,,we,needed,to,add,another,equation,to,determine,a,piece,of,the,potential,that,only,depends,on,the,radial,coordinate.,In,this,report,,we,discuss,how,one,would,connect,both,models,if,one,considers,a,situation,in,which,he,boundary,conditions,switch,from,being,periodic,to,being,wall,boundary,conditions,at,some,radial,position,r,=,rs.,The,position,r,=,rs,is,an,eﬀective,‘separatrix’.,In,this,report,,we,ﬁrst,remind,the,reader,of,the,content,in,reports,2047357-TN-07-,02,and,2047357-TN-09-01,,and,we,then,explain,how,these,models,connect,at,r,=,rs.,Remarkably,,the,connection,between,these,two,types,of,boundary,conditions,requires,a,full,gyrokinetic,treatment,around,the,separatrix.,Such,a,treatment,is,out,of,scope,of,the,ExCALIBUR,contract,,focused,on,drift,kinetics,,so,we,propose,solving,the,equations,with,a,‘separatrix’,in,a,simple,limit,in,which,the,treatment,can,be,approximated,with,a,drift,kinetic,model.,2.,Magnetic,ﬁeld,,geometry,and,orderings,We,use,the,cylindrical,coordinates,{r,,z,,ζ},(see,report,2047357-TN-07-02,for,the,direc-,tion,of,increase,of,ζ).,We,consider,a,magnetized,plasma,with,one,ion,species,with,charge,e,and,mass,mi,,electrons,with,charge,−e,and,mass,me,,and,one,species,of,neutrals,with,mass,The,plasma,is,magnetized,by,the,helical,magnetic,ﬁeld,mn,=,mi.,B(r,,ζ),:=,Bz(r)ˆz,+,Bζ(r)ˆζ(ζ),,(2.1),(2.2),where,ˆz,and,ˆζ,are,the,unit,vectors,in,the,direction,of,∇z,and,∇ζ.,Note,that,the,compo-,nents,Bz,and,Bζ,only,depend,on,the,radial,position,r.,We,assume,that,the,plasma,only,varies,in,r,and,z.,We,assume,that,the,electric,ﬁeld,produced,by,the,plasma,is,electrostatic,,E,=,−(∂φ/∂r)ˆr,−,(∂φ/∂z)ˆz,,where,ˆr,is,the,unit,vector,in,the,direction,∇r.,The,potential,φ(r,,z,,t),depends,on,the,coordinates,r,and,z,and,on,time,t.,We,impose,periodic,or,wall,boundary,conditions,at,z,=,0,and,z,=,Lz.,In,the,radial,direction,,we,consider,the,interval,between,r,=,r0,and,r,=,r0,+,Lr.,The,length,Lr,is,determined,by,a,balance,between,the,fast,parallel,velocity,of,the,particles,along,magnetic,ﬁeld,lines,and,their,slow,drift,across,them.,The,characteristic,length,between,the,two,2,Felix,I.,Parra,,Michael,Barnes,and,Michael,Hardman,walls,along,a,magnetic,ﬁeld,line,is,of,order,L(cid:107),∼,B,Bz,Lz.,(2.3),Thus,,the,typical,time,that,it,takes,for,an,ion,to,move,from,wall,to,wall,is,L(cid:107)/vti,∼,(B/Bz)(Lz/vti),,where,vti,:=,(cid:112)2Ti/mi,is,the,ion,thermal,speed,and,Ti,is,the,ion,tem-,perature.,For,a,potential,φ,of,the,order,of,Ti/e,,where,e,is,the,proton,charge,,the,radial,E,×,B,drift,is,vEr,:=,−,Bζ,B2,∂φ,∂z,∼,ρi,Lz,vti,,(2.4),:=,vti/Ωi,is,the,characteristic,ion,gyroradius,and,Ωi,where,ρi,:=,eB/mi,is,the,ion,gyrofrequency.,Thus,,the,time,it,takes,for,an,ion,to,cross,the,domain,in,the,radial,direction,is,Lr/vEr,∼,LrLz/ρivti.,By,making,this,time,of,the,same,order,as,L(cid:107)/vti,,we,solve,for,Lr,to,ﬁnd,Lr,∼,B,Bz,ρi,(2.5),To,simplify,the,problem,to,a,tractable,drift,kinetic,form,,we,assume,that,ρi,is,much,smaller,than,Lr.,This,implies,that,ρi,Lr,∼,Bz,B,(cid:39),Bz,Bζ,(cid:28),1,,(2.6),that,is,,we,will,limit,our,model,to,magnetic,ﬁelds,that,are,mostly,azimuthal,and,have,a,very,small,vertical,component.,This,is,an,approximation,that,is,consistent,with,magnetic,ﬁeld,geometry,in,conventional,tokamaks,and,also,in,the,edge,of,many,shots,in,spherical,tokamaks.,We,also,assume,that,r0,∼,Lz,(cid:29),Lr.,Since,r0,is,the,characteristic,length,of,variation,of,the,magnetic,ﬁeld,B,,the,magnetic,ﬁeld,barely,changes,across,the,domain,[r0,,r0,+,Lr].,Thus,,within,our,ordering,,we,assume,B,to,be,uniform,in,the,domain,of,interest.,We,assume,the,time,derivatives,to,be,of,the,same,order,as,the,parallel,and,perpendic-,ular,time,scales,that,we,have,discussed,above,,∂,∂t,∼,ρi,Lr,vti,Lz,.,(2.7),Our,orderings,above,are,based,on,the,assumption,φ,∼,Ti/e.,In,the,region,of,space,with,wall,boundary,conditions,,the,wall,boundary,conditions,ensure,that,φ,remains,of,this,order.,With,periodic,boundary,conditions,,the,size,of,φ,is,controlled,by,the,momentum,input.,The,force,per,unit,volume,on,the,plasma,due,to,external,sources,,neutral-plasma,collisions,or,ionization,must,satisfy,|Fi,ext⊥|,,|Fe,ext⊥|,,|Fin⊥|,,|Fen⊥|,,|Fi,ion⊥|,,|Fe,ion⊥|,(cid:46),(cid:18),ρi,Lr,(cid:19)2,pi,Lz,,,(2.8),where,pi,is,the,ion,pressure.,This,estimate,for,the,force,per,unit,volume,comes,from,making,the,force,of,the,order,of,the,perpendicular,inertia,,∂(nimiui⊥)/∂t,,where,the,perpendicular,ion,velocity,ui⊥,is,taken,to,be,of,order,(ρi/Lr)vti,(note,that,this,means,that,the,perpendicular,ﬂow,is,much,smaller,than,the,parallel,one,,which,we,assume,to,be,of,the,order,of,vti).,Equation,(2.8),might,seem,stringent,,but,the,friction,between,ions,and,neutrals,and,electron,and,neutrals,(due,to,elastic,collisions,or,ionization),is,small,in,the,closed,ﬁeld,line,region,of,the,tokamak,because,the,neutral,density,is,small,,i.e.,we,2D,drift,kinetics,in,a,helical,ﬁeld,with,a,‘separatrix’,3,can,assume,that,nnRin,∼,nnRen,(cid:114),me,mi,∼,nnRion,(cid:46),(cid:18),ρi,Lr,(cid:19)2,vti,Lz,,,(2.9),where,nnRin,,nnRen,and,nnRion,are,the,ion-neutral,,electron-neutral,and,ionization,collision,frequencies.,3.,Summary,of,reports,2047357-TN-07-02,and,2047357-TN-09-01,The,models,in,reports,2047357-TN-07-02,and,2047357-TN-09-01,are,comprised,of:,•,three,ﬂuid,equations,(conservation,of,particles,,parallel,momentum,and,energy),for,ions,that,have,to,be,solved,in,conjunction,with,an,ion,kinetic,equation,to,determine,the,ion,density,ni,=,ne,,the,ion,parallel,velocity,ui(cid:107),,the,ion,temperature,Ti,and,the,normalized,ion,distribution,function,Fi;,•,ﬁve,ﬂuid,equations,(conservation,of,particles,,the,three,components,of,momentum,and,energy),for,neutrals,that,have,to,be,solved,in,conjunction,with,a,neutral,kinetic,equation,to,determine,the,neutral,density,nn,,the,three,components,of,the,neutral,velocity,un,,the,neutral,temperature,Tn,and,the,normalized,neutral,distribution,function,Fn;,•,two,ﬂuid,equations,(conservation,of,parallel,current,,Bz,B,∂,∂z,(cid:2)ni,(cid:0)ui(cid:107),−,ue(cid:107),(cid:1)(cid:3),=,0,,(3.1),and,conservation,of,energy),for,electrons,that,have,to,be,solved,in,conjunction,with,an,electron,kinetic,equation,to,determine,the,electron,parallel,velocity,ue(cid:107),,the,electron,temperature,Te,and,the,electron,normalized,distribution,function,Fe;,and,•,the,electron,parallel,momentum,equation,,0,=,−,Bz,B,∂pe(cid:107),∂z,+,eneBz,B,∂φ,∂z,+,Fei(cid:107),+,nemennRen(un(cid:107),−,ue(cid:107)),,(3.2),for,the,potential,φ.,Here,,Fei(cid:107),is,the,collisional,friction,force,between,electrons,and,ions.,In,report,2047357-TN-07-02,,we,proposed,a,method,to,solve,equations,(3.1),and,(3.2),in,conjunction,with,wall,boundary,conditions.,Equation,(3.1),can,be,integrated,in,z,to,obtain,ue(cid:107)(r,,z,,t),−,ue(cid:107)(r,,0,,t),(recall,that,ni,and,ui(cid:107),are,time-advanced,using,ion,equations).,With,this,result,,equation,(3.2),can,be,integrated,in,z,to,obtain,the,diﬀerence,φ(r,,z,,t),−,φ(r,,0,,t),as,a,function,of,the,unknown,ue(cid:107)(r,,0,,t),(recall,that,pe(cid:107),is,determined,by,the,electron,energy,equation,and,the,electron,kinetic,equation,,and,that,Fei(cid:107),depends,on,ue(cid:107)).,With,wall,boundary,conditions,,we,could,solve,for,both,ue(cid:107)(r,,0,,t),and,φ(r,,0,,t).,In,report,2047357-TN-09-01,,we,explained,how,to,use,equations,(3.1),and,(3.2),with,pe-,riodic,boundary,conditions.,As,in,the,case,with,wall,boundary,conditions,,equations,(3.1),and,(3.2),give,ue(cid:107)(r,,z,,t)−ue(cid:107)(r,,0,,t),and,φ(r,,z,,t)−φ(r,,0,,t),as,functions,of,the,unknown,ue(cid:107)(r,,0,,t).,Dividing,equation,(3.2),by,ne,,integrating,in,z,and,using,the,periodic,bound-,ary,conditions,for,φ,,we,ﬁnd,the,condition,(cid:90),Lz,(cid:20),−,0,=,0,Bz,neB,∂pe(cid:107),∂z,+,Fei(cid:107),ne,(cid:21),+,mennRen(un(cid:107),−,ue(cid:107)),dz.,(3.3),This,condition,is,satisﬁed,by,choosing,the,correct,value,of,ue(cid:107)(r,,0,,t).,To,obtain,a,similar,condition,for,φ(r,,0,,t),,we,kept,higher,order,terms,in,ρi/Lr,in,the,current,conservation,equation,to,ﬁnd,(cid:32)(cid:90),Lz,0,∂,∂r,(cid:33),J⊥,·,ˆr,dz,=,0,,(3.4),4,Felix,I.,Parra,,Michael,Barnes,and,Michael,Hardman,where,the,average,radial,current,is,(cid:90),Lz,0,J⊥,·,ˆr,dz,=,−,∂,∂t,(cid:90),Lz,0,(cid:20),nimi,B2,(cid:18),∂φ,∂r,+,1,eni,(cid:18),∂φ,∂r,(cid:19)(cid:21),dz,∂pi⊥,∂r,+,1,eni,∂pi⊥,∂r,(cid:19),(cid:35),dz,(cid:34)(cid:90),Lz,0,nimi,B2,∂φ,∂z,(cid:18),∂φ,∂r,+,−,+,1,B,∂,∂r,(cid:90),Lz,0,(cid:90),Lz,0,+,niminnRin,B2,1,eni,niminn(Rin,+,Rion)unz,B,(cid:19),∂pi⊥,∂r,dz,dz,+,(cid:90),Lz,0,Fext,·,ˆz,B,dz.,(3.5),Equation,(3.4),is,the,equation,for,φ(r,,0,,t).,4.,Model,with,‘separatrix’,We,consider,a,case,with,mixed,periodic,and,wall,boundary,condition.,For,r,∈,[r0,,rs[,we,apply,periodic,boundary,conditions,,whereas,for,r,∈,[rs,,r0,+Lr],we,use,wall,boundary,conditions.,The,problem,at,r,=,rs,is,that,,in,general,,there,will,be,discontinuities,in,φ,and,ue(cid:107),because,of,the,diﬀerent,treatment,of,these,two,ﬁelds,on,both,side,of,r,=,rs.,These,discontinuities,give,raise,to,discontinuities,in,the,ion,density,,temperature,and,ﬂow,,and,indicate,that,there,is,a,boundary,layer,of,width,ρi,(cid:28),Lr,around,the,‘separatrix’,,and,another,boundary,layer,inside,this,layer,of,order,(B/Bz)ρe,(cid:28),ρi.,Here,ρe,is,the,electron,gyroradius.,Within,the,ρi-wide,layer,,the,potential,and,the,ion,density,ni,,the,ion,and,electron,temperatures,Ti,and,Te,,the,ion,and,electron,parallel,velocities,ui(cid:107),and,ue(cid:107),,and,the,ion,normalized,distribution,function,Fi,are,continuous,,but,the,normalized,electron,distribution,function,Fe,will,in,general,be,discontinuous,at,r,=,rs.,The,electron,distribution,function,Fe,is,continuous,only,within,the,layer,of,width,(B/Bz)ρe.,We,would,need,to,solve,these,layers,in,details,to,be,able,to,connect,the,two,sides,of,the,‘separatrix’,rs.,Thankfully,,these,layers,give,straightforward,results,in,the,collisionless,electron,limit,presented,in,section,5.4.2,of,report,2047357-TN-05-02.,In,the,2D,model,,this,limit,cor-,responds,to,collisions,with,collision,frequencies,νss(cid:48),such,that,B,Bz,νss(cid:48)Lz,vts,(cid:28),1.,(4.1),The,advantage,of,this,limit,is,that,the,collisional,friction,forces,between,electrons,,ions,and,neutrals,in,the,electron,momentum,equation,(3.2),are,small,by,(cid:112)me/mi,(cid:28),1.,Thus,,even,though,ue(cid:107),is,discontinuous,across,the,‘separatrix’,rs,,the,potential,φ,is,not,aﬀected,by,this,discontinuity,to,lowest,order.,Indeed,,without,collisional,friction,forces,,equation,(3.2),simpliﬁes,to,Bz,B,and,pe(cid:107),can,be,made,to,be,continuous,across,rs,,as,we,proceed,to,argue.,eneBz,B,∂φ,∂z,0,(cid:39),−,∂pe(cid:107),∂z,+,,,(4.2),Despite,the,fact,that,the,electron-ion,and,electron-neutral,collisional,friction,is,neg-,ligible,in,the,electron,momentum,equation,,collisions,remain,important,in,the,electron,kinetic,equation.,As,explained,section,5.4.2,of,report,2047357-TN-05-02,,due,to,colli-,sions,,the,electron,distribution,function,is,close,to,a,Maxwell-Boltzmann,distribution,2D,drift,kinetics,in,a,helical,ﬁeld,with,a,‘separatrix’,5,whose,density,and,temperature,are,determined,by,quasineutrality,and,the,electron,en-,ergy,equation.,If,pe(cid:107),is,continuous,across,rs,and,hence,φ,is,continuous,,the,boundary,layer,has,almost,no,eﬀect,on,ions,,and,the,ion,distribution,function,is,continuous,across,rs.,Since,the,ion,density,determines,the,density,of,the,Maxwell-Boltzmann,electron,distribu-,tion,function,via,quasineutrality,,it,is,self-consistent,to,assume,continuity,of,this,density.,The,electron,temperature,requires,more,thought.,Due,to,the,assumption,(cid:112)me/mi,(cid:28),1,,our,electron,energy,equation,does,not,contain,any,radial,transport,of,electron,energy,in,the,limit,(4.1).,Thus,,it,is,possible,to,have,a,discontinuity,(or,several),in,the,electron,tem-,perature,Te,,irrespective,of,the,presence,of,the,‘separatrix’.,Whether,such,discontinuities,exist,depends,on,our,choice,of,source,of,energy.,The,source,can,represent,turbulence,,for,example,,and,turbulent,diﬀusion,would,smear,out,discontinuities,in,the,temperature,,so,we,are,allowed,to,assume,that,the,source,ensures,continuity,of,Te.,Then,,if,we,use,the,simpliﬁed,electron,momentum,equation,(4.2),and,we,use,an,electron,energy,source,that,ensures,that,Te,is,continuous,,we,can,solve,the,problem,with,the,‘separatrix’,by,imposing,•,continuity,in,the,ion,and,neutral,density,ni,and,nn,,in,the,ion,,neutral,and,electron,temperature,Ti,,Tn,and,Te,,and,in,the,ion,and,neutral,average,velocities,ui(cid:107),and,un;,•,continuity,in,the,ion,and,neutral,normalized,distribution,functions,Fi,and,Fn;,•,continuity,in,φ.,The,electron,parallel,ﬂow,ue(cid:107),and,the,electron,normalized,distribution,function,Fe,will,be,discontinuous,in,general.,To,be,able,to,include,the,friction,forces,in,the,electron,momentum,equation,,we,need,to,solve,the,layer,of,width,ρi,,and,this,is,in,general,a,complex,gyrokinetic,problem,that,requires,a,treatment,similar,to,the,one,developed,by,Geraldini,et,al.,(2017).,The,treatment,of,this,layer,is,outside,of,the,scope,of,the,contract.,5.,Discussion,We,have,proposed,a,2D,drift,kinetic,model,for,a,helical,magnetic,ﬁeld,with,a,‘separa-,trix’.,This,model,is,only,valid,in,the,limit,where,collisions,satisfy,the,ordering,(4.1).,This,limit,is,valid,for,most,tokamaks,near,the,separatrix,,but,it,is,not,appropriate,for,the,far,scrape-oﬀ,layer,,near,the,wall.,The,problem,of,how,to,connect,to,that,far,scrape-oﬀ,layer,in,a,rigorous,manner,thus,remains,open.,REFERENCES,Geraldini,,A.,,Parra,,F.I.,&amp;,Militello,,F.,2017,Gyrokinetic,treatment,of,a,grazing,angle,magnetic,presheath.,Plasma,Phys.,Control.,Fusion,59,,025015." name="keywords" />
+
+    <title>TN-11_2DDriftKineticsHelicalFieldSeparatrix &#8212; Excalibur-Neptune Documents 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/design-tabs.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="tn-11-2ddriftkineticshelicalfieldseparatrix">
+<h1>TN-11_2DDriftKineticsHelicalFieldSeparatrix<a class="headerlink" href="#tn-11-2ddriftkineticshelicalfieldseparatrix" title="Permalink to this heading">¶</a></h1>
+<p>
+                        <iframe
+                                id="ID"
+                                style="border:1px solid #666CCC"
+                                title="PDF"
+                                src="_static/TN-11_2DDriftKineticsHelicalFieldSeparatrix.pdf"
+                                frameborder="1"
+                                scrolling="auto"
+                                height="1600"
+                                width="1100"
+                                align="middle">
+                        </iframe>
+                     </p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Excalibur-Neptune Documents</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="embeddedpdfs.html">Technical Reports</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, UKAEA.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.1.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/TN-11_2DDriftKineticsHelicalFieldSeparatrix.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

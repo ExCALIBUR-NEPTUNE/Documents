@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<meta content="technical note " name="description" />
+<meta content="ExCALIBUR,NEPTUNE:,Options,for,Geometry,Representation,Milestone,M2.1.1,Abstract,This,report,describes,work,for,ExCALIBUR,project,NEPTUNE,at,Milestone,2.1.1.,Investigation,of,high,order,mesh,generation,using,for,example,Nekmesh,as,an,optimal,strategy,for,representing,fusion,device,geometry,in,the,presence,of,strong,anisotropy,induced,by,the,magnetic,field.,Commercial,in,Confidence,UKAEA,REFERENCE,AND,APPROVAL,SHEET,Client,Reference:,UKAEA,Reference:,CD/EXCALIBUR-FMS/0012,Issue:,Date:,1.00,10,March,2020,Project,Name:,ExCALIBUR,Fusion,Modelling,System.,Version,1.00,Prepared,By:,Name,and,Department,Wayne,Arter,Lucian,Anton,Debasmita,Samaddar,Reviewed,By:,Rob,Akers,Modified,By:,Rob,Akers,Approved,By:,MSSC,Rob,Akers,MSSC,Signature,Date,N/A,N/A,N/A,N/A,10/03/2020,10/03/2020,10/03/2020,10/03/2020,10/03/2020,12/03/2020,1,Commercial,in,Confidence,NEPTUNE:,Options,for,Geometry,Representation,Contents,1.,Introduction…………………………………………………………………………………………..3,1.1,Target,Geometry…….………………………………………………..……………………...3,1.2,CAD………………………………………………………..………………………………….3,2.,Task,Work……………………………………………………………………………………………7,2.1,Importance,of,Geometrical,Accuracy……………………………………...……………….9,2.2,Example,Meshing,Problem……………..….………………...……………………………12,2.3,Element,Shape,Problem………...…………………………...…………………………….13,3.,Summary...………………………………………………………………………………………….13,2,Commercial,in,Confidence,Chapter,1,Introduction,1.1,Target,Geometry,Figure,1.1,indicates,the,complexity,of,the,designed,geometry,of,the,ITER,tokamak,interior.,Figure,1.2,shows,an,image,of,an,existing,device,(in,this,case,JET),,together,with,simplified,CAD,to,the,right,(the,complexity,of,ITER,and,DEMO,first,wall,geometry,is,expected,to,be,similar,to,JET).,The,ITER,wall,is,covered,with,Berilium,tiles,,there,are,ducts,entering,from,the,right,(shown,blanked,off),,grilles,protecting,antennas,,and,the,divertor,chamber,at,the,bottom,,with,exposed,support,structures,in,some,designs.,All,these,features,may,have,to,be,dealt,with,by,a,SOL,(Scrape,Off,Layer),code,as,they,can,be,impacted,by,both,plasma,and,neutral,gas.,Further,,in,order,to,gain,full,benefit,from,the,use,of,spectral,element,schemes,,the,exterior,of,this,geometry,,viz.,the,interior,of,the,device,,needs,to,be,meshed,using,elements,which,conform,to,the,surfaces,to,a,correspondingly,high,order,of,accuracy.,An,important,practical,point,is,the,representation,of,3-D,geometry,to,a,SOL,code.,With,existing,design,techniques,,the,interior,will,have,been,produced,using,a,CAD,system,such,as,CATIATM.,The,geometry,then,needs,to,be,discretised,for,the,code,to,be,able,to,model,it,,usually,by,separate,software,that,produces,a,mesh,starting,with,the,CAD,and,additional,metadata.,A,complete,specification,,part,made,in,the,CAD,package,will,have,labels,describing,the,materials,of,the,different,surfaces,(also,important,to,future,edge,physics,simulation,doe,to,sputtering,and,complex,chemical,processes,at,the,interface,between,plasma,and,materials).,A,modeller,will,want,to,add,metadata,specifying,boundary,conditions,,describing,the,meshes,and,other,aspects,of,the,discretisations,to,be,applied,in,different,regions,or,on,different,surfaces,,etc.,1.2,CAD,To,understand,meshing,,it,is,therefore,necessary,to,understand,how,‘CAD’,works.,By,‘CAD’,we,mean,the,way,the,geometry,(primarily),of,objects,is,represented,and,stored,on,computers,,not,the,process,(Computer,Aided,Design),by,which,it,is,produced.,Modern,Computer,Aided,Design,systems,work,‘bottom,up’,,so,that,a,design,may,in,fact,start,with,a,set,of,points.,These,points,are,then,used,to,generate,curves,and,the,curves,in,turn,are,used,3,Commercial,in,Confidence,to,define,surfaces,,leading,to,the,so-called,B-rep,,or,boundary,representation,of,geometry.,Earlier,CAD,systems,however,worked,directly,with,a,simple,set,of,canonical,bodies,such,as,half-spaces,,cylinders,and,spheres,,which,could,be,rotated,,translated,and,combined,by,Boolean,set,operations,to,give,the,CSG,(constructive,solid,geometry),representation,of,the,physical,object.,Figure,1.1:,The,complexity,of,the,ITER,first,wall,Figure,1.2:,Close-up,of,the,JET,divertor,showing,individual,tiles,(left),and,simplified,CAD,representation,(right).,The,B-rep,approach,uses,NURBS,to,represent,curves,and,hence,also,surfaces,,where,4,Commercial,in,Confidence,NURBS,are,mathematically,complex,objects.,NURBS,stands,for,nonuniform,rational,B-,splines,[1].,The,‘non-uniform’,and,‘B’,aspects,are,technicalities,which,need,not,be,gone,into,,but,clearly,the,spline,property,is,important,in,that,it,ensures,curves,are,smooth.,‘Rational’,is,important,because,it,means,that,the,representation,uses,rational,polynomials,,so,that,if,quadratic,NURBS,are,used,,the,conic,sections,(e.g.,ellipses),can,be,exactly,represented.,To,illustrate,this,feature,of,quadratic,NURBS,,recall,that,the,unit,circle,(x2,+,y2,=,1),may,be,written,as,;,(1.1),It,may,correspondingly,be,shown,[1],that,cubic,NURBS,allow,an,exact,representation,of,all,the,quadric,surfaces,(eg.,ellipsoids,and,cones).,An,important,kind,of,‘B’,spline,is,the,Bezier,spline.,This,is,constructed,by,successive,splitting,of,chords,as,illustrated,in,Figure,1.3,for,the,case,of,a,quadratic,(non-rational),Bezier,spline.,Figure,1.3:,Construction,of,a,quadratic,Bezier,spline,,taken,from,ref,[1].,The,point,on,the,curve,parameterised,by,t,is,produced,by,splitting,each,of,the,lines,b0b1,and,b1b2,in,the,ratio,t,:,(1,−,t),,then,splitting,the,line,joining,the,new,points,in,the,same,proportion.,NURBS,are,preferred,because,of,their,greater,flexibility,in,the,ability,to,generate,smooth,surfaces.,The,flexibility,comes,at,a,price,however,,which,may,be,paid,when,two,quite,distinct,NURBS,surfaces,need,to,be,joined,-,so-called,‘trimmed,NURBS’.,There,are,no,simple,mathematical,formulae,to,determine,NURBS,surface,intersection,,and,so,recourse,has,to,be,made,to,some,kind,of,approximation.,In,practice,what,may,be,done,is,to,consider,the,intersection,curve,as,the,definitive,,independent,3-D,object.,This,however,will,not,lie,exactly,5,Commercial,in,Confidence,on,either,NURBS,surface,,each,of,which,becomes,more,of,a,guide,than,a,definition,of,where,the,surface,lies,as,the,bounding,curves,are,approached.,Alternatively,the,trim,curves,may,be,defined,in,terms,of,the,surface,parameters,,either,as,short,line,segments,or,as,parametric,NURBS,,but,then,each,surface,at,the,join,will,have,a,slightly,different,‘intersection’,curve.,Even,when,topological,information,is,stored,such,as,in,the,STEP,or,other,proprietary,formats,,the,use,of,approximation,in,surface,intersection,,in,combination,with,round-off,error,,can,still,lead,to,the,appearance,of,small,“spurious”,features.,There,may,be,genuine,small,features,in,a,CAD,database,,e.g.,small,pipework,,rivet,heads,and,other,fasteners.,For,many,codes,these,may,not,be,important,and,are,undesirable,because,by,increasing,the,number,of,objects,to,be,modelled,-,they,also,increase,the,code,running,time.,Thus,,the,first,problem,to,be,treated,by,a,CAD,interface,is,to,remove,both,spurious,and,genuine,small,geometrical,features,by,‘CAD,repair,and,defeaturing’.,An,indication,of,the,size,of,this,problem,is,that,this,was,the,principal,aim,of,the,CADfixTM,software,which,represents,many,man-years,of,development,effort.,Even,with,modern,software,tools,and,the,results,of,years,of,research,,to,replicate,this,software,from,scratch,would,be,expected,to,take,man-years.,Finally,at,the,end,of,this,process,,there,is,a,consistent,B-rep,ready,for,meshing.,Figure,1.4:,How,CAD,is,often,produced,,taken,from,ref,[1].,The,designer,moves,two,of,the,control,points,,shown,as,open,circles,,to,shape,the,curve.,6,Commercial,in,Confidence,Chapter,2,Task,Work,There,are,two,basic,approaches,to,meshing,a,B-rep,,namely,(1),to,represent,the,geometry,by,means,of,‘voxels’,[2],,or,(2),to,mesh,the,surface,,then,generate,a,volume,mesh,that,coincides,with,the,surface,mesh.,Voxels,are,the,volume,equivalent,of,pixels,,so,that,the,geometry,is,represented,by,a,uniform,cuboid,lattice,of,geometrically,identical,cells,,each,possibly,labelled,with,a,set,of,physical,properties.,Refinements,of,voxelisation,are,to,allow,clusters,of,small,cells,to,be,treated,as,larger,cuboid,bodies,[3],,and,to,omit,cells,altogether,within,say,solid,surfaces,(also,known,as,‘tartan,meshing’).,When,both,techniques,are,combined,in,say,CFD,,the,result,is,known,as,an,AMR,mesh,,see,Figure,2.1.,Figure,2.1:,An,AMR,mesh,surrounding,a,curved,body,drawn,as,solid,black,at,right.,As,suggested,by,the,previous,paragraph,,an,AMR,mesher,is,potentially,quite,complicated.,A,well-known,difficulty,with,schemes,that,use,AMR,meshes,is,illustrated,by,Figure,2.2,for,a,light,propagation,problem.,There,will,be,interfaces,between,meshes,of,different,size,,even,7,Commercial,in,Confidence,in,regions,with,the,same,physical,properties.,However,,a,wave,with,a,wavelength,of,less,than,10h,,where,h,is,the,local,mesh-spacing,,modelled,using,a,second-order,accurate,scheme,,has,a,propagation,speed,in,error,by,1%,,which,error,increases,as,hp,typically,with,p,=,2.,Thus,computationally,,the,region,show,in,Figure,2.2,may,have,different,dispersion,properties,at,shorter,wavelength,in,the,two,different,grid-sizes,,and,computations,will,exhibit,a,spurious,reflection,at,the,interface,,which,may,be,misleading,or,even,destabilising,in,certain,cases.,The,importance,of,the,work,of,Nikiforakis,et,al,[4],is,that,they,have,managed,to,produce,in,effect,a,spatio-temporal,AMR,mesh,,so,that,they,can,compute,the,equations,of,inviscid,compressible,FD,explicitly,using,a,local,timestep.,Such,meshes,have,also,been,successfully,used,for,Particle-in-Cell,calculations,of,extreme,complexity,for,spacecraft,charging,[5],,meaning,that,Nikiforakis,work,deserved,attention.,Unfortunately,,considerable,discussion,of,the,merits,of,the,Nikiforakis,approach,versus,spectral,element,at,the,Feb,5th,ExCALIBUR,NEPTUNE,community,workshop,in,Birmingham,[6],indicated,potentially,severe,difficulties,for,AMR,meshes,when,diffusion,,especially,anisotropic,diffusion,has,to,be,treated.,Figure,2.2:,Spurious,reflections,when,using,a,low,order,scheme,with,AMR.,2.1,Importance,of,Geometrical,Accuracy,The,approximate,nature,of,the,intersection,between,two,NURBS,surfaces,may,also,cause,difficulties,,as,indicated,by,Figure,2.3.,Power,deposition,on,the,plasma,fascing,components,(PFCs),shielding,may,depend,critically,upon,the,direction,of,the,surface,normal.,A,grid,of,planar,triangles,may,produce,errors,like,those,indicated,by,Figure,2.3(a),,whereas,more,faithful,representations,would,resemble,Figure,2.3(b).,A,difficulty,for,both,AMR,and,surface-based,approaches,is,the,order,of,error,ps,in,the,spatial,approximation,of,surfaces,and,other,interfaces,used,to,bound,the,domain,of,a,PDE,calculation.,The,important,result,is,by,Boffi,[7],that,the,results,of,a,PDE,calculation,can,8,Commercial,in,Confidence,have,order,no,higher,than,ps.,Thus,in,the,usual,approach,that,starts,by,meshing,the,surface,with,simple,planar,triangles,,there,is,no,point,in,using,schemes,of,high,or,spectral,order.,Many,meshing,packages,allow,only,for,second,order,surface,approximations,,whereby,typically,each,side,of,say,a,‘curved’,triangle,is,represented,by,three,points,and,hence,a,quadratic,fit.,A,notable,exception,is,gmsh,[8].,Extensive,consultations,as,part,of,the,Y1,ExCALIBUR,NEPTUNE,Requirements,Capture,indicate,difficulties,with,higher-order,spatially,accurate,meshing,even,for,relatively,simple,geometries,that,might,be,encountered,in,the,tokamak,edge.,Figure,2.4,shows,two,problems.,The,first,is,where,self-intersection,occurs,when,trying,to,insert,nodes,inside,thin,elements,near,curved,boundaries.,The,other,is,where,the,surface,triangulation,has,a,tangency,to,an,extrusion.,We,have,determined,that,the,Nekmesh,software,is,being,developed,[9,,10],using,concepts,from,optimisation,theory,to,treat,such,issues.,(a),Figure,2.3:,Close-ups,of,two,triangular,meshes,of,the,central,left,edge,surface,of,a,TBM,(Test,Blanket,Module),Tungsten,shield.,The,CAD,contains,a,join,in,the,middle,of,the,image,leading,to,the,irregular,behaviour,of,the,horizontal,component,of,surface,normal,in,the,image,at,left,(a).,Refitting,of,CAD,using,the,CADfixTM,software,package,enables,the,production,of,a,more,smoothly,varying,normal,,see,mesh,at,right,(b).,9,Commercial,in,Confidence,Figure,2.4:,At,top,is,illustrated,a,desirable,meshing,close,to,a,curved,surface,,when,eg.,small,scale,physical,effects,due,to,a,sheath,need,to,be,represented.,Below,is,an,indication,of,how,packages,may,fail,when,they,try,to,produce,this,mesh,using,low-order,spatially,spatially,accurate,elements,(planar,triangles),,from,a,presentation,by,Sherwin,and,Moxey,at,CCFE.,At,bottom,is,a,second,picture,from,the,same,presentation,,showing,resolution,of,a,problem,arising,when,mesh,is,tangent,to,a,surface.,Figure,2.5:,Different,T1,meshes,produced,with,(left),and,without,sag,control,(right).,The,left,plot,has,mesh,features,illustrating,the,gap,between,bounding,NURBS,curve,and,NURBS,surface,,caused,in,this,case,by,defeaturing,of,fillets,around,the,surface,edges.,10,Commercial,in,Confidence,2.2,Example,Meshing,Problem,An,example,test,case,has,been,formed,by,the,meshing,of,the,surface,of,JET,Tile,1,(T1),,one,of,the,vertical,tiles,at,the,left,of,the,divertor,in,Figure,1.2.,The,figures,containing,surface,meshes,are,taken,from,a,study,in,ref,[RP4,§5.1][11],that,attempted,to,find,a,minimal,,accurate,mesh,representation,for,the,T1,surfaces,receiving,power.,A,sample,test,case,using,Nekmesh,is,illustrated,in,Figure,2.7,for,the,JET,Tile,1,,which,is,one,of,the,vertical,tiles,at,the,left,of,the,divertor,in,Figure,1.2.,Figure,2.6:,Exploration,of,the,effect,of,different,meshing,controls,on,T1.,Figure,2.7:,Meshing,of,JET,T1,tile,by,D.,Moxey,6/3/20,using,Nekmesh.,The,dots,indicate,nodes,within,the,non-planar,triangular,elements.,11,Commercial,in,Confidence,Figure,2.8:,Undesirable,element,shape,if,meshing,conforms,to,both,surface,and,fieldline.,2.3,Element,Shape,Problem,Even,assuming,accurate,meshing,,there,is,a,problem,caused,by,the,need,to,spread,power,as,widely,as,possible,over,the,surfaces.,Power,is,observed,to,flow,along,field,lines,,being,deposited,proportionately,as,𝒏̂.𝑩̂,where,𝒏̂,is,the,unit,normal,to,the,surface,and,𝑩̂,gives,the,direction,of,magnetic,field,B.,Many,designs,call,for,a,2,degree,angle,of,field,incidence,on,the,surface.,Such,a,small,angle,is,hard,to,draw,,so,we,show,an,angle,of,9.5,degrees,(arctan1/6),-,see,Figure,2.8.,Elements,with,2,degree,corners,(or,less),present,such,serious,challenges,that,simultaneous,alignment,with,both,the,fieldlines,and,the,geometry,appears,to,be,a,non-,starter.,The,Science,Plan,[12],recognises,that,it,will,be,important,to,establish,just,how,large,an,anisotropy,in,the,transport,can,be,treated,accurately,without,special,coding.,Chapter,3,Summary,As,discussed,in,the,Year,One,Summary,Report,[13],,spectral,elements,are,desirable,on,grounds,of,accuracy.,Consideration,and,discussions,have,indicated,that,the,accuracy,of,the,spectral,element,approach,can,be,maintained,in,complex,geometries,provided,surfaces,are,meshed,to,a,sufficiently,high,degree,of,accuracy.,Producing,such,meshes,can,be,challenging,,but,recent,developments,(Nekmesh),based,around,the,spectral/hp,element,library,Nektar++,are,showing,promise,that,these,challenges,can,be,met.,We,conclude,therefore,that,resource,should,be,directed,to,ensuring,that,this,emergent,capability,can,handle,PFC,and,other,geometries,relevant,to,the,tokamak,edge.,12,Commercial,in,Confidence,Acknowledgement,The,support,of,the,UK,Meteorological,Office,and,Strategic,Priorities,Fund,is,acknowledged.,Bibliography,[1],G.,Farin.,Curves,and,surfaces,for,computer,aided,geometric,design.,Academic,Press,Professional,,Inc.,San,Diego,,CA,,USA,,1990,,5th,Edition,2002.,[2],K.W.,Burn,,C.,Daffara,,G.,Gualdrini,,M.,Pierantoni,,and,P.,Ferrari.,Treating,voxel,geometries,in,radiation,protection,dosimetry,with,a,patched,version,of,the,Monte,Carlo,codes,MCNP,and,MCNPX.,Radiation,Protection,Dosimetry,,123(3):345–353,,2007.,[3],K.A.,Van,Riper,and,O.,Journals.,A,CT,and,MRI,scan,to,MCNP,input,conversion,program.,Radiation,Protection,Dosimetry,,115(1-4):513–516,,2005.,[4],N.,Gokhale,,N.,Nikiforakis,,and,R.,Klein.,A,dimensionally,split,cartesian,cut,cell,method,for,hyperbolic,conservation,laws.,Journal,of,Computational,Physics,,364:186–,208,,2018.,[5],Y,Miyake,and,H,Usui.,Particle-in-cell,modeling,of,spacecraft-plasma,interaction,effects,on,double-probe,electric,field,measurements.,Radio,Science,,51(12):1905–,1922,,2016.,[6],D.,Samaddar.,Report,on,Y1,2019,Internal,Workshop.,Technical,Report,CD/EXCALIBUR-FMS/0018-1.00-M1.1.1a,,UKAEA,,2020.,Report,on,Y1,2020,External,Workshop,(REPORT1).,Technical,Report,CD/EXCALIBUR-FMS/0010-1.00-,M1.1.1b,,UKAEA,,2020.,[7],L.,Botti.,Influence,of,reference-to-physical,frame,mappings,on,approximation,properties,of,discontinuous,piecewise,polynomial,spaces.,Journal,of,Scientific,Computing,,52(3):675–703,,2012.,http://dx.doi.org/10.1007/s10915011-9566-3.,[8],C.,Geuzaine,and,J.-F.,Remacle.,Gmsh:,A,3-d,finite,element,mesh,generator,with,built-,in,pre-and,post-processing,facilities.,International,journal,for,numerical,methods,in,engineering,,79(11):1309–1331,,2009.,[9],M.,Turner,,D.,Moxey,,J.,Peiro,,M.,Gammon,,C.R.,Pollard,,and,H.,Buck-´,low.,A,framework,for,the,generation,of,high-order,curvilinear,hybrid,meshes,for,CFD,simulations.,203:206–218.,http://dx.doi.org/10.1016/j.proeng.2017.09.808.,Engineering,,Procedia,[10],M.,Turner,,J.,Peiro,,and,D.,Moxey.´,Curvilinear,mesh,generation,using,a,variational,framework.,Computer-Aided,Design,,103:73–91,,2018.,https:,//doi.org/10.1016/j.cad.2017.10.004.,13,Commercial,in,Confidence,[11],W.,Arter,,D.,Calleja,,H.,Leggate,,and,L.,Richiusa.,Optimising,Fieldline,Following,Software.,Technical,Report,UKAEA-CCFE-RE(19)04,,CCFE,,2019.,http://www.ccfe.ac.uk/assets/Documents/,UKAEA-CCFE-RE(19)04.pdf.,[12],W.,Arter,,L.,Anton,,D.,Samaddar,,and,R.,Akers.,ExCALIBUR,Fusion,Modelling,System,Science,Plan.,Technical,Report,CD/EXCALIBUR-FMS/0001,,UKAEA,,2019.,[13],W.,Arter,,L.,Anton,,and,D.,Samaddar.,Year,One,Summary,Report.,Technical,Report,CD/EXCALIBUR-FMS/0011-1.00-M1.2.1,,UKAEA,,2020.,14" name="keywords" />
+
+    <title>CD-EXCALIBUR-FMS0012-1.00-M2.1.1_OptionsGeometryRepresentation &#8212; Excalibur-Neptune Documents 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/design-tabs.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cd-excalibur-fms0012-1-00-m2-1-1-optionsgeometryrepresentation">
+<h1>CD-EXCALIBUR-FMS0012-1.00-M2.1.1_OptionsGeometryRepresentation<a class="headerlink" href="#cd-excalibur-fms0012-1-00-m2-1-1-optionsgeometryrepresentation" title="Permalink to this heading">¶</a></h1>
+<p>
+                        <iframe
+                                id="ID"
+                                style="border:1px solid #666CCC"
+                                title="PDF"
+                                src="_static/CD-EXCALIBUR-FMS0012-1.00-M2.1.1_OptionsGeometryRepresentation.pdf"
+                                frameborder="1"
+                                scrolling="auto"
+                                height="1600"
+                                width="1100"
+                                align="middle">
+                        </iframe>
+                     </p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Excalibur-Neptune Documents</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="embeddedpdfs.html">Technical Reports</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, UKAEA.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.1.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/CD-EXCALIBUR-FMS0012-1.00-M2.1.1_OptionsGeometryRepresentation.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

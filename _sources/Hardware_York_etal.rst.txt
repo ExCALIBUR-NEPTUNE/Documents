@@ -1,0 +1,42 @@
+Hardware York etal
+==================
+
+.. dropdown:: :doc:`TN-01-6_SoftwareSupportProcurementHardwareAtExascaleD11`
+
+    This report discusses the hardware roadmaps for various architectures including Intel, AMD, NVIDIA, Arm, and other architectures such as IBM Power Architectures and those found primarily in China. It also compares and summarizes these architectures in the context of pre-Exascale and post-Exascale systems.
+
+.. dropdown:: :doc:`TN-01_SoftwareSupportProcurementHardwareAtExascale`
+
+    This report provides an overview of the current hardware roadmaps for various architectures, including Intel, AMD, NVIDIA, Arm, and other architectures. It also discusses reconfigurable architectures and compares their capabilities.
+
+.. dropdown:: :doc:`TN-02-3_SoftwareSupportProcurementDevelopingAnExascaleReadyFusionSimulation`
+
+    This report discusses the evaluation methodology, approaches to Exascale application development, and applications for evaluation in the context of Project NEPTUNE. It includes a comparison of general purpose programming languages, parallel programming models, software libraries, C++ template libraries, domain-specific languages, and their performance and portability.
+
+.. dropdown:: :doc:`TN-02-4_DevelopingAnExascaleReadyFusionSimulation`
+
+    This report presents an evaluation of various approaches to Exascale Application Development for the field of Fusion Simulation. It includes evaluations of performance and portability of several applications such as Heat, TeaLeaf, miniFE, Laghos, vlp4d, CabanaPIC, and VPIC.
+
+.. dropdown:: :doc:`TN-03-3_SoftwareSupportProcurementProgressTowardsDslAdoption`
+
+    Project NEPTUNE is concerned with the development of a new code for the simulation of a next generation fusion reactor. This report documents our progress towards developing a Domain Specific Language (DSL) that can be used for Particle-in-Cell methods and presents performance results for an application developed using the proposed DSL.
+
+.. dropdown:: :doc:`TN-04-1_1EquationsAndBenchmarkSimulationsSetuptitle`
+
+    <no summary found>
+
+.. dropdown:: :doc:`TN-06_BenchmarksBasicTurbulenceCasesUpdated`
+
+    This report presents benchmark solutions to the Blob2D and Hasegawa-Wakatani systems using the Hermes-3 fluid edge modeling code. The Blob2D system is simulated in detail, while the Hasegawa-Wakatani system uses an existing BOUT++ implementation.
+
+
+.. toctree::
+    :hidden:
+    :caption: Contents:
+    TN-01-6_SoftwareSupportProcurementHardwareAtExascaleD11.rst
+    TN-01_SoftwareSupportProcurementHardwareAtExascale.rst
+    TN-02-3_SoftwareSupportProcurementDevelopingAnExascaleReadyFusionSimulation.rst
+    TN-02-4_DevelopingAnExascaleReadyFusionSimulation.rst
+    TN-03-3_SoftwareSupportProcurementProgressTowardsDslAdoption.rst
+    TN-04-1_1EquationsAndBenchmarkSimulationsSetuptitle.rst
+    TN-06_BenchmarksBasicTurbulenceCasesUpdated.rst

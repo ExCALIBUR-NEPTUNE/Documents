@@ -1,0 +1,52 @@
+MomentKinetics Oxford-2
+=======================
+
+.. dropdown:: :doc:`TN-01_UpdateStateArtEdgeModelling`
+
+    This report provides an update to a previous report on the physics parameters and modeling approaches for the plasma edge in magnetic confinement fusion, focusing on recent progress in edge modelling.
+
+.. dropdown:: :doc:`TN-02_ImplementingDistributedMemory2D3VDriftKineticEdgeCode`
+
+    This report describes the progress towards implementing the drift-kinetic model in a 2D-3V simulation, focusing on code development for testing the model implementation. The source code can be found here: https://github.com/mabarnes/moment_kinetics.
+
+.. dropdown:: :doc:`TN-03_AReducedElectronModelTestingPlasmaDynamicsClosedFieldLines`
+
+    This report outlines a collisional model for electron dynamics within the drift kinetic approximation, which requires the calculation of the electrostatic potential as previously shown in report 2047357-TN-09-01.
+
+.. dropdown:: :doc:`TN-04-3_ConvergenceSolutions2D1VIonDriftKineticEquationWallBoundaryConditionsManufacture`
+
+    This report investigates the convergence of a 2D edge plasma model with collisionless kinetic ions and wall boundary conditions, highlighting poor convergence issues in the presence of wall boundaries in two spatial dimensions. The causes are traced to the interaction between the choice of numerical scheme and the form of the ion wall boundary condition, as well as a wave-like instability that emerges in simulations with a radial coordinate and a temperature gradient.
+
+.. dropdown:: :doc:`TN-04_ConvergenceSolutions2D1VIonDriftKineticEquationWallBoundaryConditionsManufacture`
+
+    This report investigates the convergence of a 2D edge plasma model with collisionless kinetic ions and wall boundary conditions, addressing poor convergence issues observed in previous reports. The causes are identified as interactions between the numerical scheme and ion wall boundary condition, and a wave-like instability emerging in simulations with a radial coordinate and temperature gradient.
+
+.. dropdown:: :doc:`TN-05_NumericalImplementationFluidModelElectronsDriftKineticCode`
+
+    This report presents the implementation of electron fluid equations for a 1+1D drift kinetic system, aiming to address the limitation of using a Boltzmann response in ProxyApps. The main advantage of this approach is the avoidance of solving for the electrostatic potential itself.
+
+.. dropdown:: :doc:`TN-06_IonIonModelCollisionOperatorsKrookOperatorModelFokkerPlanckOperator`
+
+    This report explores model collision operators for ion-ion collisions, focusing on a 1D2V model of a simple two species plasma consisting of a drift kinetic model of ions and Boltzmann electrons. The study considers a model Krook operator and the initial stages of implementing the full Fokker-Planck operator.
+
+.. dropdown:: :doc:`TN-07_AHigherOrderFiniteElementImplementationFullFlandauFokkerPlanckCollisionOperatorC`
+
+    This document presents a higher-order finite-element implementation of the full-FLandau Fokker-Planck collision operator for charged particle collisions in a low density plasma.
+
+.. dropdown:: :doc:`TN-08_NumericalImplementationMomentKineticElectrons`
+
+    This report describes the numerical implementation of a moment-kinetic closure for the electron fluid equations in a plasma system.
+
+
+.. toctree::
+    :hidden:
+    :caption: Contents:
+    TN-01_UpdateStateArtEdgeModelling.rst
+    TN-02_ImplementingDistributedMemory2D3VDriftKineticEdgeCode.rst
+    TN-03_AReducedElectronModelTestingPlasmaDynamicsClosedFieldLines.rst
+    TN-04-3_ConvergenceSolutions2D1VIonDriftKineticEquationWallBoundaryConditionsManufacture.rst
+    TN-04_ConvergenceSolutions2D1VIonDriftKineticEquationWallBoundaryConditionsManufacture.rst
+    TN-05_NumericalImplementationFluidModelElectronsDriftKineticCode.rst
+    TN-06_IonIonModelCollisionOperatorsKrookOperatorModelFokkerPlanckOperator.rst
+    TN-07_AHigherOrderFiniteElementImplementationFullFlandauFokkerPlanckCollisionOperatorC.rst
+    TN-08_NumericalImplementationMomentKineticElectrons.rst

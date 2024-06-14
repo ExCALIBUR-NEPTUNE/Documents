@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<meta content="technical note " name="description" />
+<meta content="1,EQUATIONS,AND,BENCHMARK,SIMULATIONS,SETUP,Title:,Authors:,Date:,Report,code:,One,Dimensional,Benchmarks,for,a,Particle,Based,Kinetic,Model,(Report,on,1D,Test,Cases,and,Proxy-App),Christopher,Ridgers,,Adam,Dearling,,University,of,York,30th,March,2023,2067270-TN-04-01,1,Equations,and,benchmark,simulations,setup,In,this,section,we,will,summarise,the,equations,to,be,solved.,Full,details,can,be,found,in,Ref.,[1],where,the,system,is,denoted,‘System,2-4’.,We,will,also,summarise,the,methodology,by,which,we,will,produce,the,benchmark,solutions,to,these,equations.,In,particular,we,will,outline,the,code,used,,i.e.,the,EPOCH,particle-in-cell,(PIC),code,[2],,as,well,as,the,setup,of,the,benchmark,problems.,1.1,Recap,of,system,of,equations,We,will,solve,a,system,of,equations,(system,2-4),consisting,of,the,Vlasov,equation,for,the,electrons,and,ions,in,the,case,where,the,magnetic,(cid:28)eld,is,zero.,∂fα,∂t,+,v,·,∂fα,∂x,+,qE,m,·,∂fα,∂v,=,0,(1),Where,f,is,the,distribution,function,for,electrons,(when,α,=,e),or,ions,(when,α,=,i),de(cid:28)ned,in,the,usual,phase,space,coordinates,(x,,v).,The,electric,(cid:28)eld,is,given,by,the,Ampere-Maxwell,equation,,given,the,current,j.,(cid:15)0,∂E,∂t,=,−µ0j,(2),1.2,Simulation,code,(cid:21),EPOCH,Equations,(1),and,(2),are,solved,by,the,particle-in-cell,method,commonly,employed,in,plasma,simulation.,Here,we,will,use,the,PIC,code,EPOCH,described,in,detail,in,Ref.,[2].,The,standard,PIC,loop,,used,by,EPOCH,,is,broken,down,into,two,steps,as,follows.,First,the,particle,pusher,solves,the,Lorentz,force,law,for,the,charged,particles,under,the,action,of,the,local,electromagnetic,(cid:28)elds.,The,current,density,is,then,determined,by,interpolating,particle,properties,onto,the,grid,and,solving,Maxwell’s,equations.,The,particle,pusher,uses,the,standard,Boris,algorithm.,The,(cid:28)eld,solver,uses,the,FDTD,approach,on,a,staggered,Yee,grid.,There,are,multiple,options,for,interpolation,functions,to,obtain,the,current,,using,di(cid:27)erent,particle,shape,functions.,In,the,simulations,that,follow,we,use,third,order,splines.,1.3,Benchmark,problems,The,following,two,benchmark,problems,are,chosen.,1.,Benchmark,problem,1,(cid:21),small,amplitude,density,modulation.,The,plasma,is,initialised,with,number,density,n,=,n0,−,n1,tanh(kx),for,both,electrons,and,ions.,The,temperature,of,1,2,EPOCH,SIMULATION,RESULTS,Figure,1:,Example,simulations,of,the,ITER-SOL,in,steady,state.,These,electron,temperature,(left),and,number,density,(right),pro(cid:28)les,were,produced,using,the,(cid:29)uid,code,SD1D,[3].,Di(cid:27)erent,thermal,conduction,models,(‘Ji-Held’,,‘Spitzer-Harm’,and,(cid:29)ux-limited,Spitzer-Harm,‘FL’,with,(cid:29)ux-limiter,of,0.2),produce,similar,results,,motivating,a,simple,choice,of,parameters,for,suitable,benchmark,problems.,both,species,is,T0.,The,perturbation,is,small,in,the,sense,that,n1,(cid:28),n0.,2.,Benchmark,problem,2,(cid:21),large,amplitude,temperature,modulation,The,temperature,of,both,electrons,and,ions,is,initially,set,to,T,=,T0,−,T1,tanh(kx).,The,perturbation,in,this,case,is,large,as,T1,∼,T0.,EPOCH,simulations,of,these,benchmark,problems,were,set,up,as,follows.,In,both,benchmark,problems,k,=,1/30,mm.,The,spatial,domain,is,represented,by,200,spatial,grid,cells.,The,timescale,for,the,simulations,is,set,to,be,120/kvT,e,,for,benchmark,problem,1,and,9/kvT,e,for,benchmark,problem,2.,vT,e,is,the,electron,thermal,speed,with,the,timestep,adaptive,and,set,by,the,CFL,condition.,The,timescales,are,set,this,way,to,ensure,time,for,substantial,particle,and,energy,transport,to,occur.,The,plasma,parameters,are,chosen,to,be,reasonably,indicative,of,the,ITER,SOL.,An,example,simulation,is,shown,in,(cid:28)gure,1.,This,simulations,shows,an,attached,case,so,has,a,relatively,high,temperature,at,the,target,but,nevertheless,provides,motivation,for,the,following,choice,of,parameters.,n0,=,1019,m−3,,n1,=,0.05,×,1019,m−3,,T0,=,30,eV,,T1,=,20,eV.,Figure,1,shows,that,the,steepest,gradients,in,density,and,temperature,are,in,the,last,few,metres,before,the,target,in,the,SOL.,This,motivates,the,choice,of,k.,The,plasma,is,represented,by,50,000,macroparticles,per,cell,equally,divided,between,electrons,and,ions.,The,EPOCH,simulations,are,1D-3V,,i.e.,while,macroparticles,can,have,velocities,in,all,three,dimensions,,spatial,gradients,are,limited,to,the,x-direction,only.,2,EPOCH,simulation,results,2.1,Transport,quantities,The,transport,properties,are,those,of,most,interest,in,the,aforementioned,benchmark,cases.,Namely,the,transport,of,particles,and,energy.,The,former,is,determined,by,the,particle,(cid:29)ux,Γ,while,the,2,2,EPOCH,SIMULATION,RESULTS,2.2,EPOCH,simulation,results,for,benchmark,problem,1,Figure,2:,Left:,Initial,ion,number,density,(ns),pro(cid:28)le,(blue),in,EPOCH,simulations,of,benchmark,problem,1,(blue).,Also,shown,is,the,ion,number,density,pro(cid:28)le,at,the,end,of,the,simulation,(orange),,i.e.,after,0.954,µs.,Right:,average,ion,velocity,in,the,x-direction,c,=,(cid:104)vx(cid:105)i,initially,(blue),and,at,the,end,of,the,EPOCH,simulation,(orange).,latter,is,determined,by,the,heat,(cid:29)ux,q.,These,are,de(cid:28)ned,in,terms,of,velocity-space,averages,of,the,distribution,function.,Γα,=,nα(cid:104)v(cid:105)α,(cid:28),1,(cid:29),2,mv2v,α,qα,=,nα,(3),(4),Here,nα,is,the,particle,number,density,for,the,species,α,=,i,,e,(i,for,ions,and,e,for,electrons).,The,angled,brackets,denote,averages,of,the,distribution,function,over,velocity,space,as,follows.,(cid:104)Φ(v)(cid:105)α,=,(cid:90),1,nα,fαΦ(v)d3v.,(5),We,will,consider,both,electron,and,ion,transport.,2.2,EPOCH,simulation,results,for,benchmark,problem,1,Ion,inertia,dominates,the,particle,(cid:29)ux.,Figure,2,shows,the,initial,and,(cid:28)nal,ion,number,density,in,the,EPOCH,simulations,of,benchmark,problem,1.,It,also,shows,the,average,ion,velocity,that,develops,in,the,x-direction,as,a,result,of,the,imposed,density,modulation.,This,average,velocity,is,given,by,(cid:104)vx(cid:105)i.,As,EPOCH,discretises,the,distribution,functions,as,discrete,macroparticles,this,velocity,space,average,is,computed,by,simply,taking,the,mean,of,vx,for,the,macroparticles,in,a,given,spatial,cell.,2.3,EPOCH,simulation,results,for,benchmark,problem,2,As,the,temperature,of,the,electrons,and,ions,is,equal,,the,electrons,move,much,faster,and,thus,dominate,the,heat,(cid:29)ux.,Figure,3,shows,the,initial,and,(cid:28)nal,electron,temperature,in,the,EPOCH,3,2.4,Numerical,convergence,2,EPOCH,SIMULATION,RESULTS,Figure,3:,Left:,Initial,electron,temperature,(Ts),in,eV,in,EPOCH,simulations,of,benchmark,problem,2,(blue).,Also,shown,is,the,electron,temperature,pro(cid:28)le,at,the,end,of,the,simulation,(orange),,i.e.,after,0.0715,µs.,Right:,heat,(cid:29)ux,in,the,x-direction,initially,(blue),and,at,the,end,of,the,EPOCH,simulation,(orange).,simulations,of,benchmark,problem,2,as,well,as,the,heat,(cid:29)ux.,The,heat,(cid:29)ux,is,given,by,(cid:104)mev2vx/2(cid:105)e.,Again,this,is,computed,by,simply,taking,the,mean,for,the,macroparticles,in,a,given,spatial,cell.,2.4,Numerical,convergence,2.4.1,Convergence,with,number,of,particles,and,gridding,Transport,phenomena,such,as,particle,and,heat,(cid:29)ux,are,challenging,to,simulate,accurately,with,PIC,codes.,This,is,because,the,transport,arises,from,the,anisotropic,part,of,the,distribution,function,,which,is,often,small.,Resolving,this,anisotropic,part,therefore,requires,many,macroparticles.,In,addition,the,steep,temperature,and,density,gradients,must,be,adequately,resolved,with,su(cid:30)cient,spatial,grid,cells.,To,determine,whether,this,was,the,case,we,halved,both,the,number,of,grid,cells,and,number,of,macroparticles,per,cell.,Figure,4,shows,the,peak,electron,heat,(cid:29)ux,and,average,ion,velocity,as,a,function,of,time,for,benchmark,problems,2,&amp;,1,respectively.,It,is,clear,that,in,both,cases,the,results,are,not,changed,signi(cid:28)cantly,by,reducing,the,resolution,and,thus,we,conclude,that,numerical,convergence,has,been,achieved.,We,note,that,the,convergence,is,better,for,benchmark,problem,2,than,for,problem,1.,This,is,because,for,the,larger,modulation,in,problem,2,the,anisotropy,in,the,distribution,function,driving,the,transport,is,bigger,and,so,easier,to,resolve,with,macoroparticles.,2.4.2,Minimising,numerical,heating,Numerical,heating,is,another,well,known,problem,when,running,under-resolved,PIC,simulations.,For,low-order,particle,shape,functions,,if,the,grid,cell,size,is,not,smaller,than,the,Debye,length,then,the,plasma,spontaneously,heats,up.,It,was,shown,that,the,use,of,high-order,shape,functions,suppresses,numerical,heating,in,EPOCH,simulations,,as,shown,in,(cid:28)gure,5.,In,benchmark,problem,2,the,grid,cell,size,is,approximately,850,Debye,lengths,(for,the,50,eV,plasma).,This,is,substantially,4,2,EPOCH,SIMULATION,RESULTS,2.4,Numerical,convergence,Left:,Peak,electron,heat,(cid:29)ux,in,EPOCH,simulations,of,benchmark,problem,2,(blue),Figure,4:,compared,to,the,simulations,of,the,same,problem,with,half,the,number,of,particles,per,cell,‘npart’,and,number,of,grid,cells,‘nx’,(orange),Right:,Peak,average,ion,velocity,in,EPOCH,simulations,of,benchmark,problem,1,(blue),compared,to,the,simulations,of,the,same,problem,with,half,the,number,of,particles,per,cell,and,number,of,grid,cells,(orange).,Figure,5:,Demonstration,of,the,suppression,of,numerical,heating,in,EPOCH,by,using,higher,order,particle,shape,functions.,The,plasma,is,initially,uniform,and,the,Debye,length,(λD),(cid:21),initially,0.5,times,the,grid,cell,size,∆x,(cid:21),increases,as,the,plasma,gets,hotter,due,to,numerical,heating.,Taken,from,[2].,5,3,CONCLUSIONS,Figure,6:,Left:,Total,energy,in,the,simulation,box,in,EPOCH,simulations,of,benchmark,problem,1,as,a,function,of,time,in,the,simulation.,Right:,The,same,for,EPOCH,simulations,of,benchmark,problem,2.,larger,than,in,the,test,cases,in,(cid:28)gure,5.,It,is,therefore,necessary,to,check,that,numerical,heating,is,small,for,our,benchmark,problems.,Figure,6,shows,the,total,energy,in,the,simulations,for,benchmark,problems,1,and,2.,It,shows,that,the,energy,grows,by,a,negligible,amount,over,the,course,of,the,simulations,of,both,problems.,Numerical,heating,can,thus,be,safely,neglected.,It,should,be,noted,that,in,the,test,cases,in,(cid:28)gure,5,collisions,were,included,which,makes,numerical,heating,worse.,This,could,explain,why,numerical,heating,is,so,small,in,our,(collisionless),simulations,,even,with,very,large,grid,cell,sizes.,3,Conclusions,(cid:136),EPOCH,PIC,simulations,have,been,used,to,benchmark,system,2-4,(Vlasov,and,Ampere-,Maxwell,equations,for,both,electrons,and,ions).,Two,benchmark,problems,were,de(cid:28)ned,to,investigate,particle,and,energy,transport,in,scenarios,relevant,to,typical,SOL,conditions.,(cid:136),Energy,transport,was,dominated,by,electron,heat,(cid:29)ux,and,bulk,transport,by,ion,velocity.,The,mass,di(cid:27)erence,of,these,species,makes,(cid:28)nding,a,problem,where,transport,from,both,is,important,challenging.,(cid:136),Numerical,convergence,was,achieved,for,both,problems,but,a,large,number,of,particles,per,cell,was,required,(50,000),,This,is,necessary,to,resolve,small,scale,anisotropies,in,the,electron,and,ion,distribution,which,drive,the,transport.,Simulations,with,large,modulations,in,the,driving,thermodynamic,variable,s(temperature,,,density),converge,more,easily,as,the,anisotropic,part,of,the,distribution,function,is,larger.,(cid:136),To,simulate,large,enough,spatial,domains,the,grid,cell,must,be,very,large,compared,to,the,Debye,length,of,the,plasma,(,850,times,larger).,Numerical,heating,can,be,suppressed,in,this,case,by,using,a,high,order,shape,function,for,the,particles.,6,REFERENCES,References,REFERENCES,[1],W.,Arter,,R.,Akers,,‘Equations,for,ExCALIBUR/NEPTUNE,Proxyapps’,,Version,1.20,,p19-20,(2021).,[2],T.D.,Arber,et,al.,,Plasma,Phys.,Control.,Fusion,,57,,113001,(2015).,[3],M.R.K.,Wigram,et,al.,Nucl.,Fusion,,60,,076008,(2020).,7" name="keywords" />
+
+    <title>TN-04-1_1EquationsAndBenchmarkSimulationsSetuptitle &#8212; Excalibur-Neptune Documents 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/design-tabs.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="tn-04-1-1equationsandbenchmarksimulationssetuptitle">
+<h1>TN-04-1_1EquationsAndBenchmarkSimulationsSetuptitle<a class="headerlink" href="#tn-04-1-1equationsandbenchmarksimulationssetuptitle" title="Permalink to this heading">¶</a></h1>
+<p>
+                        <iframe
+                                id="ID"
+                                style="border:1px solid #666CCC"
+                                title="PDF"
+                                src="_static/TN-04-1_1EquationsAndBenchmarkSimulationsSetuptitle.pdf"
+                                frameborder="1"
+                                scrolling="auto"
+                                height="1600"
+                                width="1100"
+                                align="middle">
+                        </iframe>
+                     </p>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Excalibur-Neptune Documents</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="embeddedpdfs.html">Technical Reports</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, UKAEA.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.1.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/TN-04-1_1EquationsAndBenchmarkSimulationsSetuptitle.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

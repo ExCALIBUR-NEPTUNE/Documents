@@ -1,0 +1,27 @@
+Precondition STFC
+=================
+
+.. dropdown:: :doc:`TN-01_PriorityEquationsTestCases`
+
+    This document discusses the prioritization of equations and test cases within the NEPTUNE Programme's Preconditioning project, focusing on elliptic and hyperbolic problems.
+
+.. dropdown:: :doc:`TN-02_LinearSystemsEquationsPreconditionersRelatingNeptuneProgrammeABrief`
+
+    This technical report provides a brief overview of preconditioners for linear systems of equations, including their motivation, classes, implementation details, and application cases.
+
+.. dropdown:: :doc:`TN-03_ImplicitFactorizationPreconditionersNeptuneProgramme`
+
+    This report describes the use of BOUT++ and Nektar++ for plasma physics modeling, focusing on the incorporation of preconditioners into these libraries.
+
+.. dropdown:: :doc:`TN-04_ImplicitFactorizationPreconditionersNonSymmetricProblems`
+
+    This report extends the class of constraint preconditioners from symmetric problems to non-symmetric problems. The authors consider the theoretical properties and demonstrate their effectiveness on a set of test problems inspired by the Hasegawa-Wakatani problem.
+
+
+.. toctree::
+    :hidden:
+    :caption: Contents:
+    TN-01_PriorityEquationsTestCases.rst
+    TN-02_LinearSystemsEquationsPreconditionersRelatingNeptuneProgrammeABrief.rst
+    TN-03_ImplicitFactorizationPreconditionersNeptuneProgramme.rst
+    TN-04_ImplicitFactorizationPreconditionersNonSymmetricProblems.rst
