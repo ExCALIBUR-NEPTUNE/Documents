@@ -175,7 +175,7 @@ numbered_to_descriptive_dirs["2057699"] = "Platforms"
 numbered_to_descriptive_dirs["2060042"] = "Nektar++"
 numbered_to_descriptive_dirs["2060049"] = "Coupling_STFC"
 numbered_to_descriptive_dirs["ukaea_reports"] = "UKAEA"
-numbered_to_descriptive_dirs["equations"] = "Equations"
+numbered_to_descriptive_dirs["Equations"] = "Equations"
 numbered_to_descriptive_dirs["2067270"] = "Hardware_York_etal"
 
 
@@ -215,9 +215,11 @@ def copy_and_rename_file(pdfpath, pdftxt):
     # create a new file name, replacing numbers with words
     new_file_name = None
     for key in numbered_to_descriptive_dirs:
-        if key in str(dirstub):
-            new_file_name = dirstub.replace(key, "")[1:]
+        if str(dirstub).startswith(key):
+            new_file_name = dirstub[len(key):]
             break
+    if str(new_file_name).startswith("_"):
+         new_file_name = new_file_name[1:]
     if new_file_name is None:
         return None
     # add descriptive title-like suffix
@@ -235,7 +237,6 @@ def copy_and_rename_file(pdfpath, pdftxt):
     numbered_directories_to_rsts[numbered_dir].append(rst_name)
     summary = summary_from_path(pdfpath)
     rst_to_summary[rst_name] = summary
-
     return stub
 
 
